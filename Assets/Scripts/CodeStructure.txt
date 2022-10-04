@@ -1,0 +1,46 @@
+﻿GameModel
+--------------------
+variables
+    Yeti Object
+    Yeti Sprites
+    LifeBar v
+    GoldFlames v
+    goldYeti v
+    Text_score v
+    Score Variables
+    HikerPrefabs c
+    HikerSpawnPoint c
+    HikerOffset c
+    hikerSpacing c
+    activeHiker c
+    list of hikers c
+    difficultyMultiplier c
+    hikerOffset c
+    hikerSpacing c
+    goldMode c
+    goldModeLength c
+    yetiPunchInterval v
+functions
+    
+GameController
+--------------------
+variables
+    
+functions
+    InstantiateHikers()
+    SpawnHiker()
+    MoveHikersUp()
+    UserCorrectCheck()
+    KillHiker()
+
+GameView
+--------------------
+variables
+functions
+    SetYetiSprite()
+    ResetYetiSprite()
+    SetScoreUI()
+    GoldModeUIOn()
+    GoldModeUIOff()
+    
+
