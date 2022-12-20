@@ -11,18 +11,22 @@ public class GameView : GameElement
         {
             case 0:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_right;
+                game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_right;
                 break;
 
             case 1:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
+                game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
                 break;
 
             case 2:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_left;
+                game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_left;
                 break;
 
             case 3:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_dead;
+                game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_dead;
                 break;
         }
 
@@ -50,6 +54,7 @@ public class GameView : GameElement
     public void ResetYetiSprite()
     {
         game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
+        game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
     }
 
     // ui

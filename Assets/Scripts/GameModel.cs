@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameModel : GameElement
 {
     // yeti
-    public GameObject yeti;
+    public GameObject yeti, yeti_shadow;
     public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
     public GameObject goldYeti;
     public GameObject goldFlames;
