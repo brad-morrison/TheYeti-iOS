@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class UserInput : GameElement
 {
+    Vector3 touch;
     // Update is called once per frame
     void Update()
     {
+        // DEBUG CONTROLS (Keyboard)
         if (Input.GetKeyDown("a"))
         {
-            game.view.SetYetiSprite(0);
-            if (game.controller.UserCorrectCheck(0))
-            {
-                game.controller.KillHiker();
-            }
+            game.controller.HandleTouch("left");
         }
 
         if (Input.GetKeyDown("d"))
         {
-            game.view.SetYetiSprite(2);
-            if (game.controller.UserCorrectCheck(1))
-            {
-                game.controller.KillHiker();
-            }
+            game.controller.HandleTouch("right");
         }
 
         if (Input.GetKeyDown("g"))
@@ -34,6 +28,18 @@ public class UserInput : GameElement
             else
             {
                 game.controller.DeactivateGoldMode();
+            }
+        }
+
+        // TOUCH CONTROLS
+        if (Input.GetMouseButtonDown(0)) {
+            touch = Input.mousePosition;
+
+            if (touch.x < game.model.deviceScreenWidth / 2) {
+                game.controller.HandleTouch("left");
+            }
+            else {
+                game.controller.HandleTouch("right");
             }
         }
     }

@@ -10,6 +10,30 @@ public class GameController : GameElement
         SpawnHiker();
     }
 
+    public void HandleTouch(string command) {
+
+        switch(command) {
+            case "left":
+            game.view.SetYetiSprite(0);
+            if (game.controller.UserCorrectCheck(0))
+            {
+                game.controller.KillHiker();
+            }
+            break;
+
+            case "right":
+            game.view.SetYetiSprite(2);
+            if (game.controller.UserCorrectCheck(1))
+            {
+                game.controller.KillHiker();
+            }
+            break;
+
+            default:
+            break;
+        }
+    }
+
     public void InstantiateHikers()
     {
         SpawnHiker();
@@ -83,6 +107,7 @@ public class GameController : GameElement
 
     public void KillHiker()
     {
+        game.model.hikers[0].GetComponent<Animator>().SetBool("Death", true);
         game.model.hikers.RemoveAt(0);
         Destroy(game.model.activeHiker);
         game.model.activeHiker = game.model.hikers[0];
@@ -103,18 +128,26 @@ public class GameController : GameElement
         game.model.lifebar.ActivateGoldMode();
         // activate gold mode for view (ui elements)
         game.view.ActivateGoldMode();
+        GoldMultiplierRoll();
     }
 
     public void DeactivateGoldMode()
     {
         Debug.Log("gold mode off");
-        
+
         // deactivate gold mode flag
         game.model.goldMode = false;
         // deactivate gold mode for lifebar
         game.model.lifebar.DeactivateGoldMode();
         // deactivate gold mode for view (ui elements)
         game.view.DeactivateGoldMode();
+    }
+
+    public void GoldMultiplierRoll() 
+    {
+        System.Random roll = new System.Random();
+        game.model.goldModeMultiplier = roll.Next(1,5);
+        Debug.Log("gold multiplier = " + game.model.goldModeMultiplier);
     }
 
 }
