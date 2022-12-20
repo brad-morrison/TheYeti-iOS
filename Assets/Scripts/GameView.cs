@@ -9,27 +9,35 @@ public class GameView : GameElement
     {
         switch(state)
         {
+            // drop right hand
             case 0:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_right;
                 game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_right;
+                game.model.yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = game.model.yetiGold_right;
                 break;
 
+            // idle
             case 1:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
                 game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
+                game.model.yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = game.model.yetiGold_bothUp;
                 break;
 
+            // drop left hand
             case 2:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_left;
                 game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_left;
+                game.model.yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = game.model.yetiGold_left;
                 break;
 
+            // death sprite
             case 3:
                 game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_dead;
                 game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_dead;
                 break;
         }
 
+        // reset sprite back to idle
         Invoke("ResetYetiSprite", game.model.yetiPunchInterval);
     }
 
@@ -55,6 +63,7 @@ public class GameView : GameElement
     {
         game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
         game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
+        game.model.yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = game.model.yetiGold_bothUp;
     }
 
     // ui

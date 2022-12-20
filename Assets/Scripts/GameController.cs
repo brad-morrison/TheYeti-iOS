@@ -95,6 +95,8 @@ public class GameController : GameElement
 
     public void ActivateGoldMode()
     {
+        Debug.Log("gold mode on");
+
         // activate gold mode flag
         game.model.goldMode = true;
         // activate gold mode for lifebar
@@ -105,6 +107,8 @@ public class GameController : GameElement
 
     public void DeactivateGoldMode()
     {
+        Debug.Log("gold mode off");
+        
         // deactivate gold mode flag
         game.model.goldMode = false;
         // deactivate gold mode for lifebar

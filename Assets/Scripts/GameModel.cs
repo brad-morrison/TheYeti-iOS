@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameModel : GameElement
 {
     // yeti
-    public GameObject yeti, yeti_shadow;
+    public GameObject yeti, yeti_shadow, yeti_goldOutline;
     public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
+    public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
     public GameObject goldYeti;
     public GameObject goldFlames;
     // gameplay variables
@@ -19,6 +20,7 @@ public class GameModel : GameElement
     // ui
     public GameObject text_score;
     public LifeBar lifebar;
+    public float lifeBar_ScrollSpeed;
     // prefabs
     public GameObject hikerRed;
     public GameObject hikerGreen;
@@ -30,6 +32,10 @@ public class GameModel : GameElement
     // others
     public List<GameObject> hikers = new List<GameObject>();
     
+
+    private void Awake() {
+        lifeBar_ScrollSpeed = -1.2f;
+    }
 
     public void SetScore(int amount)
     {

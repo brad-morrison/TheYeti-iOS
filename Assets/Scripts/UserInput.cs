@@ -24,5 +24,17 @@ public class UserInput : GameElement
                 game.controller.KillHiker();
             }
         }
+
+        if (Input.GetKeyDown("g"))
+        {
+            if (!game.model.goldMode)
+            {
+                game.controller.ActivateGoldMode();
+            }
+            else
+            {
+                game.controller.DeactivateGoldMode();
+            }
+        }
     }
 }

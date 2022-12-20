@@ -54,7 +54,9 @@ public class LifeBar : GameElement
         // set texture of lifeBar
         SetTexture(gold);
         // set scale of bar to start
-        transform.localScale = new Vector3(startScale, transform.localScale.y, transform.localScale.z);        
+        transform.localScale = new Vector3(startScale, transform.localScale.y, transform.localScale.z);
+        // change speed of texture scroll
+        game.model.lifeBar_ScrollSpeed = game.model.lifeBar_ScrollSpeed * 2;
     }
 
     public void DeactivateGoldMode()
@@ -62,6 +64,7 @@ public class LifeBar : GameElement
         goldFrame.SetActive(false);
         SetTexture(current);
         transform.localScale = new Vector3(scalePreGoldmode, transform.localScale.y, transform.localScale.z);
+        game.model.lifeBar_ScrollSpeed = game.model.lifeBar_ScrollSpeed / 2;
     }
 
     private void Update()
