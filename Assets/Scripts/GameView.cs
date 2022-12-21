@@ -71,4 +71,9 @@ public class GameView : GameElement
     {
         game.model.text_score.GetComponent<TextMeshProUGUI>().text = game.model.score.ToString();
     }
+
+    public void OpenGameOverUI() {
+
+        game.model.gameOver_UIGroup.active = true;
+    }
 }

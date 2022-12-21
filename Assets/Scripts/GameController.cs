@@ -169,8 +169,8 @@ public class GameController : GameElement
 
     public void GameOver() {
         Debug.Log("GAME OVER");
-        game.model.gameOver_UIGroup.active = true;
         game.model.allowInput = false;
+        game.view.OpenGameOverUI;
     }
 
     
