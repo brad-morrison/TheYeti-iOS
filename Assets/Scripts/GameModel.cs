@@ -24,6 +24,7 @@ public class GameModel : GameElement
     public GameObject text_score;
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
+    public GameObject gameOver_UIGroup;
     // prefabs
     public GameObject hiker;
     // markers
@@ -31,6 +32,7 @@ public class GameModel : GameElement
     public GameObject activeHiker;
     // flags
     public bool goldMode;
+    public bool allowInput;
     // others
     public List<GameObject> hikers = new List<GameObject>();
     
@@ -38,6 +40,7 @@ public class GameModel : GameElement
     private void Awake() {
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
+        allowInput = true;
     }
 
     public void SetScore(int amount)

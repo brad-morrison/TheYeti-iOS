@@ -9,17 +9,17 @@ public class UserInput : GameElement
     void Update()
     {
         // DEBUG CONTROLS (Keyboard)
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("a") && game.model.allowInput)
         {
             game.controller.HandleTouch("left");
         }
 
-        if (Input.GetKeyDown("d"))
+        if (Input.GetKeyDown("d") && game.model.allowInput)
         {
             game.controller.HandleTouch("right");
         }
 
-        if (Input.GetKeyDown("g"))
+        if (Input.GetKeyDown("g") && game.model.allowInput)
         {
             if (!game.model.goldMode)
             {
@@ -32,7 +32,7 @@ public class UserInput : GameElement
         }
 
         // TOUCH CONTROLS
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && game.model.allowInput) {
             touch = Input.mousePosition;
 
             if (touch.x < game.model.deviceScreenWidth / 2) {

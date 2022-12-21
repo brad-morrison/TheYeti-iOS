@@ -19,6 +19,11 @@ public class GameController : GameElement
             {
                 game.controller.KillHiker();
             }
+            else
+            {
+                // game over
+                GameOver();
+            }
             break;
 
             case "right":
@@ -26,6 +31,11 @@ public class GameController : GameElement
             if (game.controller.UserCorrectCheck(1))
             {
                 game.controller.KillHiker();
+            }
+            else
+            {
+                // game over
+                GameOver();
             }
             break;
 
@@ -64,6 +74,8 @@ public class GameController : GameElement
         // random position
         if (Random.Range(0, 2) > 0)
         {
+            hiker.GetComponent<SpriteRenderer>().flipX = true;
+            hiker.GetComponent<Animator>().SetBool("Left", false);
             hiker.transform.position = new Vector2(hiker.transform.position.x + game.model.hikerOffset, hiker.transform.position.y);
         }
         else
@@ -110,9 +122,11 @@ public class GameController : GameElement
 
     public void KillHiker()
     {
-        game.model.hikers[0].GetComponent<Animator>().SetBool("Dead", true);
+        GameObject target = game.model.hikers[0];
+        target.GetComponent<Hiker>().StartCoroutine("Die");
+        target.GetComponent<Animator>().SetBool("Dead", true);
         game.model.hikers.RemoveAt(0);
-        //Destroy(game.model.activeHiker);
+        
         game.model.activeHiker = game.model.hikers[0];
         MoveHikersUp();
         SpawnHiker();
@@ -152,5 +166,13 @@ public class GameController : GameElement
         game.model.goldModeMultiplier = roll.Next(1,5);
         Debug.Log("gold multiplier = " + game.model.goldModeMultiplier);
     }
+
+    public void GameOver() {
+        Debug.Log("GAME OVER");
+        game.model.gameOver_UIGroup.active = true;
+        game.model.allowInput = false;
+    }
+
+    
 
 }
