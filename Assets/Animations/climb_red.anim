@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Climb
+  m_Name: climb_red
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -3606331769458629778, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
+      value: {fileID: 1613423225839151595, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
     - time: 0.083333336
-      value: {fileID: -1871213159027764619, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
+      value: {fileID: -8650795186883756518, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -3606331769458629778, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
-    - {fileID: -1871213159027764619, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
+    - {fileID: 1613423225839151595, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
+    - {fileID: -8650795186883756518, guid: f3c3a69cc19fe4460b05939c2648122a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a53ad0aaa1460486061ba90bf6e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deviceScreenWidth: 0
   yeti: {fileID: 1321447869}
   yeti_shadow: {fileID: 70545433}
   yeti_goldOutline: {fileID: 1240225163}
@@ -891,8 +892,7 @@ MonoBehaviour:
   text_score: {fileID: 1507182346}
   lifebar: {fileID: 676259550}
   lifeBar_ScrollSpeed: 5
-  hikerRed: {fileID: 5915014939388324577, guid: e4bf82f01f7d84848a5aefe30f38c3b8, type: 3}
-  hikerGreen: {fileID: 593994077643975006, guid: 722687380a8ec425aae04013a5f0d085, type: 3}
+  hiker: {fileID: 6680418880634491584, guid: 8fd722179fb1b43a28873a8766f7909c, type: 3}
   spawnPoint: {fileID: 625440713}
   activeHiker: {fileID: 0}
   goldMode: 0
@@ -5357,6 +5357,8 @@ GameObject:
   - component: {fileID: 1507182349}
   - component: {fileID: 1507182348}
   - component: {fileID: 1507182347}
+  - component: {fileID: 1507182351}
+  - component: {fileID: 1507182350}
   m_Layer: 5
   m_Name: ui_text_score
   m_TagString: Untagged
@@ -5411,8 +5413,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16.85
+  m_fontSizeBase: 16.85
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5478,9 +5480,81 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1, y: 19.5}
+  m_AnchoredPosition: {x: 0.1, y: 36}
   m_SizeDelta: {x: 112.2, y: 13.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!212 &1507182350
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507182346}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.28, y: 0.42}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &1507182351
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507182346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b404710a6f1d459cb31897872d30e1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1519556048
 PrefabInstance:
   m_ObjectHideFlags: 0

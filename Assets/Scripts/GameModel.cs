@@ -25,8 +25,7 @@ public class GameModel : GameElement
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
     // prefabs
-    public GameObject hikerRed;
-    public GameObject hikerGreen;
+    public GameObject hiker;
     // markers
     public GameObject spawnPoint;
     public GameObject activeHiker;
