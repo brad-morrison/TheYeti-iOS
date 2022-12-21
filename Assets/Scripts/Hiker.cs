@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hiker : MonoBehaviour
 {
     //public bool dead;
+    public bool left;
 
     // Start is called before the first frame update
     void Start()

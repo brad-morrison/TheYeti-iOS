@@ -882,6 +882,10 @@ MonoBehaviour:
   yetiGold_bothUp: {fileID: -5717686401821120438, guid: 6e197995555764bbe8539721806338d5, type: 3}
   goldYeti: {fileID: 1240225163}
   goldFlames: {fileID: 1366815412}
+  hiker_red: {fileID: -4491713968918973378, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hiker_red_down: {fileID: 7481999752915640580, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hiker_red_axeUp: {fileID: -3724585019263890721, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hiker_red_smiling: {fileID: -3974339563261985876, guid: 5485d2b858e034484a095931e94856cf, type: 3}
   score: 0
   yetiPunchInterval: 0.15
   hikerOffset: 0.25
@@ -892,10 +896,16 @@ MonoBehaviour:
   text_score: {fileID: 1507182346}
   lifebar: {fileID: 676259550}
   lifeBar_ScrollSpeed: 5
+  gameOverUI_Group: {fileID: 1694823176}
+  gameOverUI_top: {fileID: 1180101598}
+  gameOverUI_buttons: {fileID: 1196287095}
+  gameOverUI_yeti: {fileID: 51665040}
+  gameOverUI_hiker: {fileID: 505747974}
   hiker: {fileID: 6680418880634491584, guid: 8fd722179fb1b43a28873a8766f7909c, type: 3}
   spawnPoint: {fileID: 625440713}
   activeHiker: {fileID: 0}
   goldMode: 0
+  allowInput: 0
   hikers: []
 --- !u!1 &416677055
 GameObject:
@@ -5859,6 +5869,7 @@ MonoBehaviour:
   model: {fileID: 330634346}
   controller: {fileID: 947906796}
   view: {fileID: 1604324271}
+  utilities: {fileID: 0}
 --- !u!114 &1684775131
 MonoBehaviour:
   m_ObjectHideFlags: 0

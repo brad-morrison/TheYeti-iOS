@@ -74,12 +74,16 @@ public class GameController : GameElement
         // random position
         if (Random.Range(0, 2) > 0)
         {
+            // left
+            hiker.GetComponent<Hiker>().left = true;
             hiker.GetComponent<SpriteRenderer>().flipX = true;
             hiker.GetComponent<Animator>().SetBool("Left", false);
             hiker.transform.position = new Vector2(hiker.transform.position.x + game.model.hikerOffset, hiker.transform.position.y);
         }
         else
         {
+            // right
+            hiker.GetComponent<Hiker>().left = false;
             hiker.transform.position = new Vector2(hiker.transform.position.x - game.model.hikerOffset, hiker.transform.position.y);
         }
 
@@ -104,19 +108,16 @@ public class GameController : GameElement
 
     public bool UserCorrectCheck(int pos)
     {
-        if (game.model.activeHiker.transform.position.x < 0 && pos == 0)
+        if (!game.model.activeHiker.GetComponent<Hiker>().left && pos == 0)
         {
-            print("correct");
             return true;
         }
 
-        if (game.model.activeHiker.transform.position.x > 0 && pos == 1)
+        if (game.model.activeHiker.GetComponent<Hiker>().left && pos == 1)
         {
-            print("correct");
             return true;
         }
 
-        print("incorrect");
         return false;
     }
 
@@ -168,9 +169,8 @@ public class GameController : GameElement
     }
 
     public void GameOver() {
-        Debug.Log("GAME OVER");
         game.model.allowInput = false;
-        game.view.OpenGameOverUI;
+        game.view.OpenGameOverUI();
     }
 
     

@@ -12,6 +12,8 @@ public class GameModel : GameElement
     public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
     public GameObject goldYeti;
     public GameObject goldFlames;
+    // hikers
+    public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
     // gameplay variables
     public int score;
     public float yetiPunchInterval;
@@ -24,7 +26,11 @@ public class GameModel : GameElement
     public GameObject text_score;
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
-    public GameObject gameOver_UIGroup;
+    public GameObject gameOverUI_Group;
+    public GameObject gameOverUI_top;
+    public GameObject gameOverUI_buttons;
+    public GameObject gameOverUI_yeti;
+    public GameObject gameOverUI_hiker;
     // prefabs
     public GameObject hiker;
     // markers
