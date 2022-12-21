@@ -48,14 +48,17 @@ public class GameController : GameElement
     {
         GameObject hiker;
 
+        
         // random colour
         if (Random.Range(0,2) > 0)
         {
-            hiker = Instantiate(game.model.hikerRed, game.model.spawnPoint.transform.position, Quaternion.identity);
+            // red
+            hiker = Instantiate(game.model.hiker, game.model.spawnPoint.transform.position, Quaternion.identity);
         }
         else
         {
-            hiker = Instantiate(game.model.hikerGreen, game.model.spawnPoint.transform.position, Quaternion.identity);
+            // green
+            hiker = Instantiate(game.model.hiker, game.model.spawnPoint.transform.position, Quaternion.identity);
         }
 
         // random position
@@ -107,9 +110,9 @@ public class GameController : GameElement
 
     public void KillHiker()
     {
-        game.model.hikers[0].GetComponent<Animator>().SetBool("Death", true);
+        game.model.hikers[0].GetComponent<Animator>().SetBool("Dead", true);
         game.model.hikers.RemoveAt(0);
-        Destroy(game.model.activeHiker);
+        //Destroy(game.model.activeHiker);
         game.model.activeHiker = game.model.hikers[0];
         MoveHikersUp();
         SpawnHiker();
