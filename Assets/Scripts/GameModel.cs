@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameModel : GameElement
 {
@@ -14,8 +16,10 @@ public class GameModel : GameElement
     public GameObject goldFlames;
     // hikers
     public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
+    public List<GameObject> hikers = new List<GameObject>();
     // gameplay variables
     public int score;
+    public int highScore;
     public float yetiPunchInterval;
     public float hikerOffset;
     public float hikerSpacing;
@@ -24,6 +28,8 @@ public class GameModel : GameElement
     public int goldModeMultiplier;
     // ui
     public GameObject text_score;
+    public GameObject finalScore;
+    public GameObject finalBest;
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
     public GameObject gameOverUI_Group;
@@ -39,18 +45,32 @@ public class GameModel : GameElement
     // flags
     public bool goldMode;
     public bool allowInput;
+    public bool gameOver;
+    public bool newHighScore;
     // others
-    public List<GameObject> hikers = new List<GameObject>();
+    
     
 
     private void Awake() {
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
         allowInput = true;
+        gameOver = false;
+        newHighScore = false;
+        highScore = PlayerPrefs.GetInt("high_score", 0);
     }
 
     public void SetScore(int amount)
     {
         score = amount;
+
+        if (score > highScore)
+        {
+            Debug.Log("new highscore! of " + score);
+            newHighScore = true;
+            highScore = score;
+            PlayerPrefs.SetInt("high_score", highScore);
+            PlayerPrefs.Save();
+        }
     }
 }

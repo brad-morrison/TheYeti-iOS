@@ -5,7 +5,7 @@ using TMPro;
 using DG.Tweening;
 
 public class GameView : GameElement
-{
+{Sequence OpenGameOverUI_seq;
     void Start() {
         
     }
@@ -77,9 +77,18 @@ public class GameView : GameElement
         game.model.text_score.GetComponent<TextMeshProUGUI>().text = game.model.score.ToString();
     }
 
-    public void OpenGameOverUI() {
+    public void SetGameOverScores() {
+        // set the UI score texts
         
+    }
+
+    public void OpenGameOverUI() {
         game.model.gameOverUI_Group.active = true;
+
+        game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score.ToString();
+        game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore.ToString();
+
+        
         Sequence OpenGameOverUI_seq = DOTween.Sequence();
         
         // move in top and bottom UI

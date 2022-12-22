@@ -84,7 +84,8 @@ public class LifeBar : GameElement
         if (!flashing && !game.model.goldMode) { SetTexture(current); }
 
         // when bar reaches 0
-        if (transform.localScale.x > 2.944f)
+        // extra check to only run if gameover is false to avoid infinite loop
+        if (transform.localScale.x > 2.944f && !game.model.gameOver)
         {
             if (game.model.goldMode)
             {
@@ -92,7 +93,7 @@ public class LifeBar : GameElement
             }
             else
             {
-                print("gameover");
+                game.controller.GameOver();
             }
         }
 

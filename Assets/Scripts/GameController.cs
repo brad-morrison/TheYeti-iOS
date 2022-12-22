@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : GameElement
 {
@@ -17,6 +18,9 @@ public class GameController : GameElement
             game.view.SetYetiSprite(0);
             if (game.controller.UserCorrectCheck(0))
             {
+                game.model.SetScore(game.model.score+1);
+                game.model.lifebar.PunchScale();
+                game.view.SetScoreUI();
                 game.controller.KillHiker();
             }
             else
@@ -30,6 +34,9 @@ public class GameController : GameElement
             game.view.SetYetiSprite(2);
             if (game.controller.UserCorrectCheck(1))
             {
+                game.model.SetScore(game.model.score+1);
+                game.model.lifebar.PunchScale();
+                game.view.SetScoreUI();
                 game.controller.KillHiker();
             }
             else
@@ -131,9 +138,7 @@ public class GameController : GameElement
         game.model.activeHiker = game.model.hikers[0];
         MoveHikersUp();
         SpawnHiker();
-        game.model.SetScore(game.model.score+1);
-        game.model.lifebar.PunchScale();
-        game.view.SetScoreUI();
+        
     }
 
     public void ActivateGoldMode()
@@ -168,9 +173,12 @@ public class GameController : GameElement
         Debug.Log("gold multiplier = " + game.model.goldModeMultiplier);
     }
 
+   
+
     public void GameOver() {
+        game.model.gameOver = true;
         game.model.allowInput = false;
-        game.view.OpenGameOverUI();
+        game.view.HandleDeathUI();
     }
 
     

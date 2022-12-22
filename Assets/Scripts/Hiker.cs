@@ -19,6 +19,10 @@ public class Hiker : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void DisableAnimations() {
+        this.gameObject.GetComponent<Animator>().enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

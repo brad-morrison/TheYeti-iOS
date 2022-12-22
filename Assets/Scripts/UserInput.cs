@@ -31,6 +31,14 @@ public class UserInput : GameElement
             }
         }
 
+        // flush high score
+        if (Input.GetKeyDown("s") && game.model.allowInput)
+        {
+            game.model.highScore = 0;
+            PlayerPrefs.SetInt("high_score", 0);
+            PlayerPrefs.Save();
+        }
+
         // TOUCH CONTROLS
         if (Input.GetMouseButtonDown(0) && game.model.allowInput) {
             touch = Input.mousePosition;
