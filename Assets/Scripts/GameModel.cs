@@ -17,6 +17,7 @@ public class GameModel : GameElement
     // hikers
     public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
     public List<GameObject> hikers = new List<GameObject>();
+    public GameObject hiker_standing_left, hiker_standing_right;
     // gameplay variables
     public int score;
     public int highScore;

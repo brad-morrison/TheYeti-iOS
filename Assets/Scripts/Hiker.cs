@@ -14,7 +14,6 @@ public class Hiker : MonoBehaviour
     }
 
     public IEnumerator Die() {
-        Debug.Log("running");
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
     }

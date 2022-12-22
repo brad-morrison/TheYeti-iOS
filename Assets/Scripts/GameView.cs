@@ -77,9 +77,21 @@ public class GameView : GameElement
         game.model.text_score.GetComponent<TextMeshProUGUI>().text = game.model.score.ToString();
     }
 
-    public void SetGameOverScores() {
-        // set the UI score texts
-        
+    
+    public void HandleDeathUI() {
+        game.model.hiker_standing_right.SetActive(true);
+        OpenGameOverUI();
+        DisableAllAnimations();
+    }
+
+     public void DisableAllAnimations() {
+
+        // disable current hikers animations
+        foreach (GameObject hiker in game.model.hikers)
+        {
+            hiker.GetComponent<Hiker>().DisableAnimations();
+        }
+
     }
 
     public void OpenGameOverUI() {
@@ -88,11 +100,12 @@ public class GameView : GameElement
         game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score.ToString();
         game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore.ToString();
 
-        
+
         Sequence OpenGameOverUI_seq = DOTween.Sequence();
         
         // move in top and bottom UI
         OpenGameOverUI_seq
+            .InsertCallback(5f)
             .Append(game.model.gameOverUI_top.transform.DOMoveY(1.4f, 1f).From().SetEase(Ease.OutBounce))
             .Insert(0.2f, game.model.gameOverUI_buttons.transform.DOMove(new Vector3(0,-10,0), 1).From().SetEase(Ease.OutQuint))
         // move in yeti and hiker
@@ -106,4 +119,9 @@ public class GameView : GameElement
     public void ChangeSprite(GameObject obj, Sprite sprite) {
         obj.GetComponent<SpriteRenderer>().sprite = sprite;
     }
+
+    public IEnumerator ChangeSpriteDelay(GameObject obj, Sprite sprite, float delay) {
+        yield return new WaitForSeconds(2);
+        obj.GetComponent<SpriteRenderer>().sprite = sprite;
+    } 
 }
