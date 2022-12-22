@@ -105,7 +105,6 @@ public class GameView : GameElement
         
         // move in top and bottom UI
         OpenGameOverUI_seq
-            .InsertCallback(5f)
             .Append(game.model.gameOverUI_top.transform.DOMoveY(1.4f, 1f).From().SetEase(Ease.OutBounce))
             .Insert(0.2f, game.model.gameOverUI_buttons.transform.DOMove(new Vector3(0,-10,0), 1).From().SetEase(Ease.OutQuint))
         // move in yeti and hiker
