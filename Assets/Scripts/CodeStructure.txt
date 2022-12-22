@@ -1,46 +1,30 @@
 ﻿GameModel
 --------------------
-variables
-    Yeti Object
-    Yeti Sprites
-    LifeBar v
-    GoldFlames v
-    goldYeti v
-    Text_score v
-    Score Variables
-    HikerPrefabs c
-    HikerSpawnPoint c
-    HikerOffset c
-    hikerSpacing c
-    activeHiker c
-    list of hikers c
-    difficultyMultiplier c
-    hikerOffset c
-    hikerSpacing c
-    goldMode c
-    goldModeLength c
-    yetiPunchInterval v
-functions
+SetScore
+CheckForNewHighScore()
     
 GameController
 --------------------
-variables
-    
-functions
-    InstantiateHikers()
-    SpawnHiker()
-    MoveHikersUp()
-    UserCorrectCheck()
-    KillHiker()
+HandleTouch()
+InstantiateHikers()
+SpawnHiker()
+MoveHikersUp()
+UserCorrectCheck()
+KillHiker()
+ActivateGoldMode()
+DeactivateGoldMode()
+GoldMultiplierRoll()
+DisableAllAnimations()
+GameOver()
 
 GameView
 --------------------
-variables
-functions
-    SetYetiSprite()
-    ResetYetiSprite()
-    SetScoreUI()
-    GoldModeUIOn()
-    GoldModeUIOff()
-    
+
+SetYetiSprite()
+ActivateGoldMode()
+DeactivateGoldMode()
+ResetYetiSprite()
+SetScoreUI()
+OpenGameOverUI()
+ChangeSprite()
 
