@@ -13,7 +13,6 @@ public class Game : MonoBehaviour
     public GameModel model;
     public GameController controller;
     public GameView view;
-    public Utilities utilities;
 
     // Start is called before the first frame update
     void Start()

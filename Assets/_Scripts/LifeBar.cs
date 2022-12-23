@@ -15,9 +15,11 @@ public class LifeBar : GameElement
     bool flashing;
     float startScale;
     float scalePreGoldmode;
+    public bool animate;
 
     private void Start()
     {
+        animate = true;
         current = blue;
         flashing = false;
         startScale = transform.localScale.x;
@@ -70,11 +72,11 @@ public class LifeBar : GameElement
     private void Update()
     {
         // scale by difficulty OR linearly if in goldmode
-        if (!game.model.goldMode)
+        if (!game.model.goldMode && animate)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.model.difficultyMultiplier * Time.deltaTime);
         }
-        else
+        else if (game.model.goldMode && animate)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.model.goldModeLength * Time.deltaTime);
         }

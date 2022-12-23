@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HutongGames.PlayMaker;
 
 public class GameModel : GameElement
 {
@@ -48,10 +49,13 @@ public class GameModel : GameElement
     public bool allowInput;
     public bool gameOver;
     public bool newHighScore;
+    // StateMachines
+    public GameObject stateMachines;
+    public PlayMakerFSM FSM_GameOverAnimations;
+    public PlayMakerFSM FSM_GoldModeAnimations;
     // others
     
     
-
     private void Awake() {
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
@@ -59,7 +63,12 @@ public class GameModel : GameElement
         gameOver = false;
         newHighScore = false;
         highScore = PlayerPrefs.GetInt("high_score", 0);
+        // statemachines
+        FSM_GameOverAnimations = PlayMakerFSM.FindFsmOnGameObject(stateMachines, "GameOverAnimations");
+        FSM_GoldModeAnimations = PlayMakerFSM.FindFsmOnGameObject(stateMachines, "GoldModeAnimations");
     }
+
+    //public PlayMakerFSM 
 
     public void SetScore(int amount)
     {

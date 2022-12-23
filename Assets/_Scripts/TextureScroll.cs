@@ -5,6 +5,7 @@ using UnityEngine;
 public class TextureScroll : GameElement
 {
     Renderer renderer;
+    public bool animate;
 
     // Start is called before the first frame update
     void Start()

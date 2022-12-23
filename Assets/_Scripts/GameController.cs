@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using HutongGames.PlayMaker;
 
 public class GameController : GameElement
 {
     private void Awake()
     {
+        
+
         InstantiateHikers();
         SpawnHiker();
     }
@@ -178,7 +181,7 @@ public class GameController : GameElement
     public void GameOver() {
         game.model.gameOver = true;
         game.model.allowInput = false;
-        game.view.HandleDeathUI();
+        game.view.GameOverView();
     }
 
     

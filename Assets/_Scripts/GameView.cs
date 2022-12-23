@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using HutongGames.PlayMaker;
 
 public class GameView : GameElement
 {Sequence OpenGameOverUI_seq;
@@ -78,13 +79,24 @@ public class GameView : GameElement
     }
 
     
-    public void HandleDeathUI() {
-        game.model.hiker_standing_right.SetActive(true);
-        OpenGameOverUI();
+    public void GameOverView() {
+
         DisableAllAnimations();
+
+        // set game over ui scores
+        game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score.ToString();
+        game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore.ToString();
+
+        // Run fsm
+        game.model.FSM_GameOverAnimations.SendEvent("start");
+    
     }
 
      public void DisableAllAnimations() {
+
+        // stop bar from moving
+        game.model.lifebar.animate = false;
+        game.model.lifeBar_ScrollSpeed = 0;
 
         // disable current hikers animations
         foreach (GameObject hiker in game.model.hikers)
@@ -92,17 +104,7 @@ public class GameView : GameElement
             hiker.GetComponent<Hiker>().DisableAnimations();
         }
 
-    }
-
-    public void OpenGameOverUI() {
-        game.model.gameOverUI_Group.active = true;
-        // set game over ui scores
-        game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score.ToString();
-        game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore.ToString();
-
-        // run FSM here
-        
-    }
+     }
 
     public void ChangeSprite(GameObject obj, Sprite sprite) {
         obj.GetComponent<SpriteRenderer>().sprite = sprite;
