@@ -9,7 +9,7 @@ public class GameController : GameElement
     private void Awake()
     {
         
-
+        game.model.score = 0;
         InstantiateHikers();
         SpawnHiker();
     }

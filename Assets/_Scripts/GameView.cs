@@ -84,8 +84,9 @@ public class GameView : GameElement
         DisableAllAnimations();
 
         // set game over ui scores
-        game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score.ToString();
-        game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore.ToString();
+        // if 0 then use the letter 'o' instead, 0 looks like an 8 with chosen font
+        game.model.finalScore.GetComponent<TextMeshPro>().text = game.model.score == 0 ? "o" : game.model.score.ToString();
+        game.model.finalBest.GetComponent<TextMeshPro>().text = game.model.highScore == 0 ? "o" : game.model.highScore.ToString();
 
         // Run fsm
         game.model.FSM_GameOverAnimations.SendEvent("start");
