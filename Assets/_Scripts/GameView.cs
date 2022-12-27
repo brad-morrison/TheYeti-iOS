@@ -54,6 +54,9 @@ public class GameView : GameElement
             flame.GetComponent<SpriteRenderer>().enabled = true;
         }
         game.model.goldYeti.SetActive(true);
+
+        // Run fsm
+        game.model.FSM_GoldModeAnimations.SendEvent("start");
     }
 
     public void DeactivateGoldMode()
