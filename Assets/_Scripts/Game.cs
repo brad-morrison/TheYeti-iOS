@@ -20,3 +20,5 @@ public class Game : MonoBehaviour
         Application.targetFrameRate = 600; // 60fps
     }
 }
+
+// About to refactor the scripts to tidy up the game. After which I will try Unity Events and will try to remove playmaker.
