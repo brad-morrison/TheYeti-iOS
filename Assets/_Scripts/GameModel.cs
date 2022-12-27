@@ -9,6 +9,7 @@ public class GameModel : GameElement
 {
     // device
     public float deviceScreenWidth;
+    public float deviceScreenHeight;
     // yeti
     public GameObject yeti, yeti_shadow, yeti_goldOutline;
     public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
@@ -49,6 +50,8 @@ public class GameModel : GameElement
     public bool allowInput;
     public bool gameOver;
     public bool newHighScore;
+    // GoldMode
+    public GameObject goldModeFace;
     // StateMachines
     public GameObject stateMachines;
     public PlayMakerFSM FSM_GameOverAnimations;
@@ -59,6 +62,7 @@ public class GameModel : GameElement
     private void Awake() {
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
+        deviceScreenHeight = Display.main.systemHeight;
         allowInput = true;
         gameOver = false;
         newHighScore = false;
@@ -72,7 +76,7 @@ public class GameModel : GameElement
 
     public void SetScore(int amount)
     {
-        score = amount;
+        score = score + amount;
 
         if (score > highScore)
         {

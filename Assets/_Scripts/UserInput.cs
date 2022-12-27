@@ -23,7 +23,7 @@ public class UserInput : GameElement
         {
             if (!game.model.goldMode)
             {
-                game.controller.ActivateGoldMode();
+                game.controller.GoldMode_Transition();
             }
             else
             {
@@ -43,12 +43,16 @@ public class UserInput : GameElement
         if (Input.GetMouseButtonDown(0) && game.model.allowInput) {
             touch = Input.mousePosition;
 
-            if (touch.x < game.model.deviceScreenWidth / 2) {
-                game.controller.HandleTouch("left");
+            // if touch is in lower half of screen
+            if (touch.y < game.model.deviceScreenHeight / 2) {
+                // check if touch is on the left or right of screen
+                if (touch.x < game.model.deviceScreenWidth / 2) {
+                    game.controller.HandleTouch("left");
+                } else {
+                    game.controller.HandleTouch("right");
+                }
             }
-            else {
-                game.controller.HandleTouch("right");
-            }
+            
         }
     }
 }

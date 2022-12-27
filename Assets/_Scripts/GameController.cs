@@ -21,7 +21,7 @@ public class GameController : GameElement
             game.view.SetYetiSprite(0);
             if (game.controller.UserCorrectCheck(0))
             {
-                game.model.SetScore(game.model.score+1);
+                game.model.SetScore(ScoreToAdd());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
                 game.controller.KillHiker();
@@ -37,7 +37,7 @@ public class GameController : GameElement
             game.view.SetYetiSprite(2);
             if (game.controller.UserCorrectCheck(1))
             {
-                game.model.SetScore(game.model.score+1);
+                game.model.SetScore(ScoreToAdd());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
                 game.controller.KillHiker();
@@ -51,6 +51,14 @@ public class GameController : GameElement
 
             default:
             break;
+        }
+    }
+
+    public int ScoreToAdd() {
+        if (game.model.goldMode) {
+            return game.model.goldModeMultiplier + 1;
+        } else {
+            return 1;
         }
     }
 
@@ -144,10 +152,17 @@ public class GameController : GameElement
         
     }
 
+    public void GoldMode_Transition() {
+        // Run fsm
+        game.model.FSM_GoldModeAnimations.SendEvent("start");
+        // pause lifebar animation
+        game.model.lifebar.animate = false;
+    }
+
     public void ActivateGoldMode()
     {
-        Debug.Log("gold mode on");
-
+        // restart lifebar animation
+        game.model.lifebar.animate = true;
         // activate gold mode flag
         game.model.goldMode = true;
         // activate gold mode for lifebar
@@ -159,8 +174,6 @@ public class GameController : GameElement
 
     public void DeactivateGoldMode()
     {
-        Debug.Log("gold mode off");
-
         // deactivate gold mode flag
         game.model.goldMode = false;
         // deactivate gold mode for lifebar
