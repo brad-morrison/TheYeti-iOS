@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
     public Hikers hikers;
     public Yeti yeti;
     public GoldMode goldMode;
+    public GameOver gameOver;
 
     void Awake()
     {
@@ -35,5 +36,6 @@ public class Game : MonoBehaviour
         hikers = scripts.GetComponent<Hikers>();
         yeti = scripts.GetComponent<Yeti>();
         goldMode = scripts.GetComponent<GoldMode>();
+        gameOver = scripts.GetComponent<GameOver>();
     }
 }

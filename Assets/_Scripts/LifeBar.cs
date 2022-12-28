@@ -95,7 +95,7 @@ public class LifeBar : GameElement
             }
             else
             {
-                game.controller.GameOver();
+                game.gameOver.SetGameOver();
             }
         }
 

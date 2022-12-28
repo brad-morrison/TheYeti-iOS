@@ -28,8 +28,7 @@ public class GameController : GameElement
             }
             else
             {
-                // game over
-                GameOver();
+                game.gameOver.SetGameOver();
             }
             break;
 
@@ -44,7 +43,7 @@ public class GameController : GameElement
             }
             else
             {
-                GameOver();
+                game.gameOver.SetGameOver();
             }
             break;
 
@@ -84,12 +83,6 @@ public class GameController : GameElement
     public void DeactivateGoldMode()
     {
         game.goldMode.DeactivateGoldMode();
-    }
-
-    public void GameOver() {
-        game.model.gameOver = true;
-        game.model.allowInput = false;
-        game.view.GameOverView();
     }
 
     public void DisableAllAnimations() {
