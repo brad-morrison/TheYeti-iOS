@@ -11,8 +11,8 @@ public class GameModel : GameElement
     public float deviceScreenWidth;
     public float deviceScreenHeight;
     // yeti
-    public GameObject yeti, yeti_shadow, yeti_goldOutline;
-    public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
+    //public GameObject yeti, yeti_shadow, yeti_goldOutline;
+    //public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
     public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
     public GameObject goldYeti;
     public GameObject goldFlames;

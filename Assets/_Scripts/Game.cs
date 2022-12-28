@@ -22,8 +22,9 @@ public class Game : MonoBehaviour
     public GameObject scripts;
 
     // scripts
-    [HideInInspector]
+    //[HideInInspector]
     public Hikers hikers;
+    //[HideInInspector]
     public Yeti yeti;
 
     void Awake()

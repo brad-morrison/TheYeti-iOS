@@ -5617,18 +5617,9 @@ MonoBehaviour:
   yetiGold_bothUp: {fileID: -5717686401821120438, guid: 6e197995555764bbe8539721806338d5, type: 3}
   goldYeti: {fileID: 1240225163}
   goldFlames: {fileID: 1366815412}
-  hiker_red: {fileID: -4491713968918973378, guid: 5485d2b858e034484a095931e94856cf, type: 3}
-  hiker_red_down: {fileID: 7481999752915640580, guid: 5485d2b858e034484a095931e94856cf, type: 3}
-  hiker_red_axeUp: {fileID: -3724585019263890721, guid: 5485d2b858e034484a095931e94856cf, type: 3}
-  hiker_red_smiling: {fileID: -3974339563261985876, guid: 5485d2b858e034484a095931e94856cf, type: 3}
-  hikers: []
-  hiker_standing_left: {fileID: 1454616198}
-  hiker_standing_right: {fileID: 1692104044}
   score: 0
   highScore: 0
   yetiPunchInterval: 0.15
-  hikerOffset: 0.25
-  hikerSpacing: 0.3
   difficultyMultiplier: 0.2
   goldModeLength: 0.5
   goldModeMultiplier: 0
@@ -5643,8 +5634,6 @@ MonoBehaviour:
   gameOverUI_yeti: {fileID: 51665040}
   gameOverUI_hiker: {fileID: 505747974}
   hiker: {fileID: 6680418880634491584, guid: 8fd722179fb1b43a28873a8766f7909c, type: 3}
-  spawnPoint: {fileID: 625440713}
-  activeHiker: {fileID: 0}
   goldMode: 0
   allowInput: 0
   gameOver: 0
@@ -5653,6 +5642,7 @@ MonoBehaviour:
   stateMachines: {fileID: 101263843}
   FSM_GameOverAnimations: {fileID: 0}
   FSM_GoldModeAnimations: {fileID: 0}
+  hikers: {fileID: 0}
 --- !u!1 &386209989
 GameObject:
   m_ObjectHideFlags: 0
@@ -10782,6 +10772,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6921192925168688220, guid: c9bc0eb698c0844f18b4c93a4a8655a7, type: 3}
   m_PrefabInstance: {fileID: 1834258668}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1249974485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249974487}
+  - component: {fileID: 1249974486}
+  - component: {fileID: 1249974488}
+  m_Layer: 0
+  m_Name: Scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1249974486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249974485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b59eeb89a8ff4dba97972d7c6ddadaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hikerOffsetX: 0.22
+  hikerOffsetY: 0.3
+  hikerRed_idle: {fileID: -4491713968918973378, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hikerRed_lookingDown: {fileID: 7481999752915640580, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hikerRed_axeUp: {fileID: -3724585019263890721, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hikerRed_smiling: {fileID: -3974339563261985876, guid: 5485d2b858e034484a095931e94856cf, type: 3}
+  hikers: []
+  hiker_standing_left: {fileID: 0}
+  hiker_standing_right: {fileID: 0}
+  hiker: {fileID: 6680418880634491584, guid: 8fd722179fb1b43a28873a8766f7909c, type: 3}
+  spawnPoint: {fileID: 625440713}
+  activeHiker: {fileID: 0}
+--- !u!4 &1249974487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249974485}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.08182455, y: 0.08021889, z: 0.009664664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1684775129}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249974488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249974485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507beeb74298549ed803ea99d4fb2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yeti: {fileID: 1321447869}
+  yeti_shadow: {fileID: 70545433}
+  yeti_goldOutline: {fileID: 1240225163}
+  yeti_left: {fileID: 4370597571352623678, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yeti_right: {fileID: 2889537343899344147, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yeti_bothUp: {fileID: -6270007319738283744, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yeti_bothDown1: {fileID: 8019481336561790259, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yeti_bothDown2: {fileID: -1680044901845065803, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yeti_dead: {fileID: 907935624007186437, guid: 950831a87f26c47bcbd5b844313dade4, type: 3}
+  yetiGold_left: {fileID: 6175424187271958114, guid: 6e197995555764bbe8539721806338d5, type: 3}
+  yetiGold_right: {fileID: -7966843708283605976, guid: 6e197995555764bbe8539721806338d5, type: 3}
+  yetiGold_bothUp: {fileID: -5717686401821120438, guid: 6e197995555764bbe8539721806338d5, type: 3}
 --- !u!1 &1270827806
 GameObject:
   m_ObjectHideFlags: 0
@@ -12869,7 +12940,7 @@ Transform:
   - {fileID: 1039779587}
   - {fileID: 1694823177}
   m_Father: {fileID: 1684775129}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1604324271
 MonoBehaviour:
@@ -12989,6 +13060,7 @@ Transform:
   m_Children:
   - {fileID: 330634345}
   - {fileID: 947906795}
+  - {fileID: 1249974487}
   - {fileID: 1604324270}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -13008,6 +13080,9 @@ MonoBehaviour:
   model: {fileID: 330634346}
   controller: {fileID: 947906796}
   view: {fileID: 1604324271}
+  scripts: {fileID: 1249974485}
+  hikers: {fileID: 0}
+  yeti: {fileID: 0}
 --- !u!114 &1684775131
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class GameController : GameElement
 
         switch(command) {
             case "left":
-            game.view.SetYetiSprite(0);
+            game.yeti.SetSprite(0);
             if (game.controller.UserCorrectCheck(0))
             {
                 game.model.SetScore(ScoreToAdd());
@@ -34,7 +34,7 @@ public class GameController : GameElement
             break;
 
             case "right":
-            game.view.SetYetiSprite(2);
+            game.yeti.SetSprite(2);
             if (game.controller.UserCorrectCheck(1))
             {
                 game.model.SetScore(ScoreToAdd());
@@ -44,7 +44,6 @@ public class GameController : GameElement
             }
             else
             {
-                // game over
                 GameOver();
             }
             break;

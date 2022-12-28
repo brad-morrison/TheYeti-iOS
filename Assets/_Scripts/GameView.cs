@@ -7,10 +7,8 @@ using HutongGames.PlayMaker;
 
 public class GameView : GameElement
 {Sequence OpenGameOverUI_seq;
-    void Start() {
-        
-    }
-
+    
+    /*
     public void SetYetiSprite(int state)
     {
         switch(state)
@@ -46,6 +44,7 @@ public class GameView : GameElement
         // reset sprite back to idle
         Invoke("ResetYetiSprite", game.model.yetiPunchInterval);
     }
+    */
 
     public void ActivateGoldMode()
     {
@@ -67,13 +66,13 @@ public class GameView : GameElement
         }
         game.model.goldYeti.SetActive(false);
     }
-
+/*
     public void ResetYetiSprite()
     {
         game.model.yeti.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
         game.model.yeti_shadow.GetComponent<SpriteRenderer>().sprite = game.model.yeti_bothUp;
         game.model.yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = game.model.yetiGold_bothUp;
-    }
+    }*/
 
     // ui
     public void SetScoreUI()
