@@ -44,7 +44,10 @@ public class GoldMode : GameElement {
     }
 
     public int GoldMultiplierRoll() {
-        return 10;
+        System.Random rand = new System.Random();
+        int roll = rand.Next(1,5);
+        Debug.Log("gold multiplier = " + roll);
+        return roll;
     }
 
     public void GoldFlames(bool state) {

@@ -75,13 +75,6 @@ public class GameController : GameElement
 
         return false;
     }
-/*
-    public void GoldMode_Transition() {
-        // Run fsm
-        game.model.FSM_GoldModeAnimations.SendEvent("start");
-        // pause lifebar animation
-        game.model.lifebar.animate = false;
-    }*/
 
     public void ActivateGoldMode()
     {
@@ -93,19 +86,21 @@ public class GameController : GameElement
         game.goldMode.DeactivateGoldMode();
     }
 
-    public void GoldMultiplierRoll() 
-    {
-        System.Random roll = new System.Random();
-        game.goldMode.goldModeMultiplier = roll.Next(1,5);
-        Debug.Log("gold multiplier = " + game.goldMode.goldModeMultiplier);
-    }
-
     public void GameOver() {
         game.model.gameOver = true;
         game.model.allowInput = false;
         game.view.GameOverView();
     }
 
-    
+    public void DisableAllAnimations() {
+
+        // disable lifebar animations
+        game.model.lifebar.animate = false;
+        game.model.lifeBar_ScrollSpeed = 0;
+
+        // disable hiker animations
+        game.hikers.DisableAnimations();
+
+     }
 
 }

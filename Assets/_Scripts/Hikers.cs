@@ -85,7 +85,12 @@ public class Hikers : GameElement {
         activeHiker = hikers[0];
         MoveHikersUp();
         SpawnHiker();
-        
+    }
+
+    public void DisableAnimations() {
+        foreach (GameObject hiker in hikers) {
+            hiker.GetComponent<Hiker>().DisableAnimations();
+        }
     }
 
 
