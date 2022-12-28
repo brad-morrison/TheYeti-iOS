@@ -49,3 +49,5 @@ public class GameOver : GameElement {
         newHighScoreLabel.SetActive(true); 
     }
 }
+
+// about to try and remove playmaker
