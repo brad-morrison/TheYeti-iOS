@@ -10,25 +10,10 @@ public class GameModel : GameElement
     // device
     public float deviceScreenWidth;
     public float deviceScreenHeight;
-    // yeti
-    //public GameObject yeti, yeti_shadow, yeti_goldOutline;
-    //public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
-    public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
-    public GameObject goldYeti;
-    public GameObject goldFlames;
-    // hikers
-    //public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
-    //public List<GameObject> hikers = new List<GameObject>();
-    //public GameObject hiker_standing_left, hiker_standing_right;
     // gameplay variables
     public int score;
     public int highScore;
-    public float yetiPunchInterval;
-    //public float hikerOffset;
-    //public float hikerSpacing;
     public float difficultyMultiplier;
-    public float goldModeLength;
-    public int goldModeMultiplier;
     // ui
     public GameObject text_score;
     public GameObject finalScore;
@@ -40,18 +25,12 @@ public class GameModel : GameElement
     public GameObject gameOverUI_buttons;
     public GameObject gameOverUI_yeti;
     public GameObject gameOverUI_hiker;
-    // prefabs
-    public GameObject hiker;
-    // markers
-    //public GameObject spawnPoint;
-    //public GameObject activeHiker;
     // flags
-    public bool goldMode;
     public bool allowInput;
     public bool gameOver;
     public bool newHighScore;
     // GoldMode
-    public GameObject goldModeFace;
+    
     // StateMachines
     public GameObject stateMachines;
     public PlayMakerFSM FSM_GameOverAnimations;

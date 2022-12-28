@@ -36,7 +36,7 @@ public class LifeBar : GameElement
 
     public void PunchScale()
     {
-        if (!game.model.goldMode)
+        if (!game.goldMode.goldMode)
         {
             if (transform.localScale.x + punchAmount > 0)
             {
@@ -47,7 +47,7 @@ public class LifeBar : GameElement
 
     }
 
-    public void ActivateGoldMode()
+    public void GoldMode()
     {
         // save scale of bar
         scalePreGoldmode = transform.localScale.x;
@@ -61,7 +61,7 @@ public class LifeBar : GameElement
         game.model.lifeBar_ScrollSpeed = game.model.lifeBar_ScrollSpeed * 2;
     }
 
-    public void DeactivateGoldMode()
+    public void NormalMode()
     {
         goldFrame.SetActive(false);
         SetTexture(current);
@@ -72,24 +72,24 @@ public class LifeBar : GameElement
     private void Update()
     {
         // scale by difficulty OR linearly if in goldmode
-        if (!game.model.goldMode && animate)
+        if (!game.goldMode.goldMode && animate)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.model.difficultyMultiplier * Time.deltaTime);
         }
-        else if (game.model.goldMode && animate)
+        else if (game.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.model.goldModeLength * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.goldMode.goldModeLength * Time.deltaTime);
         }
         
         if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
-        if (!flashing && !game.model.goldMode) { SetTexture(current); }
+        if (!flashing && !game.goldMode.goldMode) { SetTexture(current); }
 
         // when bar reaches 0
         // extra check to only run if gameover is false to avoid infinite loop
         if (transform.localScale.x > 2.944f && !game.model.gameOver)
         {
-            if (game.model.goldMode)
+            if (game.goldMode.goldMode)
             {
                 game.controller.DeactivateGoldMode();
             }

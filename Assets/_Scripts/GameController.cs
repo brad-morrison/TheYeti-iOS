@@ -14,14 +14,14 @@ public class GameController : GameElement
         game.hikers.SpawnHiker();
     }
 
-    public void HandleTouch(string command) {
+    public void HandleInput(string command) {
 
         switch(command) {
             case "left":
             game.yeti.SetSprite(0);
-            if (game.controller.UserCorrectCheck(0))
+            if (game.controller.IsPlayerCorrect(0))
             {
-                game.model.SetScore(ScoreToAdd());
+                game.model.SetScore(AddToScore());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
                 game.hikers.KillHiker();
@@ -35,9 +35,9 @@ public class GameController : GameElement
 
             case "right":
             game.yeti.SetSprite(2);
-            if (game.controller.UserCorrectCheck(1))
+            if (game.controller.IsPlayerCorrect(1))
             {
-                game.model.SetScore(ScoreToAdd());
+                game.model.SetScore(AddToScore());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
                 game.hikers.KillHiker();
@@ -53,77 +53,15 @@ public class GameController : GameElement
         }
     }
 
-    public int ScoreToAdd() {
-        if (game.model.goldMode) {
-            return game.model.goldModeMultiplier + 1;
+    public int AddToScore() {
+        if (game.goldMode.goldMode) {
+            return game.goldMode.goldModeMultiplier + 1;
         } else {
             return 1;
         }
     }
-/*
-    public void InstantiateHikers()
-    {
-        SpawnHiker();
-        MoveHikersUp();
-        SpawnHiker();
-        MoveHikersUp();
-        SpawnHiker();
-        MoveHikersUp();
-    }*/
-/*
-    public void SpawnHiker()
-    {
-        GameObject hiker;
 
-        
-        // random colour
-        if (Random.Range(0,2) > 0)
-        {
-            // red
-            hiker = Instantiate(game.model.hiker, game.model.spawnPoint.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            // green
-            hiker = Instantiate(game.model.hiker, game.model.spawnPoint.transform.position, Quaternion.identity);
-        }
-
-        // random position
-        if (Random.Range(0, 2) > 0)
-        {
-            // left
-            hiker.GetComponent<Hiker>().left = true;
-            hiker.GetComponent<SpriteRenderer>().flipX = true;
-            hiker.GetComponent<Animator>().SetBool("Left", false);
-            hiker.transform.position = new Vector2(hiker.transform.position.x + game.model.hikerOffset, hiker.transform.position.y);
-        }
-        else
-        {
-            // right
-            hiker.GetComponent<Hiker>().left = false;
-            hiker.transform.position = new Vector2(hiker.transform.position.x - game.model.hikerOffset, hiker.transform.position.y);
-        }
-
-        // if first hiker then set to active
-        if (game.model.hikers.Count < 1)
-        {
-            game.model.activeHiker = hiker;
-        }
-
-        // add hiker to list of hikers
-        game.model.hikers.Add(hiker);
-
-    } 
-
-    public void MoveHikersUp()
-    {
-        foreach (GameObject hiker in game.model.hikers)
-        {
-            hiker.transform.position = new Vector2(hiker.transform.position.x, hiker.transform.position.y + game.model.hikerSpacing);
-        }
-    }*/
-
-    public bool UserCorrectCheck(int pos)
+    public bool IsPlayerCorrect(int pos)
     {
         if (!game.hikers.activeHiker.GetComponent<Hiker>().left && pos == 0)
         {
@@ -138,57 +76,29 @@ public class GameController : GameElement
         return false;
     }
 /*
-    public void KillHiker()
-    {
-        GameObject target = game.model.hikers[0];
-        target.GetComponent<Hiker>().StartCoroutine("Die");
-        target.GetComponent<Animator>().SetBool("Dead", true);
-        game.model.hikers.RemoveAt(0);
-        
-        game.model.activeHiker = game.model.hikers[0];
-        MoveHikersUp();
-        SpawnHiker();
-        
-    }
-*/
     public void GoldMode_Transition() {
         // Run fsm
         game.model.FSM_GoldModeAnimations.SendEvent("start");
         // pause lifebar animation
         game.model.lifebar.animate = false;
-    }
+    }*/
 
     public void ActivateGoldMode()
     {
-        // restart lifebar animation
-        game.model.lifebar.animate = true;
-        // activate gold mode flag
-        game.model.goldMode = true;
-        // activate gold mode for lifebar
-        game.model.lifebar.ActivateGoldMode();
-        // activate gold mode for view (ui elements)
-        game.view.ActivateGoldMode();
-        GoldMultiplierRoll();
+        game.goldMode.GoldModeAnnounce();
     }
 
     public void DeactivateGoldMode()
     {
-        // deactivate gold mode flag
-        game.model.goldMode = false;
-        // deactivate gold mode for lifebar
-        game.model.lifebar.DeactivateGoldMode();
-        // deactivate gold mode for view (ui elements)
-        game.view.DeactivateGoldMode();
+        game.goldMode.DeactivateGoldMode();
     }
 
     public void GoldMultiplierRoll() 
     {
         System.Random roll = new System.Random();
-        game.model.goldModeMultiplier = roll.Next(1,5);
-        Debug.Log("gold multiplier = " + game.model.goldModeMultiplier);
+        game.goldMode.goldModeMultiplier = roll.Next(1,5);
+        Debug.Log("gold multiplier = " + game.goldMode.goldModeMultiplier);
     }
-
-   
 
     public void GameOver() {
         game.model.gameOver = true;

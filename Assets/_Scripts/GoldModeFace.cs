@@ -11,7 +11,7 @@ public class GoldModeFace : GameElement
     }
 
     private void OnMouseDown() {
-        game.controller.GoldMode_Transition();
+        game.controller.ActivateGoldMode();
         Destroy(gameObject);
     }
 

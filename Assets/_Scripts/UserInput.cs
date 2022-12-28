@@ -11,19 +11,19 @@ public class UserInput : GameElement
         // DEBUG CONTROLS (Keyboard)
         if (Input.GetKeyDown("a") && game.model.allowInput)
         {
-            game.controller.HandleTouch("left");
+            game.controller.HandleInput("left");
         }
 
         if (Input.GetKeyDown("d") && game.model.allowInput)
         {
-            game.controller.HandleTouch("right");
+            game.controller.HandleInput("right");
         }
 
         if (Input.GetKeyDown("g") && game.model.allowInput)
         {
-            if (!game.model.goldMode)
+            if (!game.goldMode.goldMode)
             {
-                game.controller.GoldMode_Transition();
+                game.controller.ActivateGoldMode();
             }
             else
             {
@@ -47,9 +47,9 @@ public class UserInput : GameElement
             if (touch.y < game.model.deviceScreenHeight / 2) {
                 // check if touch is on the left or right of screen
                 if (touch.x < game.model.deviceScreenWidth / 2) {
-                    game.controller.HandleTouch("left");
+                    game.controller.HandleInput("left");
                 } else {
-                    game.controller.HandleTouch("right");
+                    game.controller.HandleInput("right");
                 }
             }
             

@@ -24,8 +24,8 @@ public class Game : MonoBehaviour
     // scripts
     //[HideInInspector]
     public Hikers hikers;
-    //[HideInInspector]
     public Yeti yeti;
+    public GoldMode goldMode;
 
     void Awake()
     {
@@ -34,5 +34,6 @@ public class Game : MonoBehaviour
         // script references
         hikers = scripts.GetComponent<Hikers>();
         yeti = scripts.GetComponent<Yeti>();
+        goldMode = scripts.GetComponent<GoldMode>();
     }
 }
