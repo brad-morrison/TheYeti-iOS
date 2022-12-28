@@ -5,7 +5,20 @@ using UnityEngine;
 public class UserInput : GameElement
 {
     Vector3 touch;
-    // Update is called once per frame
+
+    public void ButtonPress(string function) {
+        Debug.Log(function + " pressed");
+
+        switch(function) {
+            case "replay":
+                Application.LoadLevel("Main");
+                break;
+
+            default:
+                break;
+        }
+    }
+
     void Update()
     {
         // DEBUG CONTROLS (Keyboard)

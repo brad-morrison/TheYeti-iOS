@@ -18,7 +18,6 @@ public class Game : MonoBehaviour
 
     public GameModel model;
     public GameController controller;
-    public GameView view;
     public GameObject scripts;
 
     // scripts
@@ -27,6 +26,9 @@ public class Game : MonoBehaviour
     public Yeti yeti;
     public GoldMode goldMode;
     public GameOver gameOver;
+    public Audio audio;
+    public UserInput input;
+    public Particles particles;
 
     void Awake()
     {
@@ -37,5 +39,8 @@ public class Game : MonoBehaviour
         yeti = scripts.GetComponent<Yeti>();
         goldMode = scripts.GetComponent<GoldMode>();
         gameOver = scripts.GetComponent<GameOver>();
+        audio = scripts.GetComponent<Audio>();
+        input = scripts.GetComponent<UserInput>();
+        particles = scripts.GetComponent<Particles>();
     }
 }

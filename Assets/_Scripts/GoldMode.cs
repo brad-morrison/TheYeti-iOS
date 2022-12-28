@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GoldMode : GameElement {
 
@@ -8,24 +9,32 @@ public class GoldMode : GameElement {
     public int goldModeMultiplier;
     // gameobjects & prefabs
     public GameObject goldMode_announceUI;
-    public GameObject goldFlames, goldModeFace;
+    public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierPop;
     
     public void GoldModeAnnounce() {
+        // roll and set gold multiplier
+        goldModeMultiplier = GoldMultiplierRoll();
+        // set multiplier text
+        multiplierAnnounce.GetComponent<TextMeshPro>().text = "+" + goldModeMultiplier.ToString();
+        
         goldMode_announceUI.SetActive(true);
         game.model.lifebar.animate = false;
+        game.audio.PlaySound(game.audio.goldModeStart);
+        // turn off input
+        game.model.allowInput = false;
     }
 
     public void ActivateGoldMode() {
         // hide announce ui
         goldMode_announceUI.SetActive(false);
+        // turn on input
+        game.model.allowInput = true;
         // restart lifebar animation
         game.model.lifebar.animate = true;
         // activate gold mode flag
         game.goldMode.goldMode = true;
         // activate gold mode for lifebar
         game.model.lifebar.GoldMode();
-        // roll and set gold multiplier
-        goldModeMultiplier = GoldMultiplierRoll();
         // turn on flames
         GoldFlames(true);
         // turn on outline
@@ -41,6 +50,7 @@ public class GoldMode : GameElement {
         GoldFlames(false);
         // turn off yeti outline
         game.yeti.yeti_goldOutline.SetActive(false);
+        game.audio.PlaySound(game.audio.goldModeEnd);
     }
 
     public int GoldMultiplierRoll() {

@@ -5,8 +5,11 @@ using UnityEngine;
 public class GoldModeFace : GameElement
 {
     float step;
+    AudioSource source;
 
     private void Start() {
+        source = GetComponent<AudioSource>();
+        source.Play();
         step = 0.0009f;
     }
 

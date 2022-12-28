@@ -8,7 +8,6 @@ public class GameController : GameElement
 {
     private void Start()
     {
-        
         game.model.score = 0;
         game.hikers.InitHikers();
         game.hikers.SpawnHiker();
@@ -16,14 +15,20 @@ public class GameController : GameElement
 
     public void HandleInput(string command) {
 
+        if (game.goldMode.goldMode) { 
+            game.audio.PlaySound(game.audio.coin); 
+            Instantiate(game.goldMode.multiplierPop);
+            }
+
         switch(command) {
             case "left":
             game.yeti.SetSprite(0);
             if (game.controller.IsPlayerCorrect(0))
             {
+                game.audio.PlaySound(game.audio.punchSmall);
                 game.model.SetScore(AddToScore());
+                SetScoreUI();
                 game.model.lifebar.PunchScale();
-                game.view.SetScoreUI();
                 game.hikers.KillHiker();
             }
             else
@@ -36,9 +41,10 @@ public class GameController : GameElement
             game.yeti.SetSprite(2);
             if (game.controller.IsPlayerCorrect(1))
             {
+                game.audio.PlaySound(game.audio.punchLarge);
                 game.model.SetScore(AddToScore());
+                SetScoreUI();
                 game.model.lifebar.PunchScale();
-                game.view.SetScoreUI();
                 game.hikers.KillHiker();
             }
             else
@@ -96,4 +102,7 @@ public class GameController : GameElement
 
      }
 
+    public void SetScoreUI() {
+        game.model.text_score.GetComponent<TextMeshPro>().text = game.model.score == 0 ? "o" : game.model.score.ToString();
+    }
 }

@@ -11,6 +11,8 @@ public class GameOver : GameElement {
     public void SetGameOver() {
         gameOver = true;
         gameOver_UI.SetActive(true);
+        game.audio.PlaySound(game.audio.gameOver);
+        game.audio.PlaySoundAfter(game.audio.hit, 1.1f);
 
         // switch on high score items if true
         if (game.model.newHighScore) { 
@@ -37,6 +39,7 @@ public class GameOver : GameElement {
     }
 
     IEnumerator NoHighScore() {
+        game.audio.PlaySoundAfter(game.audio.pop, 1);
         yeti.GetComponent<SpriteRenderer>().sprite = game.yeti.yeti_dead;
         yield return new WaitForSeconds(1);
         hiker.GetComponent<SpriteRenderer>().sprite = game.hikers.hikerRed_smiling;
@@ -46,6 +49,7 @@ public class GameOver : GameElement {
         yeti.GetComponent<SpriteRenderer>().sprite = game.yeti.yeti_dead;
         yield return new WaitForSeconds(0);
         crown.SetActive(true);
+        game.audio.PlaySound(game.audio.crown);
         newHighScoreLabel.SetActive(true); 
     }
 }
