@@ -17,15 +17,15 @@ public class GameModel : GameElement
     public GameObject goldYeti;
     public GameObject goldFlames;
     // hikers
-    public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
-    public List<GameObject> hikers = new List<GameObject>();
-    public GameObject hiker_standing_left, hiker_standing_right;
+    //public Sprite hiker_red, hiker_red_down, hiker_red_axeUp, hiker_red_smiling;
+    //public List<GameObject> hikers = new List<GameObject>();
+    //public GameObject hiker_standing_left, hiker_standing_right;
     // gameplay variables
     public int score;
     public int highScore;
     public float yetiPunchInterval;
-    public float hikerOffset;
-    public float hikerSpacing;
+    //public float hikerOffset;
+    //public float hikerSpacing;
     public float difficultyMultiplier;
     public float goldModeLength;
     public int goldModeMultiplier;
@@ -43,8 +43,8 @@ public class GameModel : GameElement
     // prefabs
     public GameObject hiker;
     // markers
-    public GameObject spawnPoint;
-    public GameObject activeHiker;
+    //public GameObject spawnPoint;
+    //public GameObject activeHiker;
     // flags
     public bool goldMode;
     public bool allowInput;
@@ -57,9 +57,15 @@ public class GameModel : GameElement
     public PlayMakerFSM FSM_GameOverAnimations;
     public PlayMakerFSM FSM_GoldModeAnimations;
     // others
+
+    // scripts
+    public Hikers hikers;
     
     
     private void Awake() {
+        // script references 
+        hikers = GetComponent<Hikers>();
+
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;

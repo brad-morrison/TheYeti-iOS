@@ -10,15 +10,28 @@ public class GameElement : MonoBehaviour
 
 public class Game : MonoBehaviour
 {
+    // MODEL      - all data and general variables for the game
+    // CONTROLLER - main game logic, control and flow
+    // SCRIPTS    - a GameObject that holds other scripts, individual scripts
+    //              are grabbed at Awake() for easy access within other scripts.
+    //              (hidden from inspector to look tidier).
+
     public GameModel model;
     public GameController controller;
     public GameView view;
+    public GameObject scripts;
 
-    // Start is called before the first frame update
-    void Start()
+    // scripts
+    [HideInInspector]
+    public Hikers hikers;
+    public Yeti yeti;
+
+    void Awake()
     {
-        Application.targetFrameRate = 600; // 60fps
+        Application.targetFrameRate = 600; // run at 60fps
+
+        // script references
+        hikers = scripts.GetComponent<Hikers>();
+        yeti = scripts.GetComponent<Yeti>();
     }
 }
-
-// About to refactor the scripts to tidy up the game. After which I will try Unity Events and will try to remove playmaker.

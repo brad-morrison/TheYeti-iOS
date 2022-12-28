@@ -6,12 +6,12 @@ using HutongGames.PlayMaker;
 
 public class GameController : GameElement
 {
-    private void Awake()
+    private void Start()
     {
         
         game.model.score = 0;
-        InstantiateHikers();
-        SpawnHiker();
+        game.hikers.InitHikers();
+        game.hikers.SpawnHiker();
     }
 
     public void HandleTouch(string command) {
@@ -24,7 +24,7 @@ public class GameController : GameElement
                 game.model.SetScore(ScoreToAdd());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
-                game.controller.KillHiker();
+                game.hikers.KillHiker();
             }
             else
             {
@@ -40,7 +40,7 @@ public class GameController : GameElement
                 game.model.SetScore(ScoreToAdd());
                 game.model.lifebar.PunchScale();
                 game.view.SetScoreUI();
-                game.controller.KillHiker();
+                game.hikers.KillHiker();
             }
             else
             {
@@ -61,7 +61,7 @@ public class GameController : GameElement
             return 1;
         }
     }
-
+/*
     public void InstantiateHikers()
     {
         SpawnHiker();
@@ -70,8 +70,8 @@ public class GameController : GameElement
         MoveHikersUp();
         SpawnHiker();
         MoveHikersUp();
-    }
-
+    }*/
+/*
     public void SpawnHiker()
     {
         GameObject hiker;
@@ -114,7 +114,7 @@ public class GameController : GameElement
         // add hiker to list of hikers
         game.model.hikers.Add(hiker);
 
-    }
+    } 
 
     public void MoveHikersUp()
     {
@@ -122,23 +122,23 @@ public class GameController : GameElement
         {
             hiker.transform.position = new Vector2(hiker.transform.position.x, hiker.transform.position.y + game.model.hikerSpacing);
         }
-    }
+    }*/
 
     public bool UserCorrectCheck(int pos)
     {
-        if (!game.model.activeHiker.GetComponent<Hiker>().left && pos == 0)
+        if (!game.hikers.activeHiker.GetComponent<Hiker>().left && pos == 0)
         {
             return true;
         }
 
-        if (game.model.activeHiker.GetComponent<Hiker>().left && pos == 1)
+        if (game.hikers.activeHiker.GetComponent<Hiker>().left && pos == 1)
         {
             return true;
         }
 
         return false;
     }
-
+/*
     public void KillHiker()
     {
         GameObject target = game.model.hikers[0];
@@ -151,7 +151,7 @@ public class GameController : GameElement
         SpawnHiker();
         
     }
-
+*/
     public void GoldMode_Transition() {
         // Run fsm
         game.model.FSM_GoldModeAnimations.SendEvent("start");

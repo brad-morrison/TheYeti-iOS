@@ -103,7 +103,7 @@ public class GameView : GameElement
         game.model.lifeBar_ScrollSpeed = 0;
 
         // disable current hikers animations
-        foreach (GameObject hiker in game.model.hikers)
+        foreach (GameObject hiker in game.model.hikers.hikers)
         {
             hiker.GetComponent<Hiker>().DisableAnimations();
         }
