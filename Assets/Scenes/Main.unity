@@ -1337,6 +1337,7 @@ MonoBehaviour:
   deviceScreenHeight: 0
   score: 0
   highScore: 0
+  totalKills: 0
   difficultyMultiplier: 0.2
   text_score: {fileID: 1314924027}
   finalScore: {fileID: 0}
@@ -6620,6 +6621,7 @@ MonoBehaviour:
   yetiGold_left: {fileID: -7966843708283605976, guid: 6e197995555764bbe8539721806338d5, type: 3}
   yetiGold_right: {fileID: 6175424187271958114, guid: 6e197995555764bbe8539721806338d5, type: 3}
   yetiGold_bothUp: {fileID: -5717686401821120438, guid: 6e197995555764bbe8539721806338d5, type: 3}
+  currentCostume: {fileID: 0}
 --- !u!114 &1249974489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7468,7 +7470,7 @@ MonoBehaviour:
   on: {fileID: -5130057317469923895, guid: bdb4fe5b2a34249b980245886daef5f3, type: 3}
   on_inActive: {fileID: 0}
   off_inActive: {fileID: 0}
-  function: Clothes
+  function: costumes
   pressActive: 0
   active: 1
 --- !u!61 &1362368207
@@ -8537,6 +8539,8 @@ MonoBehaviour:
   audio: {fileID: 0}
   input: {fileID: 0}
   particles: {fileID: 0}
+  mainMenu: {fileID: 0}
+  costumes: {fileID: 0}
 --- !u!1 &1685227083
 GameObject:
   m_ObjectHideFlags: 0

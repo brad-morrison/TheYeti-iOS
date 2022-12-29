@@ -14,6 +14,33 @@ public class UserInput : GameElement
                 Application.LoadLevel("Main");
                 break;
 
+            case "settings":
+                game.mainMenu.ShowSettingsUI(true);
+                game.mainMenu.ShowMainUI(false);
+                break;
+
+            case "close_settings":
+                game.mainMenu.ShowSettingsUI(false);
+                game.mainMenu.ShowMainUI(true);
+                break;
+
+            case "costumes_next":
+                game.costumes.NextCostume();
+                break;
+            
+            case "costumes_prev":
+                game.costumes.PreviousCostume();
+                break;
+
+            case "costumes_select":
+                game.costumes.SetCostume(game.costumes.currentCostume);
+                Application.LoadLevel("Menu");
+                break;
+
+            case "costumes":
+                Application.LoadLevel("Costumes");
+                break;
+                
             default:
                 break;
         }

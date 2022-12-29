@@ -9,14 +9,32 @@ public class Button : GameElement {
     public bool pressActive;
     public bool active; // greyed out or not
 
-    private void Start() {
+    private void Awake() {
         off = GetComponent<SpriteRenderer>().sprite;
+        Init();
+    }
+
+    public void Init() {
+        if (active)
+            GetComponent<SpriteRenderer>().sprite = off;
+        else
+            GetComponent<SpriteRenderer>().sprite = off_inActive;
     }
 
     public void SetActive()
     {
         active = true;
         GetComponent<SpriteRenderer>().sprite = off;
+    }
+
+    public void Grey(bool value) {
+        if (value) {
+            active = false;
+            GetComponent<SpriteRenderer>().sprite = off_inActive;
+        } else {
+            active = true;
+            GetComponent<SpriteRenderer>().sprite = off;
+        }
     }
 
     private void OnMouseDown() {

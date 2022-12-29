@@ -13,6 +13,7 @@ public class GameModel : GameElement
     // gameplay variables
     public int score;
     public int highScore;
+    public int totalKills;
     public float difficultyMultiplier;
     // ui
     public GameObject text_score;
@@ -20,11 +21,6 @@ public class GameModel : GameElement
     public GameObject finalBest;
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
-    public GameObject gameOverUI_Group;
-    public GameObject gameOverUI_top;
-    public GameObject gameOverUI_buttons;
-    public GameObject gameOverUI_yeti;
-    public GameObject gameOverUI_hiker;
     // flags
     public bool allowInput;
     public bool gameOver;
@@ -40,6 +36,10 @@ public class GameModel : GameElement
         gameOver = false;
         newHighScore = false;
         highScore = PlayerPrefs.GetInt("high_score", 0);
+
+        // reset these
+        highScore = 250;
+        totalKills = 250;
     }
 
     public void SetScore(int amount)

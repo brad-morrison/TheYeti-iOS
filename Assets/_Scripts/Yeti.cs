@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using HutongGames.PlayMaker;
 
 public class Yeti : GameElement {
     
@@ -6,7 +10,17 @@ public class Yeti : GameElement {
     public GameObject yeti, yeti_shadow, yeti_goldOutline;
     public Sprite yeti_left, yeti_right, yeti_bothUp, yeti_bothDown1, yeti_bothDown2, yeti_dead;
     public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
-    
+    public Costume currentCostume;
+
+    private void Awake() {
+        int costumeId = PlayerPrefs.GetInt("costume");
+        //currentCostume = game.costumes.costumesList[costumeId];
+        Debug.Log(game.costumes.costumesList[costumeId]);
+    }
+
+    private void Start() {
+        yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
+    }
 
     public void SetSprite(int state) {
         switch(state)

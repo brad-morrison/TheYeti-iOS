@@ -22,6 +22,7 @@ public class Game : MonoBehaviour
 
     // scripts
     //[HideInInspector]
+    public Costumes costumes;
     public Hikers hikers;
     public Yeti yeti;
     public GoldMode goldMode;
@@ -29,12 +30,15 @@ public class Game : MonoBehaviour
     public Audio audio;
     public UserInput input;
     public Particles particles;
+    public MainMenu mainMenu;
+    
 
     void Awake()
     {
         Application.targetFrameRate = 600; // run at 60fps
 
         // script references
+        costumes = scripts.GetComponent<Costumes>();
         hikers = scripts.GetComponent<Hikers>();
         yeti = scripts.GetComponent<Yeti>();
         goldMode = scripts.GetComponent<GoldMode>();
@@ -42,5 +46,6 @@ public class Game : MonoBehaviour
         audio = scripts.GetComponent<Audio>();
         input = scripts.GetComponent<UserInput>();
         particles = scripts.GetComponent<Particles>();
+        mainMenu = scripts.GetComponent<MainMenu>();
     }
 }
