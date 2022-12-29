@@ -82,6 +82,7 @@ public class LifeBar : MonoBehaviour
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), manager.goldMode.goldModeLength * Time.deltaTime);
         }
         
+        // turn red if below certain size
         if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
         if (!flashing && !manager.goldMode.goldMode) { SetTexture(current); }
@@ -98,11 +99,6 @@ public class LifeBar : MonoBehaviour
             {
                 manager.gameOver.SetGameOver();
             }
-        }
-
-        if (Input.GetKeyDown("space"))
-        {
-            manager.ActivateGoldMode();
         }
     }
 

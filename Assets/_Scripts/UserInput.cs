@@ -9,7 +9,6 @@ public class UserInput : MonoBehaviour
     public GameManager manager;
 
     public void ButtonPress(string function) {
-        Debug.Log(function + " pressed");
 
         switch(function) {
             case "replay":
@@ -27,15 +26,16 @@ public class UserInput : MonoBehaviour
                 break;
 
             case "costumes_next":
-                costumes.GetComponent<Costumes>().NextCostume();
+                costumes.GetComponent<CostumeManager>().NextCostume();
                 break;
             
             case "costumes_prev":
-                costumes.GetComponent<Costumes>().PreviousCostume();
+                costumes.GetComponent<CostumeManager>().PreviousCostume();
                 break;
 
             case "costumes_select":
-                costumes.GetComponent<Costumes>().SetCostume(costumes.GetComponent<Costumes>().currentCostume);
+                //costumes.GetComponent<Costumes>().SetCostume(costumes.GetComponent<Costumes>().currentCostume);
+                costumes.GetComponent<CostumeManager>().SetCostume();
                 Application.LoadLevel("Menu");
                 break;
 

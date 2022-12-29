@@ -6,14 +6,19 @@ using TMPro;
 public class MainMenu : MonoBehaviour {
     public GameObject settingsUI, mainUI;
     public GameObject yeti;
+    // costumes
+    public GameObject costumesListPrefab;
+    private List<Costume> costumesList;
+    //
     // add costumes ref here
 
     private void Start() {
+        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
         // set chosen costume
-        //yeti.GetComponent<SpriteRenderer>().sprite = game.costumes.costumesList[PlayerPrefs.GetInt("costume")].both;
+        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[PlayerPrefs.GetInt("costume")].both;
         
         // costume ref to add - yeti.GetComponent<SpriteRenderer>().sprite = game.costumes.costumesList[2].both;
-        Debug.Log(PlayerPrefs.GetInt("costume"));
+        //Debug.Log(PlayerPrefs.GetInt("costume"));
     }
 
     public void ShowSettingsUI(bool on) {

@@ -41,13 +41,13 @@ public class GameOver : MonoBehaviour {
 
     IEnumerator NoHighScore() {
         manager.audio.PlaySoundAfter(manager.audio.pop, 1);
-        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.yeti_dead;
+        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(1);
         hiker.GetComponent<SpriteRenderer>().sprite = manager.hikers.hikerRed_smiling;
     }
 
     IEnumerator HighScore() {
-        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.yeti_dead;
+        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(0);
         crown.SetActive(true);
         manager.audio.PlaySound(manager.audio.crown);

@@ -9,8 +9,10 @@ public class Button : MonoBehaviour {
     public string function;
     public bool pressActive;
     public bool active; // greyed out or not
+    public UserInput userInput;
 
     private void Awake() {
+        userInput = GameObject.Find("UserInput").GetComponent<UserInput>();
         off = GetComponent<SpriteRenderer>().sprite;
         Init();
     }
@@ -54,7 +56,7 @@ public class Button : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = off_inActive;
 
         if (pressActive)
-            manager.input.ButtonPress(function);
+            userInput.ButtonPress(function);
     }
 
     private void OnMouseExit() {

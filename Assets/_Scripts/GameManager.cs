@@ -30,9 +30,18 @@ public class GameManager : MonoBehaviour {
     public bool allowInput;
     public bool isGameOver;
     public bool newHighScore;
+    // costumes
+    public GameObject costumesListPrefab;
+    public List<Costume> costumesList;
+    // character
+    public GameObject yetiCharacter;
 
     private void Awake() {
         Application.targetFrameRate = 600; // run at 60fps
+        // costume
+        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
+
+        
         lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
@@ -61,7 +70,7 @@ public class GameManager : MonoBehaviour {
             yeti.SetSprite(0);
             if (IsPlayerCorrect(0))
             {
-                audio.PlaySound(audio.punchSmall);
+                //audio.PlaySound(audio.punchSmall);
                 SetScore(AddToScore());
                 SetScoreUI();
                 lifebar.PunchScale();
@@ -77,7 +86,7 @@ public class GameManager : MonoBehaviour {
             yeti.SetSprite(2);
             if (IsPlayerCorrect(1))
             {
-                audio.PlaySound(audio.punchLarge);
+                //audio.PlaySound(audio.punchLarge);
                 SetScore(AddToScore());
                 SetScoreUI();
                 lifebar.PunchScale();
