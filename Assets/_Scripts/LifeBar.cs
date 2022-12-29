@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeBar : GameElement
+public class LifeBar : MonoBehaviour
 {
     public float punchAmount;
     public GameObject timer_scroller;
@@ -16,6 +16,7 @@ public class LifeBar : GameElement
     float startScale;
     float scalePreGoldmode;
     public bool animate;
+    public GameManager manager;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class LifeBar : GameElement
 
     public void PunchScale()
     {
-        if (!game.goldMode.goldMode)
+        if (!manager.goldMode.goldMode)
         {
             if (transform.localScale.x + punchAmount > 0)
             {
@@ -58,7 +59,7 @@ public class LifeBar : GameElement
         // set scale of bar to start
         transform.localScale = new Vector3(startScale, transform.localScale.y, transform.localScale.z);
         // change speed of texture scroll
-        game.model.lifeBar_ScrollSpeed = game.model.lifeBar_ScrollSpeed * 2;
+        manager.lifeBar_ScrollSpeed = manager.lifeBar_ScrollSpeed * 2;
     }
 
     public void NormalMode()
@@ -66,42 +67,42 @@ public class LifeBar : GameElement
         goldFrame.SetActive(false);
         SetTexture(current);
         transform.localScale = new Vector3(scalePreGoldmode, transform.localScale.y, transform.localScale.z);
-        game.model.lifeBar_ScrollSpeed = game.model.lifeBar_ScrollSpeed / 2;
+        manager.lifeBar_ScrollSpeed = manager.lifeBar_ScrollSpeed / 2;
     }
 
     private void Update()
     {
         // scale by difficulty OR linearly if in goldmode
-        if (!game.goldMode.goldMode && animate)
+        if (!manager.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.model.difficultyMultiplier * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), manager.difficultyMultiplier * Time.deltaTime);
         }
-        else if (game.goldMode.goldMode && animate)
+        else if (manager.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), game.goldMode.goldModeLength * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), manager.goldMode.goldModeLength * Time.deltaTime);
         }
         
         if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
-        if (!flashing && !game.goldMode.goldMode) { SetTexture(current); }
+        if (!flashing && !manager.goldMode.goldMode) { SetTexture(current); }
 
         // when bar reaches 0
         // extra check to only run if gameover is false to avoid infinite loop
-        if (transform.localScale.x > 2.944f && !game.model.gameOver)
+        if (transform.localScale.x > 2.944f && !manager.gameOver)
         {
-            if (game.goldMode.goldMode)
+            if (manager.goldMode.goldMode)
             {
-                game.controller.DeactivateGoldMode();
+                manager.DeactivateGoldMode();
             }
             else
             {
-                game.gameOver.SetGameOver();
+                manager.gameOver.SetGameOver();
             }
         }
 
         if (Input.GetKeyDown("space"))
         {
-            game.controller.ActivateGoldMode();
+            manager.ActivateGoldMode();
         }
     }
 

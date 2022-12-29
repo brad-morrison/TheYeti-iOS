@@ -2,36 +2,37 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
-public class GameOver : GameElement {
+public class GameOver : MonoBehaviour {
 
     public bool gameOver;
     public GameObject gameOver_UI, finalScoreLabel, highScoreLabel, newHighScoreLabel;
     public GameObject hiker, yeti, crown;
+    public GameManager manager;
 
     public void SetGameOver() {
         gameOver = true;
         gameOver_UI.SetActive(true);
-        game.audio.PlaySound(game.audio.gameOver);
-        game.audio.PlaySoundAfter(game.audio.hit, 1.1f);
+        manager.audio.PlaySound(manager.audio.gameOver);
+        manager.audio.PlaySoundAfter(manager.audio.hit, 1.1f);
 
         // switch on high score items if true
-        if (game.model.newHighScore) { 
+        if (manager.newHighScore) { 
             hiker.SetActive(false); 
         }
 
         SetScoreUI();
-        game.model.allowInput = false;
-        game.controller.DisableAllAnimations();
+        manager.allowInput = false;
+        manager.DisableAllAnimations();
     }
 
     public void SetScoreUI() {
         // if 0 then use the letter 'o' instead, 0 looks like an 8 with chosen font
-        finalScoreLabel.GetComponent<TextMeshPro>().text = game.model.score == 0 ? "o" : game.model.score.ToString();
-        highScoreLabel.GetComponent<TextMeshPro>().text = game.model.highScore == 0 ? "o" : game.model.highScore.ToString();
+        finalScoreLabel.GetComponent<TextMeshPro>().text = manager.score == 0 ? "o" : manager.score.ToString();
+        highScoreLabel.GetComponent<TextMeshPro>().text = manager.highScore == 0 ? "o" : manager.highScore.ToString();
     }
 
     public void ChangeSprites() {
-        if (!game.model.newHighScore) {
+        if (!manager.newHighScore) {
             StartCoroutine(NoHighScore());
         } else {
             StartCoroutine(HighScore());
@@ -39,17 +40,17 @@ public class GameOver : GameElement {
     }
 
     IEnumerator NoHighScore() {
-        game.audio.PlaySoundAfter(game.audio.pop, 1);
-        yeti.GetComponent<SpriteRenderer>().sprite = game.yeti.yeti_dead;
+        manager.audio.PlaySoundAfter(manager.audio.pop, 1);
+        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.yeti_dead;
         yield return new WaitForSeconds(1);
-        hiker.GetComponent<SpriteRenderer>().sprite = game.hikers.hikerRed_smiling;
+        hiker.GetComponent<SpriteRenderer>().sprite = manager.hikers.hikerRed_smiling;
     }
 
     IEnumerator HighScore() {
-        yeti.GetComponent<SpriteRenderer>().sprite = game.yeti.yeti_dead;
+        yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.yeti_dead;
         yield return new WaitForSeconds(0);
         crown.SetActive(true);
-        game.audio.PlaySound(game.audio.crown);
+        manager.audio.PlaySound(manager.audio.crown);
         newHighScoreLabel.SetActive(true); 
     }
 }

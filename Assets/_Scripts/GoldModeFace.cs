@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldModeFace : GameElement
+public class GoldModeFace : MonoBehaviour
 {
     float step;
     AudioSource source;
+    public GameManager manager;
 
     private void Start() {
         source = GetComponent<AudioSource>();
@@ -14,7 +15,7 @@ public class GoldModeFace : GameElement
     }
 
     private void OnMouseDown() {
-        game.controller.ActivateGoldMode();
+        manager.ActivateGoldMode();
         Destroy(gameObject);
     }
 

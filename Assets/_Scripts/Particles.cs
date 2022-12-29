@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Particles : GameElement {
+public class Particles : MonoBehaviour {
 
     public void Snow(bool on) {
 

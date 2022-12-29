@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
-public class Costumes : GameElement {
+public class Costumes : MonoBehaviour {
     public GameObject yeti, nameText, scoreText, killsText;
     public GameObject unlockedText, lockedText;
     public GameObject leftButton, rightButton, selectButton, unlockAllButton;
     public List<Costume> costumesList = new List<Costume>();
     public Costume currentCostume;
     public int costumeIndex = 0;
+    // get from prefs
+    public int highScore, totalKills;
 
     private void Awake() {
         // set to current costume
@@ -80,15 +82,13 @@ public class Costumes : GameElement {
     }
 
     public void SetCostume(Costume costume) {
-        // set costume in model
-        game.yeti.currentCostume = costume;
         // set playerpref
         PlayerPrefs.SetInt("costume", costumeIndex);
     }
 
     public bool IsLocked(Costume costume) {
 
-        if(game.model.highScore > costume.best || game.model.totalKills > costume.kills)
+        if(highScore > costume.best || totalKills > costume.kills)
         {
             return false;
         }

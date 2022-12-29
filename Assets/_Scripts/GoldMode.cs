@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
 
-public class GoldMode : GameElement {
-
+public class GoldMode : MonoBehaviour {
+    public GameManager manager;
     // variables
     public bool goldMode;
     public float goldModeLength;
@@ -18,39 +18,39 @@ public class GoldMode : GameElement {
         multiplierAnnounce.GetComponent<TextMeshPro>().text = "+" + goldModeMultiplier.ToString();
         
         goldMode_announceUI.SetActive(true);
-        game.model.lifebar.animate = false;
-        game.audio.PlaySound(game.audio.goldModeStart);
+        manager.lifebar.animate = false;
+        manager.audio.PlaySound(manager.audio.goldModeStart);
         // turn off input
-        game.model.allowInput = false;
+        manager.allowInput = false;
     }
 
     public void ActivateGoldMode() {
         // hide announce ui
         goldMode_announceUI.SetActive(false);
         // turn on input
-        game.model.allowInput = true;
+        manager.allowInput = true;
         // restart lifebar animation
-        game.model.lifebar.animate = true;
+        manager.lifebar.animate = true;
         // activate gold mode flag
-        game.goldMode.goldMode = true;
+        manager.goldMode.goldMode = true;
         // activate gold mode for lifebar
-        game.model.lifebar.GoldMode();
+        manager.lifebar.GoldMode();
         // turn on flames
         GoldFlames(true);
         // turn on outline
-        game.yeti.yeti_goldOutline.SetActive(true);
+        manager.yeti.yeti_goldOutline.SetActive(true);
     }
 
     public void DeactivateGoldMode() {
         // deactivate gold mode flag
-        game.goldMode.goldMode = false;
+        manager.goldMode.goldMode = false;
         // activate normal mode for lifebar
-        game.model.lifebar.NormalMode();
+        manager.lifebar.NormalMode();
         // turn off flames
         GoldFlames(false);
         // turn off yeti outline
-        game.yeti.yeti_goldOutline.SetActive(false);
-        game.audio.PlaySound(game.audio.goldModeEnd);
+        manager.yeti.yeti_goldOutline.SetActive(false);
+        manager.audio.PlaySound(manager.audio.goldModeEnd);
     }
 
     public int GoldMultiplierRoll() {
@@ -61,7 +61,7 @@ public class GoldMode : GameElement {
     }
 
     public void GoldFlames(bool state) {
-        foreach(Transform flame in game.goldMode.goldFlames.transform)
+        foreach(Transform flame in manager.goldMode.goldFlames.transform)
         {
             flame.GetComponent<SpriteRenderer>().enabled = state;
         }

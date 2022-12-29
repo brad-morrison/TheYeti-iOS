@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hikers : GameElement {
+public class Hikers : MonoBehaviour {
     // gameplay variables
     public float hikerOffsetX; // 0.22
     public float hikerOffsetY; // 0.3

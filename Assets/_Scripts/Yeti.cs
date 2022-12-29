@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using HutongGames.PlayMaker;
 
-public class Yeti : GameElement {
+public class Yeti : MonoBehaviour {
     
     public float yetiPunchInterval; // 0.1
     public GameObject yeti, yeti_shadow, yeti_goldOutline;
@@ -15,7 +15,6 @@ public class Yeti : GameElement {
     private void Awake() {
         int costumeId = PlayerPrefs.GetInt("costume");
         //currentCostume = game.costumes.costumesList[costumeId];
-        Debug.Log(game.costumes.costumesList[costumeId]);
     }
 
     private void Start() {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Audio : GameElement {
+public class Audio : MonoBehaviour {
     public AudioSource source;
     // yeti sounds
     public AudioClip punchSmall, punchLarge;

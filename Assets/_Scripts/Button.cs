@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Button : GameElement {
+public class Button : MonoBehaviour {
+    public GameManager manager;
     public Sprite on, on_inActive, off_inActive;
     Sprite off;
     public string function;
@@ -53,7 +54,7 @@ public class Button : GameElement {
             GetComponent<SpriteRenderer>().sprite = off_inActive;
 
         if (pressActive)
-            game.input.ButtonPress(function);
+            manager.input.ButtonPress(function);
     }
 
     private void OnMouseExit() {

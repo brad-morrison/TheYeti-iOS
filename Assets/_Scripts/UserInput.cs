@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserInput : GameElement
+public class UserInput : MonoBehaviour
 {
     Vector3 touch;
+    public GameObject mainMenu, costumes;
+    public GameManager manager;
 
     public void ButtonPress(string function) {
         Debug.Log(function + " pressed");
@@ -15,25 +17,25 @@ public class UserInput : GameElement
                 break;
 
             case "settings":
-                game.mainMenu.ShowSettingsUI(true);
-                game.mainMenu.ShowMainUI(false);
+                mainMenu.GetComponent<MainMenu>().ShowSettingsUI(true);
+                mainMenu.GetComponent<MainMenu>().ShowMainUI(false);
                 break;
 
             case "close_settings":
-                game.mainMenu.ShowSettingsUI(false);
-                game.mainMenu.ShowMainUI(true);
+                mainMenu.GetComponent<MainMenu>().ShowSettingsUI(false);
+                mainMenu.GetComponent<MainMenu>().ShowMainUI(true);
                 break;
 
             case "costumes_next":
-                game.costumes.NextCostume();
+                costumes.GetComponent<Costumes>().NextCostume();
                 break;
             
             case "costumes_prev":
-                game.costumes.PreviousCostume();
+                costumes.GetComponent<Costumes>().PreviousCostume();
                 break;
 
             case "costumes_select":
-                game.costumes.SetCostume(game.costumes.currentCostume);
+                costumes.GetComponent<Costumes>().SetCostume(costumes.GetComponent<Costumes>().currentCostume);
                 Application.LoadLevel("Menu");
                 break;
 
@@ -49,47 +51,47 @@ public class UserInput : GameElement
     void Update()
     {
         // DEBUG CONTROLS (Keyboard)
-        if (Input.GetKeyDown("a") && game.model.allowInput)
+        if (Input.GetKeyDown("a") && manager.allowInput)
         {
-            game.controller.HandleInput("left");
+            manager.HandleInput("left");
         }
 
-        if (Input.GetKeyDown("d") && game.model.allowInput)
+        if (Input.GetKeyDown("d") && manager.allowInput)
         {
-            game.controller.HandleInput("right");
+            manager.HandleInput("right");
         }
 
-        if (Input.GetKeyDown("g") && game.model.allowInput)
+        if (Input.GetKeyDown("g") && manager.allowInput)
         {
-            if (!game.goldMode.goldMode)
+            if (!manager.goldMode.goldMode)
             {
-                game.controller.ActivateGoldMode();
+                manager.ActivateGoldMode();
             }
             else
             {
-                game.controller.DeactivateGoldMode();
+                manager.DeactivateGoldMode();
             }
         }
 
         // flush high score
-        if (Input.GetKeyDown("s") && game.model.allowInput)
+        if (Input.GetKeyDown("s") && manager.allowInput)
         {
-            game.model.highScore = 0;
+            manager.highScore = 0;
             PlayerPrefs.SetInt("high_score", 0);
             PlayerPrefs.Save();
         }
 
         // TOUCH CONTROLS
-        if (Input.GetMouseButtonDown(0) && game.model.allowInput) {
+        if (Input.GetMouseButtonDown(0) && manager.allowInput) {
             touch = Input.mousePosition;
 
             // if touch is in lower half of screen
-            if (touch.y < game.model.deviceScreenHeight / 2) {
+            if (touch.y < manager.deviceScreenHeight / 2) {
                 // check if touch is on the left or right of screen
-                if (touch.x < game.model.deviceScreenWidth / 2) {
-                    game.controller.HandleInput("left");
+                if (touch.x < manager.deviceScreenWidth / 2) {
+                    manager.HandleInput("left");
                 } else {
-                    game.controller.HandleInput("right");
+                    manager.HandleInput("right");
                 }
             }
             
