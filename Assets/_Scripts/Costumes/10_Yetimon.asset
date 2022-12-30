@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a0fa96e297c349bd9a6c908b5049f82, type: 3}
-  m_Name: Base
+  m_Name: 10_Yetimon
   m_EditorClassIdentifier: 
-  name: Base
-  best: 0
-  kills: 0
-  both: {fileID: 930950972, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  left: {fileID: 1903482057, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  right: {fileID: 619051476, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  dead: {fileID: 1786625125, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  name: Yetimon
+  best: 900
+  kills: 900
+  both: {fileID: -1429436865, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  left: {fileID: -325226197, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  right: {fileID: 406967215, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  dead: {fileID: -170412936, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

@@ -46,5 +46,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costumesList:
   - {fileID: 11400000, guid: c8949246bee7046ea9c45f8963bc848b, type: 2}
+  - {fileID: 11400000, guid: bd7466363a7bb4a238d256e26d64b896, type: 2}
   - {fileID: 11400000, guid: b436e781837864febb0f20547acc1471, type: 2}
+  - {fileID: 11400000, guid: 39be2cbdb69b04a838cde622e84d278a, type: 2}
+  - {fileID: 11400000, guid: 6bb2cc85a94ec4633a4114e97d66e1b5, type: 2}
   - {fileID: 11400000, guid: 69f37246a90af4a1a94237f155a8ee84, type: 2}
+  - {fileID: 11400000, guid: 27dedac8ec1204e678557469e2120bf2, type: 2}
+  - {fileID: 11400000, guid: d3d28a5a2380d41ae8bfcaf8ace84627, type: 2}
+  - {fileID: 11400000, guid: 93050f2a43541416fb15cb14e934ff89, type: 2}
+  - {fileID: 11400000, guid: 705e87ca197bc4057b8f93b06e07cb91, type: 2}
+  - {fileID: 11400000, guid: a7514139c86b64d1c98093845a680217, type: 2}
+  - {fileID: 11400000, guid: 5227bbca5abbd4de0b8249bc640f48bf, type: 2}
+  - {fileID: 11400000, guid: 57fb25f1ceb304d2fbd11884857920ab, type: 2}
+  - {fileID: 11400000, guid: 89e49072335ee4a3fbde7e34a3978332, type: 2}
+  - {fileID: 11400000, guid: 21714012ca54b4c159bbd981296ab287, type: 2}
+  - {fileID: 11400000, guid: d4e4df21238814eab94067862fc0356c, type: 2}
+  - {fileID: 11400000, guid: 24bae40afc1584630941504f7161fa48, type: 2}

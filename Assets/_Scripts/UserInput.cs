@@ -25,6 +25,22 @@ public class UserInput : MonoBehaviour
                 mainMenu.GetComponent<MainMenu>().ShowMainUI(true);
                 break;
 
+            case "music":
+                mainMenu.GetComponent<MainMenu>().Music(false);
+                break;
+
+            case "music_mute":
+                mainMenu.GetComponent<MainMenu>().Music(true);
+                break;
+
+            case "sfx":
+                mainMenu.GetComponent<MainMenu>().Sfx(false);
+                break;
+
+            case "sfx_mute":
+                mainMenu.GetComponent<MainMenu>().Sfx(true);
+                break;
+
             case "costumes_next":
                 costumes.GetComponent<CostumeManager>().NextCostume();
                 break;

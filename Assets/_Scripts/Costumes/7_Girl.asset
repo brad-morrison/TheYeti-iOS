@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a0fa96e297c349bd9a6c908b5049f82, type: 3}
-  m_Name: BigFoot
+  m_Name: 7_Girl
   m_EditorClassIdentifier: 
-  name: Big Foot
-  best: 100
-  kills: 100
-  both: {fileID: -796068947, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  left: {fileID: 1429274103, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  right: {fileID: 1107456345, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  dead: {fileID: -1441460451, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  name: Yeti Girl
+  best: 600
+  kills: 600
+  both: {fileID: 1467418482, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  left: {fileID: -1420437763, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  right: {fileID: 313332159, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  dead: {fileID: 1050204851, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

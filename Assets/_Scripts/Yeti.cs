@@ -16,6 +16,7 @@ public class Yeti : MonoBehaviour {
         
         currentCostume = manager.costumesList[PlayerPrefs.GetInt("costume")];
         yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
+        manager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
 
     public void SetSprite(int state) {

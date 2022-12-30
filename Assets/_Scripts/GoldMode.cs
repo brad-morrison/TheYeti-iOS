@@ -32,7 +32,7 @@ public class GoldMode : MonoBehaviour {
         // restart lifebar animation
         manager.lifebar.animate = true;
         // activate gold mode flag
-        manager.goldMode.goldMode = true;
+        goldMode = true;
         // activate gold mode for lifebar
         manager.lifebar.GoldMode();
         // turn on flames
@@ -43,7 +43,7 @@ public class GoldMode : MonoBehaviour {
 
     public void DeactivateGoldMode() {
         // deactivate gold mode flag
-        manager.goldMode.goldMode = false;
+        goldMode = false;
         // activate normal mode for lifebar
         manager.lifebar.NormalMode();
         // turn off flames

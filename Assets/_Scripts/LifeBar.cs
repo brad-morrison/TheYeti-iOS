@@ -89,7 +89,7 @@ public class LifeBar : MonoBehaviour
 
         // when bar reaches 0
         // extra check to only run if gameover is false to avoid infinite loop
-        if (transform.localScale.x > 2.944f && !manager.gameOver)
+        if (transform.localScale.x > 2.944f && !manager.gameOver.gameOver)
         {
             if (manager.goldMode.goldMode)
             {

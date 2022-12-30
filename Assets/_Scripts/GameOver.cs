@@ -54,5 +54,3 @@ public class GameOver : MonoBehaviour {
         newHighScoreLabel.SetActive(true); 
     }
 }
-
-// about to try and remove playmaker

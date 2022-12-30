@@ -5,13 +5,14 @@ using UnityEngine;
 public class GoldModeFace : MonoBehaviour
 {
     float step;
-    AudioSource source;
+    AudioSource audioSource;
     public GameManager manager;
 
     private void Start() {
-        source = GetComponent<AudioSource>();
-        source.Play();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
         step = 0.0009f;
+        StartCoroutine(KillAfter(5));
     }
 
     private void OnMouseDown() {
@@ -21,5 +22,11 @@ public class GoldModeFace : MonoBehaviour
 
     private void Update() {
         transform.position = new Vector3(gameObject.transform.position.x + step, gameObject.transform.position.y, gameObject.transform.position.z);
+    }
+
+    public IEnumerator KillAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
     }
 }
