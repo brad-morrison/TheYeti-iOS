@@ -23,9 +23,9 @@ public class CostumeManager : MonoBehaviour {
         
         SetCostume();
 
-        // remove
-        highScore = 200;
-        totalKills = 200;
+        // get score data
+        highScore = PlayerPrefs.GetInt("high_score", 0);
+        totalKills = PlayerPrefs.GetInt("total_kills", 0);
 
         RefreshButtons();
     }

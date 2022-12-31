@@ -14,6 +14,7 @@ public class GameOver : MonoBehaviour {
         gameOver_UI.SetActive(true);
         manager.audio.PlaySound(manager.audio.gameOver);
         manager.audio.PlaySoundAfter(manager.audio.hit, 1.1f);
+        
 
         // switch on high score items if true
         if (manager.newHighScore) { 

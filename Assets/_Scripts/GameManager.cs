@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     // model variables
     public int score;
     public int highScore;
+    public int totalKills_counter;
     public int totalKills;
     public float difficultyMultiplier;
     // ui
@@ -37,23 +38,25 @@ public class GameManager : MonoBehaviour {
     public GameObject yetiCharacter, yetiCharacter_gameOver;
 
     private void Awake() {
-        
-        // costume
-        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-
-        
-        lifeBar_ScrollSpeed = -1.2f;
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
+        // costume
+        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
         allowInput = true;
         isGameOver = false;
         newHighScore = false;
-        highScore = PlayerPrefs.GetInt("high_score", 0);
     }
 
     private void Start()
     {
+        // get score data
+        highScore = PlayerPrefs.GetInt("high_score", 0);
+        Debug.Log("high score - " + highScore);
+        totalKills = PlayerPrefs.GetInt("total_kills", 0);
+        Debug.Log("total kills - " + totalKills);
+
         score = 0;
+        lifeBar_ScrollSpeed = -1.2f;
         hikers.InitHikers();
         hikers.SpawnHiker();
     }
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour {
             yeti.SetSprite(0);
             if (IsPlayerCorrect(0))
             {
+                totalKills_counter++;
                 audio.PlaySound(audio.punchSmall);
                 SetScore(AddToScore());
                 SetScoreUI();
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
+                // add totalKills from this game to total
+                PlayerPrefs.SetInt("total_kills", totalKills + totalKills_counter);
                 gameOver.SetGameOver();
             }
             break;
@@ -86,6 +92,7 @@ public class GameManager : MonoBehaviour {
             yeti.SetSprite(2);
             if (IsPlayerCorrect(1))
             {
+                totalKills_counter++;
                 audio.PlaySound(audio.punchLarge);
                 SetScore(AddToScore());
                 SetScoreUI();

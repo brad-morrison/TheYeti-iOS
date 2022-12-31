@@ -92,8 +92,29 @@ public class UserInput : MonoBehaviour
         // flush high score
         if (Input.GetKeyDown("s") && manager.allowInput)
         {
-            manager.highScore = 0;
+            Debug.Log("reset scores");
             PlayerPrefs.SetInt("high_score", 0);
+            PlayerPrefs.SetInt("total_kills", 0);
+            PlayerPrefs.Save();
+        }
+
+        // for debug - add 100 to high score
+        if (Input.GetKeyDown("h") && manager.allowInput)
+        {
+            Debug.Log("added 100 to high score | now - " + manager.highScore);
+            int data = PlayerPrefs.GetInt("high_score", 0);
+            manager.highScore = manager.highScore + 100;
+            PlayerPrefs.SetInt("high_score", data + 100);
+            PlayerPrefs.Save();
+        }
+
+        // for debug - add 100 to kills
+        if (Input.GetKeyDown("k") && manager.allowInput)
+        {
+            Debug.Log("added 100 to kills | now - " + manager.totalKills_counter);
+            int data = PlayerPrefs.GetInt("total_kills", 0);
+            manager.totalKills = manager.totalKills_counter + 100;
+            PlayerPrefs.SetInt("high_score", data + 100);
             PlayerPrefs.Save();
         }
 

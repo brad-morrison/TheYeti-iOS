@@ -2106,6 +2106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2171,6 +2172,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &519420033
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
 --- !u!1001 &523415430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7077,6 +7086,7 @@ MonoBehaviour:
   particles: {fileID: 1075519576}
   score: 0
   highScore: 0
+  totalKills_counter: 0
   totalKills: 0
   difficultyMultiplier: 0.3
   text_score: {fileID: 1314924027}
