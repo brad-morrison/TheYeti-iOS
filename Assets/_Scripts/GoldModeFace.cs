@@ -9,10 +9,12 @@ public class GoldModeFace : MonoBehaviour
     public GameManager manager;
 
     private void Start() {
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
+        if (manager.sound) // debug
+            audioSource.Play();
         step = 0.0009f;
-        StartCoroutine(KillAfter(5));
+        //StartCoroutine(KillAfter(10));
     }
 
     private void OnMouseDown() {
@@ -22,6 +24,12 @@ public class GoldModeFace : MonoBehaviour
 
     private void Update() {
         transform.position = new Vector3(gameObject.transform.position.x + step, gameObject.transform.position.y, gameObject.transform.position.z);
+        if (transform.position.x > 1.5f)
+        {
+            manager.CalculateNextGoldModeSpawn();
+            Destroy(gameObject);
+        }
+            
     }
 
     public IEnumerator KillAfter(float time)

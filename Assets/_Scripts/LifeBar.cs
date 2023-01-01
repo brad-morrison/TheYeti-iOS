@@ -97,7 +97,8 @@ public class LifeBar : MonoBehaviour
             }
             else
             {
-                manager.gameOver.SetGameOver();
+                if (!manager.noTimerDeath) // for debug
+                    manager.gameOver.SetGameOver();
             }
         }
     }

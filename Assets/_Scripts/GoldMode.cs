@@ -15,7 +15,7 @@ public class GoldMode : MonoBehaviour {
         // roll and set gold multiplier
         goldModeMultiplier = GoldMultiplierRoll();
         // set multiplier text
-        multiplierAnnounce.GetComponent<TextMeshPro>().text = "+" + goldModeMultiplier.ToString();
+        multiplierAnnounce.GetComponent<TextMeshPro>().text = "x" + goldModeMultiplier.ToString();
         
         goldMode_announceUI.SetActive(true);
         manager.lifebar.animate = false;
@@ -51,11 +51,12 @@ public class GoldMode : MonoBehaviour {
         // turn off yeti outline
         manager.yeti.yeti_goldOutline.SetActive(false);
         manager.audio.PlaySound(manager.audio.goldModeEnd);
+        // calc next goldmode spawn
+        manager.CalculateNextGoldModeSpawn();
     }
 
     public int GoldMultiplierRoll() {
-        System.Random rand = new System.Random();
-        int roll = rand.Next(1,5);
+        int roll = Random.Range(2,5);
         Debug.Log("gold multiplier = " + roll);
         return roll;
     }

@@ -10,8 +10,8 @@ public class MainMenu : MonoBehaviour {
     // costumes
     public GameObject costumesListPrefab;
     private List<Costume> costumesList;
-    //
-    // add costumes ref here
+    // DEBUG
+    public GameObject highscore_text, kills_text;
 
     private void Start() {
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
@@ -26,6 +26,10 @@ public class MainMenu : MonoBehaviour {
         {
             Sfx(false);
         }
+
+        // DEBUG
+        highscore_text.GetComponent<TextMeshPro>().text = PlayerPrefs.GetInt("high_score").ToString();
+        kills_text.GetComponent<TextMeshPro>().text = PlayerPrefs.GetInt("total_kills").ToString();
     }
 
     public void ShowSettingsUI(bool on) {

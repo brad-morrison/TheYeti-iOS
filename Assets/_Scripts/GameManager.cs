@@ -4,7 +4,14 @@ using UnityEngine;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
+    // DEBUG
+    [Header("FOR TESTING")]
+    public bool noTimerDeath;
+    public bool noTouchDeath;
+    public bool sound;
+
     // device
+    [Header("")]
     public float deviceScreenWidth;
     public float deviceScreenHeight;
     // scripts
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour {
     public List<Costume> costumesList;
     // character
     public GameObject yetiCharacter, yetiCharacter_gameOver;
+    
 
     private void Awake() {
         deviceScreenWidth = Display.main.systemWidth;
@@ -49,6 +57,12 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
+        // set debug data
+        noTimerDeath = true;
+        noTouchDeath = true;
+        sound = false;
+
+
         // get score data
         highScore = PlayerPrefs.GetInt("high_score", 0);
         Debug.Log("high score - " + highScore);
@@ -59,12 +73,14 @@ public class GameManager : MonoBehaviour {
         lifeBar_ScrollSpeed = -1.2f;
         hikers.InitHikers();
         hikers.SpawnHiker();
+        CalculateNextGoldModeSpawn();
     }
 
     public void HandleInput(string command) {
 
         if (goldMode.goldMode) { 
-            audio.PlaySound(audio.coin); 
+            audio.PlaySound(audio.coin);
+            goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
             Instantiate(goldMode.multiplierPop);
             }
 
@@ -84,7 +100,8 @@ public class GameManager : MonoBehaviour {
             {
                 // add totalKills from this game to total
                 PlayerPrefs.SetInt("total_kills", totalKills + totalKills_counter);
-                gameOver.SetGameOver();
+                if (!noTouchDeath) // for debug
+                    gameOver.SetGameOver();
             }
             break;
 
@@ -101,7 +118,10 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
-                gameOver.SetGameOver();
+                // add totalKills from this game to total
+                PlayerPrefs.SetInt("total_kills", totalKills + totalKills_counter);
+                if (!noTouchDeath) // for debug
+                    gameOver.SetGameOver();
             }
             break;
 
@@ -112,7 +132,7 @@ public class GameManager : MonoBehaviour {
 
     public int AddToScore() {
         if (goldMode.goldMode) {
-            return goldMode.goldModeMultiplier + 1;
+            return goldMode.goldModeMultiplier;
         } else {
             return 1;
         }
@@ -172,4 +192,21 @@ public class GameManager : MonoBehaviour {
     public void SetScoreUI() {
         text_score.GetComponent<TextMeshPro>().text = score == 0 ? "o" : score.ToString();
     }
+
+    public void CalculateNextGoldModeSpawn()
+    {
+        // choose a random time to wait until the next gold mode
+        float time = Random.Range(1.0f, 5.0f);
+        // call the coroutine
+        StartCoroutine(GoldModeFaceCountdown(time));
+    }
+
+    public IEnumerator GoldModeFaceCountdown(float from)
+    {
+        Debug.Log("Gold face spawning in " + from + " seconds");
+        yield return new WaitForSeconds(from);
+        // spawn gold face
+        Instantiate(goldMode.goldModeFace);
+    }
+
 }
