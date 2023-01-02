@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using DG.Tweening;
 
 public class Hikers : MonoBehaviour {
+    public GameManager manager;
     // gameplay variables
     public float hikerOffsetX; // 0.22
     public float hikerOffsetY; // 0.3
@@ -15,6 +18,8 @@ public class Hikers : MonoBehaviour {
     // markers
     public GameObject spawnPoint;
     public GameObject activeHiker;
+    // events
+    public UnityEvent hikerShake = new UnityEvent();
 
     public void InitHikers() {
         SpawnHiker();
@@ -63,8 +68,19 @@ public class Hikers : MonoBehaviour {
             activeHiker = newHiker;
         }
 
+        // tag with frenzy roll
+        int frenzyRoll = Random.Range(0, 5);
+        if (frenzyRoll == 1 && !manager.goldMode.goldMode)
+        {
+            newHiker.GetComponent<Hiker>().frenzyTagged = true;
+            newHiker.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
         // add hiker to list of hikers
         hikers.Add(newHiker);
+
+        // add as child of hikers object
+        newHiker.transform.parent = this.gameObject.transform;
     }
 
     public void MoveHikersUp()
@@ -73,11 +89,25 @@ public class Hikers : MonoBehaviour {
         {
             hiker.transform.position = new Vector2(hiker.transform.position.x, hiker.transform.position.y + hikerOffsetY);
         }
+
+        ShakeHikers();
+    }
+
+    public void ShakeHikers()
+    {
+        
+        gameObject.GetComponent<DOTweenAnimation>().DORestart();
+        
+        
     }
 
     public void KillHiker()
     {
         GameObject target = hikers[0];
+
+        
+
+        target.GetComponent<SpriteRenderer>().sortingOrder = 10;
         target.GetComponent<Hiker>().StartCoroutine("Die");
         target.GetComponent<Animator>().SetBool("Dead", true);
         hikers.RemoveAt(0);
@@ -85,6 +115,7 @@ public class Hikers : MonoBehaviour {
         activeHiker = hikers[0];
         MoveHikersUp();
         SpawnHiker();
+        
     }
 
     public void DisableAnimations() {

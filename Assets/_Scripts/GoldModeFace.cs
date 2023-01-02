@@ -6,19 +6,20 @@ public class GoldModeFace : MonoBehaviour
 {
     float step;
     AudioSource audioSource;
-    public GameManager manager;
+    public MasterManager manager;
 
     private void Start() {
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
         audioSource = GetComponent<AudioSource>();
-        if (manager.sound) // debug
-            audioSource.Play();
+
+        if (!manager.playerData.GetSfx()) // debug
+            audioSource.mute = true;
+
         step = 0.0009f;
-        //StartCoroutine(KillAfter(10));
     }
 
     private void OnMouseDown() {
-        manager.ActivateGoldMode();
+        manager.gameManager.ActivateGoldMode();
         Destroy(gameObject);
     }
 
@@ -26,7 +27,7 @@ public class GoldModeFace : MonoBehaviour
         transform.position = new Vector3(gameObject.transform.position.x + step, gameObject.transform.position.y, gameObject.transform.position.z);
         if (transform.position.x > 1.5f)
         {
-            manager.CalculateNextGoldModeSpawn();
+            manager.gameManager.CalculateNextGoldModeSpawn();
             Destroy(gameObject);
         }
             

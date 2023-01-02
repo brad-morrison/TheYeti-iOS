@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hiker : MonoBehaviour
 {
     public bool left;
+    public bool frenzyTagged;
 
     public IEnumerator Die() {
         yield return new WaitForSeconds(1);

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class MainMenu : MonoBehaviour {
+    public MasterManager master;
     public GameObject settingsUI, mainUI;
     public GameObject musicButton, musicButtonMuted, sfxButton, sfxButtonMuted;
     public GameObject yeti;
@@ -13,23 +15,25 @@ public class MainMenu : MonoBehaviour {
     // DEBUG
     public GameObject highscore_text, kills_text;
 
-    private void Start() {
-        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
+    private void Start()
+    {
+
+
+        // get master
+        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
+        master.SceneChanged();
+
         // set chosen costume
-        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[PlayerPrefs.GetInt("costume")].both;
+        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
+        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].both;
+
         // set audio settings
-        if (PlayerPrefs.GetInt("music") == 0)
-        {
-            Music(false);
-        }
-        if (PlayerPrefs.GetInt("sfx") == 0)
-        {
-            Sfx(false);
-        }
+        Music(master.playerData.GetMusic());
+        Sfx(master.playerData.GetSfx());
 
         // DEBUG
-        highscore_text.GetComponent<TextMeshPro>().text = PlayerPrefs.GetInt("high_score").ToString();
-        kills_text.GetComponent<TextMeshPro>().text = PlayerPrefs.GetInt("total_kills").ToString();
+        highscore_text.GetComponent<TextMeshPro>().text = master.playerData.GetHighScore().ToString();
+        kills_text.GetComponent<TextMeshPro>().text = master.playerData.GetKills().ToString();
     }
 
     public void ShowSettingsUI(bool on) {
@@ -42,23 +46,16 @@ public class MainMenu : MonoBehaviour {
 
     public void Music(bool value)
     {
-        int onOff = value ? onOff = 1 : onOff = 0; 
-        PlayerPrefs.SetInt("music", onOff);
+        master.playerData.SetMusic(value);
 
         musicButton.SetActive(value);
         musicButtonMuted.SetActive(!value);
 
-        GameObject audio = GameObject.Find("Audio");
-        if (value)
-            audio.GetComponent<AudioSource>().Play();
-        else
-            audio.GetComponent<AudioSource>().Pause();
     }
 
     public void Sfx(bool value)
     {
-        int onOff = value ? onOff = 1 : onOff = 0;
-        PlayerPrefs.SetInt("sfx", onOff);
+        master.playerData.SetSfx(value);
 
         sfxButton.SetActive(value);
         sfxButtonMuted.SetActive(!value);

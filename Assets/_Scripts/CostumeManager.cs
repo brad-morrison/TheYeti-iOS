@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 
 public class CostumeManager : MonoBehaviour {
+    public MasterManager master;
     public GameObject yeti, nameText, scoreText, killsText;
     public GameObject unlockedText, lockedText;
     public GameObject leftButton, rightButton, selectButton, unlockAllButton;
@@ -17,6 +18,11 @@ public class CostumeManager : MonoBehaviour {
     public int highScore, totalKills;
 
     private void Awake() {
+
+        // get master
+        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>(); 
+        master.SceneChanged();
+
         // set to current costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
         currentCostume = costumesList[costumeIndex];
@@ -24,8 +30,8 @@ public class CostumeManager : MonoBehaviour {
         SetCostume();
 
         // get score data
-        highScore = PlayerPrefs.GetInt("high_score", 0);
-        totalKills = PlayerPrefs.GetInt("total_kills", 0);
+        highScore = master.playerData.GetHighScore();
+        totalKills = master.playerData.GetKills();
 
         RefreshButtons();
     }
@@ -92,7 +98,7 @@ public class CostumeManager : MonoBehaviour {
 
     public void SetCostume() {
         // set playerpref
-        PlayerPrefs.SetInt("costume", costumeIndex);
+        master.playerData.SetCostume(costumeIndex);
     }
 
     public bool IsLocked(Costume costume) {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.Timeline;
 
 public class GameOver : MonoBehaviour {
 
@@ -8,12 +9,22 @@ public class GameOver : MonoBehaviour {
     public GameObject gameOver_UI, finalScoreLabel, highScoreLabel, newHighScoreLabel;
     public GameObject hiker, yeti, crown;
     public GameManager manager;
+    public Audio audio;
+
+    private void Start()
+    {
+        audio = GameObject.Find("Audio").GetComponent<Audio>();
+    }
 
     public void SetGameOver() {
         gameOver = true;
         gameOver_UI.SetActive(true);
-        manager.audio.PlaySound(manager.audio.gameOver);
-        manager.audio.PlaySoundAfter(manager.audio.hit, 1.1f);
+        audio.PlaySound(audio.gameOver);
+        audio.PlaySoundAfter(audio.hit, 1.1f);
+        manager.isGameOver = true;
+        // setkills
+        int totalKills = manager.master.playerData.GetKills();
+        manager.master.playerData.SetKills(totalKills + manager.totalKills_counter);
         
 
         // switch on high score items if true
@@ -41,7 +52,7 @@ public class GameOver : MonoBehaviour {
     }
 
     IEnumerator NoHighScore() {
-        manager.audio.PlaySoundAfter(manager.audio.pop, 1);
+        audio.PlaySoundAfter(audio.pop, 1);
         yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(1);
         hiker.GetComponent<SpriteRenderer>().sprite = manager.hikers.hikerRed_smiling;
@@ -51,7 +62,7 @@ public class GameOver : MonoBehaviour {
         yeti.GetComponent<SpriteRenderer>().sprite = manager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(0);
         crown.SetActive(true);
-        manager.audio.PlaySound(manager.audio.crown);
+        audio.PlaySound(audio.crown);
         newHighScoreLabel.SetActive(true); 
     }
 }

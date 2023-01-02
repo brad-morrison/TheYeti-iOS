@@ -10,7 +10,13 @@ public class GoldMode : MonoBehaviour {
     // gameobjects & prefabs
     public GameObject goldMode_announceUI;
     public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierPop;
-    
+    public Audio audio;
+
+    private void Start()
+    {
+        audio = GameObject.Find("Audio").GetComponent<Audio>();
+    }
+
     public void GoldModeAnnounce() {
         // roll and set gold multiplier
         goldModeMultiplier = GoldMultiplierRoll();
@@ -19,7 +25,7 @@ public class GoldMode : MonoBehaviour {
         
         goldMode_announceUI.SetActive(true);
         manager.lifebar.animate = false;
-        manager.audio.PlaySound(manager.audio.goldModeStart);
+        audio.PlaySound(audio.goldModeStart);
         // turn off input
         manager.allowInput = false;
     }
@@ -50,7 +56,7 @@ public class GoldMode : MonoBehaviour {
         GoldFlames(false);
         // turn off yeti outline
         manager.yeti.yeti_goldOutline.SetActive(false);
-        manager.audio.PlaySound(manager.audio.goldModeEnd);
+        audio.PlaySound(audio.goldModeEnd);
         // calc next goldmode spawn
         manager.CalculateNextGoldModeSpawn();
     }

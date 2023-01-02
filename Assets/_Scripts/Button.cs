@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Button : MonoBehaviour {
-    public GameManager manager;
+    public MasterManager master;
     public Sprite on, on_inActive, off_inActive;
     Sprite off;
     public string function;
     public bool pressActive;
     public bool active; // greyed out or not
-    public UserInput userInput;
 
     private void Awake() {
-        userInput = GameObject.Find("UserInput").GetComponent<UserInput>();
+        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
         off = GetComponent<SpriteRenderer>().sprite;
         Init();
     }
@@ -56,7 +55,7 @@ public class Button : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = off_inActive;
 
         if (pressActive)
-            userInput.ButtonPress(function);
+            master.buttons.ButtonPress(function);
     }
 
     private void OnMouseExit() {
