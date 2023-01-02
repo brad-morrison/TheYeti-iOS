@@ -11,6 +11,7 @@ public class Audio : MonoBehaviour {
     public AudioClip gameOver, goldModeFace, goldModeStart, goldModeEnd, crown;
     // others
     public AudioClip hit, pop, coin;
+    public AudioClip buttonDown, buttonUp, buttonUp_grey;
     public MasterManager master;
     public bool sfxOn;
 

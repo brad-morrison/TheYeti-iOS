@@ -12,6 +12,7 @@ public class MasterManager : MonoBehaviour
 	public GameManager gameManager;
 	public MainMenu mainMenu;
 	public CostumeManager costumeManager;
+	//
 
 	void Start()
 	{

@@ -1392,6 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 0}
+  audio: {fileID: 0}
   on: {fileID: -8761496183629611704, guid: bdb4fe5b2a34249b980245886daef5f3, type: 3}
   on_inActive: {fileID: 0}
   off_inActive: {fileID: 0}
@@ -2169,7 +2170,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1039779587}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2876,6 +2878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 0}
+  audio: {fileID: 0}
   on: {fileID: 7263181891274304025, guid: bdb4fe5b2a34249b980245886daef5f3, type: 3}
   on_inActive: {fileID: 0}
   off_inActive: {fileID: 0}
@@ -6147,7 +6150,7 @@ Transform:
   - {fileID: 2090039903}
   - {fileID: 537595081}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &995128487
 PrefabInstance:
@@ -6409,7 +6412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039779586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.033, z: 0}
+  m_LocalPosition: {x: 0, y: 1.033, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6417,8 +6420,8 @@ Transform:
   - {fileID: 2082695323}
   - {fileID: 530840585}
   - {fileID: 676259549}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1075519575
 GameObject:
@@ -8034,6 +8037,7 @@ MonoBehaviour:
   newHighScore: 0
   frenzyMode: 0
   frenzyTokenCount: 0
+  frenzyCounterPrefab: {fileID: 929374126585526806, guid: 21c92cf14fd41488fb3566d7d3501ae0, type: 3}
   costumesListPrefab: {fileID: 3206050045897712289, guid: 8d4c631e376eb4601b9e8de5c4402335, type: 3}
   costumesList: []
   yetiCharacter: {fileID: 1321447869}
@@ -8233,6 +8237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 0}
+  audio: {fileID: 0}
   on: {fileID: -5130057317469923895, guid: bdb4fe5b2a34249b980245886daef5f3, type: 3}
   on_inActive: {fileID: 0}
   off_inActive: {fileID: 0}
@@ -8324,7 +8329,7 @@ Transform:
   - {fileID: 1278900910}
   - {fileID: 1245256059}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370254363
 GameObject:
@@ -10608,7 +10613,7 @@ Transform:
   - {fileID: 811908004}
   - {fileID: 417228763}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1961944283
 GameObject:

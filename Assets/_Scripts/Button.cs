@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Button : MonoBehaviour {
     public MasterManager master;
+    public Audio audio;
     public Sprite on, on_inActive, off_inActive;
     Sprite off;
     public string function;
@@ -12,6 +13,7 @@ public class Button : MonoBehaviour {
 
     private void Awake() {
         master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
+        audio = GameObject.Find("Audio").GetComponent<Audio>();
         off = GetComponent<SpriteRenderer>().sprite;
         Init();
     }
@@ -40,29 +42,52 @@ public class Button : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        if (active)
-            GetComponent<SpriteRenderer>().sprite = on;
-        else
-            GetComponent<SpriteRenderer>().sprite = on_inActive;
 
+        audio.PlaySound(audio.buttonDown);
         pressActive = true;
+
+        if (active)
+        {
+            GetComponent<SpriteRenderer>().sprite = on;
+            iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)1);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = on_inActive;
+        }
+
+        
     }
 
     private void OnMouseUp() {
+        if (active)
+        {
+            GetComponent<SpriteRenderer>().sprite = off;
+            if (pressActive)
+                audio.PlaySound(audio.buttonUp);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = off_inActive;
+            //audio.PlaySound(audio.buttonUp_grey);
+        }
+
+        if (pressActive)
+            master.buttons.ButtonPress(function);
+
+        pressActive = false;
+    }
+
+    private void OnMouseExit() {
+        
+
         if (active)
             GetComponent<SpriteRenderer>().sprite = off;
         else
             GetComponent<SpriteRenderer>().sprite = off_inActive;
 
         if (pressActive)
-            master.buttons.ButtonPress(function);
-    }
-
-    private void OnMouseExit() {
-        if (active)
-            GetComponent<SpriteRenderer>().sprite = off;
-        else
-            GetComponent<SpriteRenderer>().sprite = off_inActive;
+            audio.PlaySound(audio.buttonUp_grey);
 
         pressActive = false;
     }

@@ -22,6 +22,7 @@ public class GameOver : MonoBehaviour {
         audio.PlaySound(audio.gameOver);
         audio.PlaySoundAfter(audio.hit, 1.1f);
         manager.isGameOver = true;
+        iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)5);
         // setkills
         int totalKills = manager.master.playerData.GetKills();
         manager.master.playerData.SetKills(totalKills + manager.totalKills_counter);

@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
     // frenzy mode
     public bool frenzyMode;
     public int frenzyTokenCount;
+    public GameObject frenzyCounterPrefab;
     // costumes
     public GameObject costumesListPrefab;
     public List<Costume> costumesList;
@@ -119,6 +120,8 @@ public class GameManager : MonoBehaviour {
 
     public void HitLeft()
     {
+        iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)(goldMode.goldMode ? 2 : 1));
+
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
 
@@ -145,6 +148,8 @@ public class GameManager : MonoBehaviour {
 
     public void HitRight()
     {
+        iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType) (goldMode.goldMode ? 2 : 1));
+
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
 
@@ -171,7 +176,12 @@ public class GameManager : MonoBehaviour {
     public void FrenzyCheck()
     {
         if (hikers.hikers[0].GetComponent<Hiker>().frenzyTagged)
+        {
             frenzyTokenCount++;
+            Instantiate(frenzyCounterPrefab);
+        }
+
+        
 
         if (frenzyTokenCount == 3 && !goldMode.goldMode)
         {

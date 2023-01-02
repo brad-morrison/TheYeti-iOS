@@ -44,6 +44,7 @@ public class Hikers : MonoBehaviour {
         {
             // green
             newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
+
         }
 
         // random position
@@ -69,7 +70,7 @@ public class Hikers : MonoBehaviour {
         }
 
         // tag with frenzy roll
-        int frenzyRoll = Random.Range(0, 5);
+        int frenzyRoll = Random.Range(0, 10);
         if (frenzyRoll == 1 && !manager.goldMode.goldMode)
         {
             newHiker.GetComponent<Hiker>().frenzyTagged = true;
