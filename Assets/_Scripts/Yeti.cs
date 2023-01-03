@@ -28,11 +28,13 @@ public class Yeti : MonoBehaviour {
                 yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_right;
                 break;
 
-            // idle
+            // both
             case 1:
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
                 yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
                 break;
+
+            
 
             // drop left hand
             case 2:
@@ -43,6 +45,11 @@ public class Yeti : MonoBehaviour {
             // death sprite
             case 3:
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.dead;
+                break;
+
+            // both down
+            case 4:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
                 break;
         }
 

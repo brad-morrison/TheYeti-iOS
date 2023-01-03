@@ -15,7 +15,9 @@ MonoBehaviour:
   name: Dr Frog
   best: 300
   kills: 300
-  both: {fileID: -1232454372, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  left: {fileID: 405526851, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  right: {fileID: -871424413, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
-  dead: {fileID: 502337162, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  both: {fileID: -1605027818, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  idle1: {fileID: -568980932, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  idle2: {fileID: 1359354621, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  left: {fileID: 1697529356, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  right: {fileID: -260452608, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  dead: {fileID: 160348159, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

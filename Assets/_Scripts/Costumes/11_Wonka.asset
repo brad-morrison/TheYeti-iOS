@@ -16,6 +16,8 @@ MonoBehaviour:
   best: 1000
   kills: 1000
   both: {fileID: 1614800756, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  idle1: {fileID: -1538736577, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
+  idle2: {fileID: -482063608, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   left: {fileID: 1734777964, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   right: {fileID: 165750183, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   dead: {fileID: -313334026, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

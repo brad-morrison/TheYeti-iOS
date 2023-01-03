@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public GameOver gameOver;
     public Audio audio;
     public Particles particles;
+    public FrenzyMode frenzyMode;
     // model variables
     public int score;
     public int highScore;
@@ -41,11 +42,6 @@ public class GameManager : MonoBehaviour {
     public bool allowInput;
     public bool isGameOver;
     public bool newHighScore;
-    // frenzy mode
-    public bool frenzyMode;
-    public int frenzyTokenCount;
-    public GameObject frenzyCounterPrefab;
-    public GameObject frenzyUI;
     // costumes
     public GameObject costumesListPrefab;
     public List<Costume> costumesList;
@@ -126,7 +122,15 @@ public class GameManager : MonoBehaviour {
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
 
-        yeti.SetSprite(0);
+        if (frenzyMode.frenzyMode)
+        {
+            yeti.SetSprite(4);
+        }
+        else
+        {
+            yeti.SetSprite(0);
+        }
+        
         if (IsPlayerCorrect(0))
         {
             totalKills_counter++;
@@ -135,7 +139,8 @@ public class GameManager : MonoBehaviour {
             SetScoreUI();
             lifebar.PunchScale();
             // frenzy check
-            FrenzyCheck();
+            if (!frenzyMode.frenzyMode)
+                frenzyMode.FrenzyCheck();
 
             hikers.KillHiker();
         }
@@ -154,7 +159,15 @@ public class GameManager : MonoBehaviour {
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
 
-        yeti.SetSprite(2);
+        if (frenzyMode.frenzyMode)
+        {
+            yeti.SetSprite(4);
+        }
+        else
+        {
+            yeti.SetSprite(2);
+        }
+
         if (IsPlayerCorrect(1))
         {
             totalKills_counter++;
@@ -163,7 +176,8 @@ public class GameManager : MonoBehaviour {
             SetScoreUI();
             lifebar.PunchScale();
             // frenzy check
-            FrenzyCheck();
+            if (!frenzyMode.frenzyMode)
+                frenzyMode.FrenzyCheck();
 
             hikers.KillHiker();
         }
@@ -172,37 +186,6 @@ public class GameManager : MonoBehaviour {
             if (!noTouchDeath) // for debug
                 gameOver.SetGameOver();
         }
-    }
-
-    public void FrenzyCheck()
-    {
-        if (hikers.hikers[0].GetComponent<Hiker>().frenzyTagged)
-        {
-            frenzyTokenCount++;
-            Instantiate(frenzyCounterPrefab);
-        }
-
-        
-
-        if (frenzyTokenCount == 3 && !goldMode.goldMode)
-        {
-            StartFrenzyMode();
-        }
-    }
-
-    public void StartFrenzyMode()
-    {
-        Debug.Log("Frenzy mode started");
-        frenzyMode = true;
-        StartCoroutine(FrenzyCountdown());
-        Instantiate(frenzyUI);
-    }
-
-    public void StopFrenzyMode()
-    {
-        Debug.Log("Frenzy mode ended");
-        frenzyMode = false;
-        frenzyTokenCount = 0;
     }
 
     public int AddToScore() {
@@ -219,7 +202,7 @@ public class GameManager : MonoBehaviour {
 
         if (score > highScore)
         {
-            Debug.Log("new highscore! of " + score);
+            Debug.Log("new highscore of " + score);
             newHighScore = true;
             highScore = score;
             PlayerPrefs.SetInt("high_score", highScore);
@@ -229,7 +212,7 @@ public class GameManager : MonoBehaviour {
 
     public bool IsPlayerCorrect(int pos)
     {
-        if (frenzyMode)
+        if (frenzyMode.frenzyMode)
             return true;
 
         if (!hikers.activeHiker.GetComponent<Hiker>().left && pos == 0)
@@ -284,21 +267,11 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Gold face spawning in " + from + " seconds");
         yield return new WaitForSeconds(from);
         // spawn gold face
-        if (!isGameOver)
+        if (!isGameOver && !frenzyMode.frenzyMode)
             Instantiate(goldMode.goldModeFace);
     }
 
-    public IEnumerator FrenzyCountdown()
-    {
-        yield return new WaitForSeconds(5);
-        print("3");
-        yield return new WaitForSeconds(1);
-        print("2");
-        yield return new WaitForSeconds(1);
-        print("1");
-        yield return new WaitForSeconds(1);
-        StopFrenzyMode();
-    }
+    
 
 }
 

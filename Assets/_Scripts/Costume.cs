@@ -7,5 +7,5 @@ public class Costume : ScriptableObject {
     public string name;
     public int best;
     public int kills;
-    public Sprite both, left, right, dead;
+    public Sprite both, idle1, idle2, left, right, dead;
 }

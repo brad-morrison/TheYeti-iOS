@@ -16,18 +16,18 @@ public class FrenzyCounter : MonoBehaviour
 
     public void ActivateFaces()
     {
-        if (master.gameManager.frenzyTokenCount == 1)
+        if (master.gameManager.frenzyMode.frenzyTokenCount == 1)
         {
             StartCoroutine(ActivateFaceAfter(face1));
         }
 
-        if (master.gameManager.frenzyTokenCount == 2)
+        if (master.gameManager.frenzyMode.frenzyTokenCount == 2)
         {
             face1.SetActive(true);
             StartCoroutine(ActivateFaceAfter(face2));
         }
 
-        if (master.gameManager.frenzyTokenCount == 3)
+        if (master.gameManager.frenzyMode.frenzyTokenCount == 3)
         {
             face1.SetActive(true);
             face2.SetActive(true);
