@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
     public bool frenzyMode;
     public int frenzyTokenCount;
     public GameObject frenzyCounterPrefab;
+    public GameObject frenzyUI;
     // costumes
     public GameObject costumesListPrefab;
     public List<Costume> costumesList;
@@ -194,6 +195,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Frenzy mode started");
         frenzyMode = true;
         StartCoroutine(FrenzyCountdown());
+        Instantiate(frenzyUI);
     }
 
     public void StopFrenzyMode()
