@@ -108,14 +108,10 @@ public class GameManager : MonoBehaviour {
             Instantiate(goldMode.multiplierPop);
         }
 
-        if (command == "left")
-            HitLeft();
-
-        if (command == "right")
-            HitRight();
+        Hit(command);
     }
 
-    public void HitLeft()
+    public void Hit(string side)
     {
         iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)(goldMode.goldMode ? 2 : 1));
 
@@ -123,15 +119,11 @@ public class GameManager : MonoBehaviour {
             scoreBounceSmall.Invoke();
 
         if (frenzyMode.frenzyMode)
-        {
-            yeti.SetSprite(4);
-        }
+            yeti.SetSprite("idle1");
         else
-        {
-            yeti.SetSprite(0);
-        }
-        
-        if (IsPlayerCorrect(0))
+            yeti.SetSprite(side);
+
+        if (IsPlayerCorrect(side))
         {
             totalKills_counter++;
             master.audio.PlaySound(master.audio.punchSmall);
@@ -146,46 +138,23 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-          
             if (!noTouchDeath) // for debug
                 gameOver.SetGameOver();
         }
     }
 
-    public void HitRight()
+    public bool IsPlayerCorrect(string side)
     {
-        iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType) (goldMode.goldMode ? 2 : 1));
-
-        if (!goldMode.goldMode)
-            scoreBounceSmall.Invoke();
-
         if (frenzyMode.frenzyMode)
-        {
-            yeti.SetSprite(4);
-        }
-        else
-        {
-            yeti.SetSprite(2);
-        }
+            return true;
 
-        if (IsPlayerCorrect(1))
-        {
-            totalKills_counter++;
-            master.audio.PlaySound(master.audio.punchLarge);
-            SetScore(AddToScore());
-            SetScoreUI();
-            lifebar.PunchScale();
-            // frenzy check
-            if (!frenzyMode.frenzyMode)
-                frenzyMode.FrenzyCheck();
+        if (!hikers.activeHiker.GetComponent<Hiker>().left && side == "left")
+            return true;
 
-            hikers.KillHiker();
-        }
-        else
-        {
-            if (!noTouchDeath) // for debug
-                gameOver.SetGameOver();
-        }
+        if (hikers.activeHiker.GetComponent<Hiker>().left && side == "right")
+            return true;
+
+        return false;
     }
 
     public int AddToScore() {
@@ -208,24 +177,6 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("high_score", highScore);
             PlayerPrefs.Save();
         }
-    }
-
-    public bool IsPlayerCorrect(int pos)
-    {
-        if (frenzyMode.frenzyMode)
-            return true;
-
-        if (!hikers.activeHiker.GetComponent<Hiker>().left && pos == 0)
-        {
-            return true;
-        }
-
-        if (hikers.activeHiker.GetComponent<Hiker>().left && pos == 1)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     public void ActivateGoldMode()

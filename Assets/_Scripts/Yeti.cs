@@ -19,37 +19,34 @@ public class Yeti : MonoBehaviour {
         manager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
 
-    public void SetSprite(int state) {
-        switch(state)
+    public void SetSprite(string sprite) {
+        switch(sprite)
         {
-            // drop right hand
-            case 0:
+            case "left":
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.left;
                 yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_right;
                 break;
 
-            // both
-            case 1:
+            case "both":
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
                 yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
                 break;
 
-            
-
-            // drop left hand
-            case 2:
+            case "right":
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.right;
                 yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_left;
                 break;
 
-            // death sprite
-            case 3:
+            case "dead":
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.dead;
                 break;
 
-            // both down
-            case 4:
+            case "idle1":
                 yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+                break;
+
+            case "idle2":
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
                 break;
         }
 

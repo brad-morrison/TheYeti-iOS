@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Buttons : MonoBehaviour
 {
     public MasterManager master;
-    public bool gameControlsOn;
 
     private void Start()
     {
         // get master
         master = gameObject.transform.parent.GetComponent<MasterManager>();
+    }
 
-        gameControlsOn = false;
+    // listen to events
+    private void OnEnable()
+    {
+        Actions.onButtonPressed += ButtonPress;
+    }
+
+    private void OnDisable()
+    {
+        Actions.onButtonPressed -= ButtonPress;
     }
 
     public void ButtonPress(string function) {

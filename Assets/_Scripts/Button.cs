@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Button : MonoBehaviour {
-    public MasterManager master;
     public Audio audio;
     public Sprite on, on_inActive, off_inActive;
     Sprite off;
@@ -12,7 +12,6 @@ public class Button : MonoBehaviour {
     public bool active; // greyed out or not
 
     private void Awake() {
-        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
         audio = GameObject.Find("Audio").GetComponent<Audio>();
         off = GetComponent<SpriteRenderer>().sprite;
         Init();
@@ -69,11 +68,10 @@ public class Button : MonoBehaviour {
         else
         {
             GetComponent<SpriteRenderer>().sprite = off_inActive;
-            //audio.PlaySound(audio.buttonUp_grey);
         }
 
         if (pressActive)
-            master.buttons.ButtonPress(function);
+            Actions.onButtonPressed(function);
 
         pressActive = false;
     }
