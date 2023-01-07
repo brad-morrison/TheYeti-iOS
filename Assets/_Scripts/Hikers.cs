@@ -70,7 +70,7 @@ public class Hikers : MonoBehaviour {
         }
 
         // tag with frenzy roll
-        int frenzyRoll = Random.Range(0, 10);
+        int frenzyRoll = Random.Range(0, 2);
         if (frenzyRoll == 1 && !manager.goldMode.goldMode && !manager.frenzyMode.frenzyMode)
         {
             newHiker.GetComponent<Hiker>().frenzyTagged = true;

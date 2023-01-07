@@ -12,6 +12,7 @@ public class FrenzyMode : MonoBehaviour
     public GameObject frenzyUI;
     // events
     public UnityEvent UI_finished = new UnityEvent();
+    public UnityEvent<int> countdownTick;
 
     private void Start()
     {
@@ -59,13 +60,19 @@ public class FrenzyMode : MonoBehaviour
 
     public IEnumerator FrenzyCountdown()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         print("3");
+        Instantiate(manager.timer);
+        countdownTick.Invoke(3);
         yield return new WaitForSeconds(1);
         print("2");
+        countdownTick.Invoke(2);
         yield return new WaitForSeconds(1);
+        countdownTick.Invoke(1);
         print("1");
         yield return new WaitForSeconds(1);
+        countdownTick.Invoke(0);
         StopFrenzyMode();
+
     }
 }

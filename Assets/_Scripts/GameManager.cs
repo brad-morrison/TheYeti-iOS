@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
     public GameObject finalBest;
     public LifeBar lifebar;
     public float lifeBar_ScrollSpeed;
+    public GameObject timer;
     // flags
     public bool allowInput;
     public bool isGameOver;
