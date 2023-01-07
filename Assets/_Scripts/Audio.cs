@@ -12,6 +12,9 @@ public class Audio : MonoBehaviour {
     // others
     public AudioClip hit, pop, coin;
     public AudioClip buttonDown, buttonUp, buttonUp_grey;
+    public AudioClip hikerDeath1, hikerDeath2, hikerDeath3;
+    public AudioClip frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
+    public AudioClip timerTick, timerLow;
     public MasterManager master;
     public bool sfxOn;
 

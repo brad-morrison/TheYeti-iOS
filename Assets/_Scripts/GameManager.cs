@@ -136,6 +136,11 @@ public class GameManager : MonoBehaviour {
                 frenzyMode.FrenzyCheck();
 
             hikers.KillHiker();
+            // play hiker death sound
+            int rand = Random.Range(1, 6);
+            if (rand == 1) master.audio.PlaySound(master.audio.hikerDeath1);
+            if (rand == 2) master.audio.PlaySound(master.audio.hikerDeath2);
+            if (rand == 3) master.audio.PlaySound(master.audio.hikerDeath3);
         }
         else
         {

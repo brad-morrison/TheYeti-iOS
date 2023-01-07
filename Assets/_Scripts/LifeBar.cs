@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LifeBar : MonoBehaviour
 {
+    public Audio audio;
     public float punchAmount;
     public GameObject timer_scroller;
     public GameObject goldFrame;
@@ -20,6 +21,7 @@ public class LifeBar : MonoBehaviour
 
     private void Start()
     {
+        audio = GameObject.Find("Audio").GetComponent<Audio>();
         animate = true;
         current = blue;
         flashing = false;
@@ -83,7 +85,7 @@ public class LifeBar : MonoBehaviour
         }
         
         // turn red if below certain size
-        if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
+        if (transform.localScale.x > 2.0f) { current = red; audio.PlaySound(audio.timerLow); } else { current = blue; }
 
         if (!flashing && !manager.goldMode.goldMode) { SetTexture(current); }
 

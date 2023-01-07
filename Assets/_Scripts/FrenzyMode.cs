@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class FrenzyMode : MonoBehaviour
 {
+    public MasterManager master;
     public GameManager manager;
     public bool frenzyMode;
     public int frenzyTokenCount;
+    public int frenzyLength;
     public GameObject frenzyCounterPrefab;
     public GameObject frenzyUI;
     // events
@@ -16,6 +18,7 @@ public class FrenzyMode : MonoBehaviour
 
     private void Start()
     {
+        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
         manager = transform.parent.GetComponent<GameManager>();
     }
 
@@ -38,6 +41,9 @@ public class FrenzyMode : MonoBehaviour
     {
         frenzyMode = true;
         frenzyUI.SetActive(true);
+        master.audio.PlaySound(master.audio.frenzyStart1);
+        master.audio.PlaySound(master.audio.frenzyStart2);
+        master.audio.PlaySound(master.audio.goldModeStart);
     }
 
     public void StartFrenzyMode()
@@ -56,23 +62,18 @@ public class FrenzyMode : MonoBehaviour
         frenzyTokenCount = 0;
         frenzyMode = false;
         frenzyTokenCount = 0;
+        master.audio.PlaySound(master.audio.frenzyEnd);
     }
 
     public IEnumerator FrenzyCountdown()
     {
-        yield return new WaitForSeconds(1);
-        print("3");
-        Instantiate(manager.timer);
-        countdownTick.Invoke(3);
-        yield return new WaitForSeconds(1);
-        print("2");
-        countdownTick.Invoke(2);
-        yield return new WaitForSeconds(1);
-        countdownTick.Invoke(1);
-        print("1");
-        yield return new WaitForSeconds(1);
-        countdownTick.Invoke(0);
+        // wait until final 3 seconds
+        yield return new WaitForSeconds(frenzyLength-3);
+        // create timer ui object and start
+        GameObject timer = Instantiate(manager.timer);
+        timer.GetComponent<Timer>().StartCountdown(3);
+        // continue timer
+        yield return new WaitForSeconds(3);
         StopFrenzyMode();
-
     }
 }

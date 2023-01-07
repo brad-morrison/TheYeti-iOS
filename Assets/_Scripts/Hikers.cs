@@ -105,7 +105,6 @@ public class Hikers : MonoBehaviour {
     public void KillHiker()
     {
         GameObject target = hikers[0];
-
         
 
         target.GetComponent<SpriteRenderer>().sortingOrder = 10;

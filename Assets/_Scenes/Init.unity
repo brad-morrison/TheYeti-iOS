@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 0}
-  gameControlsOn: 0
 --- !u!1 &325750093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1069,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e5833d935c2aa4105a652424485d6410, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1190,6 +1189,15 @@ MonoBehaviour:
   buttonDown: {fileID: 8300000, guid: c2a5e6f39c5c64f1fbdaf9cbbcf142be, type: 3}
   buttonUp: {fileID: 8300000, guid: 1bb8364fffba84326941bdc8f8cba095, type: 3}
   buttonUp_grey: {fileID: 8300000, guid: f7a8cb5b665fa43c4a95d485e024d1be, type: 3}
+  hikerDeath1: {fileID: 8300000, guid: 46f3a520e250d4f6184c8215b123482f, type: 3}
+  hikerDeath2: {fileID: 8300000, guid: d48d564d25b0443e2b71e8b429715ec3, type: 3}
+  hikerDeath3: {fileID: 8300000, guid: ecc89f50d8bf24ffe937b8edff60db93, type: 3}
+  frenzyStart1: {fileID: 8300000, guid: 0742f9b33f2a845a9b3f915571c0acde, type: 3}
+  frenzyStart2: {fileID: 8300000, guid: 143b086864a5f441fad99ec60e2989d6, type: 3}
+  frenzyStart3: {fileID: 0}
+  frenzyEnd: {fileID: 8300000, guid: e42276f9314bf4b1199f75da3d4db76a, type: 3}
+  timerTick: {fileID: 8300000, guid: a6c3e2d9c60214c8ea02118ff5f3ae1d, type: 3}
+  timerLow: {fileID: 0}
   master: {fileID: 0}
   sfxOn: 0
 --- !u!1 &1172863553
