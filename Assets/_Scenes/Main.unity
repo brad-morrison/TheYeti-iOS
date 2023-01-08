@@ -3636,6 +3636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9660efd8a760049d98a02aec8760139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audio: {fileID: 0}
   punchAmount: -0.13
   timer_scroller: {fileID: 41739729}
   goldFrame: {fileID: 2082695322}
@@ -5814,6 +5815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780dd5241bc0c4e86b78f252634248d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  master: {fileID: 0}
   manager: {fileID: 0}
   frenzyMode: 0
   frenzyTokenCount: 0
@@ -8007,6 +8009,8 @@ MonoBehaviour:
   noTimerDeath: 0
   noTouchDeath: 0
   sound: 1
+  allowGoldMode: 1
+  allowFrenzyMode: 1
   deviceScreenWidth: 0
   deviceScreenHeight: 0
   master: {fileID: 0}
@@ -8017,6 +8021,9 @@ MonoBehaviour:
   audio: {fileID: 0}
   particles: {fileID: 1075519576}
   frenzyMode: {fileID: 948941191}
+  frenzyHikerChance: 20
+  goldModeWaitTime_min: 5
+  goldModeWaitTime_max: 20
   score: 0
   highScore: 0
   totalKills_counter: 0

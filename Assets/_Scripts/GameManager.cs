@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public bool noTimerDeath;
     public bool noTouchDeath;
     public bool sound;
+    public bool allowGoldMode;      // bool in if statement of goldfacecalculator
+    public bool allowFrenzyMode;    // bool in hikers script if statement
 
     // device
     [Header("")]
@@ -26,6 +28,12 @@ public class GameManager : MonoBehaviour {
     public Audio audio;
     public Particles particles;
     public FrenzyMode frenzyMode;
+    // gameplay
+    [Header("Gameplay")]
+    public int frenzyHikerChance; // large number = less chance
+    public float goldModeWaitTime_min; // min wait time for face spawn
+    public float goldModeWaitTime_max; // max wait time for face spawn
+    [Header("")]
     // model variables
     public int score;
     public int highScore;
@@ -88,7 +96,7 @@ public class GameManager : MonoBehaviour {
         highScore = master.playerData.GetHighScore();
 
         score = 0;
-        lifeBar_ScrollSpeed = -1.2f;
+        lifeBar_ScrollSpeed = -0.5f;
         hikers.InitHikers();
         hikers.SpawnHiker();
         CalculateNextGoldModeSpawn();
@@ -141,6 +149,8 @@ public class GameManager : MonoBehaviour {
             if (rand == 1) master.audio.PlaySound(master.audio.hikerDeath1);
             if (rand == 2) master.audio.PlaySound(master.audio.hikerDeath2);
             if (rand == 3) master.audio.PlaySound(master.audio.hikerDeath3);
+            // check for difficulty increase
+            DifficultyIncreaseCheck();
         }
         else
         {
@@ -185,6 +195,22 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void DifficultyIncreaseCheck()
+    {
+        if (score % 10 == 0)
+        {
+            // ends in 0
+            difficultyMultiplier += 0.02f;
+            lifeBar_ScrollSpeed -= 0.1f;
+
+            print(difficultyMultiplier);
+        }
+        else
+        {
+            return;
+        }
+    }
+
     public void ActivateGoldMode()
     {
         goldMode.GoldModeAnnounce();
@@ -214,7 +240,7 @@ public class GameManager : MonoBehaviour {
     public void CalculateNextGoldModeSpawn()
     {
         // choose a random time to wait until the next gold mode
-        float time = Random.Range(1.0f, 5.0f);
+        float time = Random.Range(goldModeWaitTime_min, goldModeWaitTime_max);
         // call the coroutine
         StartCoroutine(GoldModeFaceCountdown(time));
     }
@@ -224,7 +250,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Gold face spawning in " + from + " seconds");
         yield return new WaitForSeconds(from);
         // spawn gold face
-        if (!isGameOver && !frenzyMode.frenzyMode)
+        if (!isGameOver && !frenzyMode.frenzyMode && allowGoldMode)
             Instantiate(goldMode.goldModeFace);
     }
 
