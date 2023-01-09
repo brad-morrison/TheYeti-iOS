@@ -1183,6 +1183,7 @@ MonoBehaviour:
   goldModeStart: {fileID: 8300000, guid: bcd53c78070c049ad9e4f9e6454751ee, type: 3}
   goldModeEnd: {fileID: 8300000, guid: 8d164877775fa4c28b6676fd61dfc5fd, type: 3}
   crown: {fileID: 8300000, guid: ccbca61d1c41a45a093e263b638ab333, type: 3}
+  high_score: {fileID: 8300000, guid: 77893cb83dfff4abe98d290a6f2fc0f1, type: 3}
   hit: {fileID: 8300000, guid: 8ad0b6063aa9449f19af6add35cf7a0f, type: 3}
   pop: {fileID: 8300000, guid: a4a342fdc2eaa454faec50e05fd68cc3, type: 3}
   coin: {fileID: 8300000, guid: 00542776acf81463cb5a51f477aeb892, type: 3}
@@ -1192,6 +1193,7 @@ MonoBehaviour:
   hikerDeath1: {fileID: 8300000, guid: 46f3a520e250d4f6184c8215b123482f, type: 3}
   hikerDeath2: {fileID: 8300000, guid: d48d564d25b0443e2b71e8b429715ec3, type: 3}
   hikerDeath3: {fileID: 8300000, guid: ecc89f50d8bf24ffe937b8edff60db93, type: 3}
+  frenzyCounter: {fileID: 8300000, guid: f6f3e3e7e7f9e4e90afc47a154275427, type: 3}
   frenzyStart1: {fileID: 8300000, guid: 0742f9b33f2a845a9b3f915571c0acde, type: 3}
   frenzyStart2: {fileID: 8300000, guid: 143b086864a5f441fad99ec60e2989d6, type: 3}
   frenzyStart3: {fileID: 0}

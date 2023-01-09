@@ -38,7 +38,13 @@ public class FrenzyCounter : MonoBehaviour
     public IEnumerator ActivateFaceAfter(GameObject face)
     {
         yield return new WaitForSeconds(0.5f);
+        master.audio.PlaySound(master.audio.frenzyCounter);
         face.SetActive(true);
+
+        if (master.gameManager.frenzyMode.frenzyTokenCount == 3 && !master.gameManager.goldMode.goldMode)
+        {
+            master.gameManager.frenzyMode.StartFrenzyTransition();
+        }
     }
 
     public IEnumerator DestroyAfter()

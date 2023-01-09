@@ -1638,7 +1638,7 @@ TextureImporter:
         x: 324
         y: 1657
         width: 71
-        height: 57
+        height: 58
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2328,10 +2328,10 @@ TextureImporter:
       costumes_10: -1232454372
       bigfoot_right: 1107456345
       costumes_19: 1614800756
-      costumes_21: -628260061
+      costumes_70: 1569772909
       costumes_38: -1294264230
       costumes_67: 1169165274
-      costumes_70: 1569772909
+      costumes_21: -628260061
       captainFuzz_right: -1849606996
       costumes_50: 1692237051
       ghost_left: -2023139478
@@ -2356,8 +2356,8 @@ TextureImporter:
       costumes_22: -1429436865
       hulk_right: -871424413
       bigfoot_dead: -1441460451
-      costumes_0: -581324784
       costumes_59: -2146469276
+      costumes_0: -581324784
       costumes_71: -1342272040
       costumes_17: -1973441979
       costumes_55: 433290167

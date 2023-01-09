@@ -15,21 +15,23 @@ public class MainMenu : MonoBehaviour {
     // DEBUG
     public GameObject highscore_text, kills_text;
 
-    private void Start()
+    private void Awake()
     {
-
-
         // get master
         master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
         master.SceneChanged();
 
         // set chosen costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].both;
+        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle1;
+        StartCoroutine(YetiAnimate());
+        //yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].both;
 
         // set audio settings
         Music(master.playerData.GetMusic());
         Sfx(master.playerData.GetSfx());
+
+        
 
         // DEBUG
         highscore_text.GetComponent<TextMeshPro>().text = master.playerData.GetHighScore().ToString();
@@ -60,7 +62,16 @@ public class MainMenu : MonoBehaviour {
         sfxButton.SetActive(value);
         sfxButtonMuted.SetActive(!value);
 
-        
+    }
 
+    public IEnumerator YetiAnimate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);
+            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle2;
+            yield return new WaitForSeconds(0.3f);
+            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle1;
+        }
     }
 }

@@ -8,12 +8,12 @@ public class Audio : MonoBehaviour {
     // yeti sounds
     public AudioClip punchSmall, punchLarge;
     // game event sounds
-    public AudioClip gameOver, goldModeFace, goldModeStart, goldModeEnd, crown;
+    public AudioClip gameOver, goldModeFace, goldModeStart, goldModeEnd, crown, high_score;
     // others
     public AudioClip hit, pop, coin;
     public AudioClip buttonDown, buttonUp, buttonUp_grey;
     public AudioClip hikerDeath1, hikerDeath2, hikerDeath3;
-    public AudioClip frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
+    public AudioClip frenzyCounter, frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
     public AudioClip timerTick, timerLow;
     public AudioClip error, timer_warning;
     public MasterManager master;

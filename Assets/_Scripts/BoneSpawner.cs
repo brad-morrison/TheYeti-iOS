@@ -31,6 +31,11 @@ public class BoneSpawner : MonoBehaviour
             StartCoroutine(SpawnIn());
     }
 
+    public void Switch()
+    {
+        spawn = !spawn;
+    }
+
     public GameObject RandomObj()
     {
         GameObject random;

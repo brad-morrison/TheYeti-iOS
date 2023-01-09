@@ -23,7 +23,12 @@ public class GameControls : MonoBehaviour
 
         if (Input.GetKeyDown("b") && manager.allowInput)
         {
-            manager.FallingBones(!manager.fallingBonesIsOn);
+            manager.FallingBones(true);
+        }
+
+        if (Input.GetKeyDown("n") && manager.allowInput)
+        {
+            manager.FallingBones(false);
         }
 
         if (Input.GetKeyDown("g") && manager.allowInput)

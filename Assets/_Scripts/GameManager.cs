@@ -59,12 +59,14 @@ public class GameManager : MonoBehaviour {
     // effects
     public GameObject fallingBones;
     public bool fallingBonesIsOn;
+    public GameObject newHighScore_text;
     // events
     public UnityEvent scoreBounceSmall = new UnityEvent();
     public UnityEvent scoreBounceBig = new UnityEvent();
     public UnityEvent cameraShake = new UnityEvent();
     public UnityEvent platformShake = new UnityEvent();
     public UnityEvent yetiShake = new UnityEvent();
+    public UnityEvent _newHighScore = new UnityEvent();
 
 
 
@@ -192,12 +194,21 @@ public class GameManager : MonoBehaviour {
 
         if (score > highScore)
         {
-            Debug.Log("new highscore of " + score);
-            newHighScore = true;
-            highScore = score;
-            PlayerPrefs.SetInt("high_score", highScore);
-            PlayerPrefs.Save();
+            if (!newHighScore) // only get 1 high score per game
+                NewHighScore(score);
         }
+    }
+
+    public void NewHighScore(int score)
+    {
+        //_newHighScore.Invoke();
+        newHighScore = true;
+        highScore = score;
+        StartCoroutine(FallingBonesFor(3.0f));
+        newHighScore_text.SetActive(true);
+        //audio.PlaySound(audio.high_score);
+        PlayerPrefs.SetInt("high_score", highScore);
+        PlayerPrefs.Save();
     }
 
     public void DifficultyIncreaseCheck()
@@ -240,15 +251,16 @@ public class GameManager : MonoBehaviour {
 
     public void FallingBones(bool isOn)
     {
-        // get all falling bones components
         Component[] spawners = fallingBones.GetComponentsInChildren<BoneSpawner>();
 
         foreach (BoneSpawner spawner in spawners)
         {
-            spawner.spawn = isOn;
+            if (isOn)
+                spawner.spawn = true;
+            else
+                spawner.spawn = false;
         }
 
-        fallingBonesIsOn = isOn;
     }
 
     public void SetScoreUI() {
@@ -270,6 +282,13 @@ public class GameManager : MonoBehaviour {
         // spawn gold face
         if (!isGameOver && !frenzyMode.frenzyMode && allowGoldMode)
             Instantiate(goldMode.goldModeFace);
+    }
+
+    public IEnumerator FallingBonesFor(float time)
+    {
+        FallingBones(true);
+        yield return new WaitForSeconds(time);
+        FallingBones(false);
     }
 
     

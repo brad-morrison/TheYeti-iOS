@@ -29,18 +29,13 @@ public class FrenzyMode : MonoBehaviour
             frenzyTokenCount++;
             Instantiate(frenzyCounterPrefab);
         }
-
-        if (frenzyTokenCount == 3 && !manager.goldMode.goldMode)
-        {
-    
-            StartFrenzyTransition();
-        }
     }
 
     public void StartFrenzyTransition()
     {
         frenzyMode = true;
         frenzyUI.SetActive(true);
+        manager.allowInput = false;
         master.audio.PlaySound(master.audio.frenzyStart1);
         master.audio.PlaySound(master.audio.frenzyStart2);
         master.audio.PlaySound(master.audio.goldModeStart);
@@ -53,6 +48,7 @@ public class FrenzyMode : MonoBehaviour
         StartCoroutine(FrenzyCountdown());
         frenzyUI.SetActive(false);
         manager.yetiCharacter.GetComponent<SpriteRenderer>().color = Color.red;
+        manager.allowInput = true;
     }
 
     public void StopFrenzyMode()
