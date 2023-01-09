@@ -1,0 +1,36 @@
+﻿
+things to add for MVP release
+
+[#] make costume scene open on chosen costume
+[#] add timer low sfx (removed feature)
+[#] change timer low sfx to something more discrete (removed feature)
+[#] error sfx on grey button press
+[#] add snow falling particles to play mode
+[#] high-score & total kills banner in main menu
+[#] add falling bones whan get new high score
+[ ] let player know about new highscore while playing
+[ ] add randomized blizzard turning on and off
+[ ] In-app purchases
+[ ] leaderboards
+[ ] different scene backgrounds
+[ ] yeti headbob animation on menu
+[ ] add smashing particles
+[ ] center all UI
+[ ] add sfx to frenzy faces
+[ ] make frenzy ui at start faster
+[ ] add bomb to frenzy hikers
+[ ] quick tutorial
+[ ] finalise costume unlocks scores
+[ ] optimise gameplay variables
+
+things to add for next version release
+
+[ ] ads
+[ ] more costumes
+[ ] levels
+[ ] rising platform to sky as score increases
+[ ] costume unlocked alert
+[ ] notification bubble on costumes button when new unlock
+[ ] coins system which can be spent on vending machine for yeti accesories (hats, glasses etc)
+[ ] levels
+

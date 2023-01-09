@@ -85,7 +85,7 @@ public class LifeBar : MonoBehaviour
         }
         
         // turn red if below certain size
-        if (transform.localScale.x > 2.0f) { current = red; audio.PlaySound(audio.timerLow); } else { current = blue; }
+        if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
         if (!flashing && !manager.goldMode.goldMode) { SetTexture(current); }
 

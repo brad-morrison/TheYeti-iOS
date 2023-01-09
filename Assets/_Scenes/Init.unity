@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75604b538a3b240a7b4291d069983166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 4
+  delay: 0
   audio: {fileID: 735390871}
   clip: {fileID: 8300000, guid: 8caa03e541dfe4e61a42dfa362d6f1e4, type: 3}
 --- !u!4 &735390870
@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &849771965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e5833d935c2aa4105a652424485d6410, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1197,7 +1197,9 @@ MonoBehaviour:
   frenzyStart3: {fileID: 0}
   frenzyEnd: {fileID: 8300000, guid: e42276f9314bf4b1199f75da3d4db76a, type: 3}
   timerTick: {fileID: 8300000, guid: a6c3e2d9c60214c8ea02118ff5f3ae1d, type: 3}
-  timerLow: {fileID: 0}
+  timerLow: {fileID: 8300000, guid: 6bcebaa90b3254202833710a2103b186, type: 3}
+  error: {fileID: 8300000, guid: fd698b7325f4e43af87240252d1cae6e, type: 3}
+  timer_warning: {fileID: 8300000, guid: 3b7950a3b41f64da09c461b950550e6c, type: 3}
   master: {fileID: 0}
   sfxOn: 0
 --- !u!1 &1172863553

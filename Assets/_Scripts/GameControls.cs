@@ -21,6 +21,11 @@ public class GameControls : MonoBehaviour
             manager.HandleInput("right");
         }
 
+        if (Input.GetKeyDown("b") && manager.allowInput)
+        {
+            manager.FallingBones(!manager.fallingBonesIsOn);
+        }
+
         if (Input.GetKeyDown("g") && manager.allowInput)
         {
             if (!manager.goldMode.goldMode)

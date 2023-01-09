@@ -13,7 +13,7 @@ public class CostumeManager : MonoBehaviour {
     private List<Costume> costumesList;
     //
     public Costume currentCostume;
-    public int costumeIndex = 0;
+    public int costumeIndex;
     // get from prefs
     public int highScore, totalKills;
 
@@ -23,15 +23,20 @@ public class CostumeManager : MonoBehaviour {
         master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>(); 
         master.SceneChanged();
 
-        // set to current costume
-        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-        currentCostume = costumesList[costumeIndex];
-        
-        SetCostume();
-
         // get score data
         highScore = master.playerData.GetHighScore();
         totalKills = master.playerData.GetKills();
+
+        // set to current costume
+        costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
+        currentCostume = costumesList[master.playerData.GetCostume()];
+        costumeIndex = master.playerData.GetCostume();
+        ShowCostume(currentCostume);
+
+
+        //SetCostume();
+
+        
 
         RefreshButtons();
     }

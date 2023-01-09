@@ -68,6 +68,7 @@ public class Button : MonoBehaviour {
         else
         {
             GetComponent<SpriteRenderer>().sprite = off_inActive;
+            audio.PlaySound(audio.error);
         }
 
         if (pressActive)

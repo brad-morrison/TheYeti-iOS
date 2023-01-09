@@ -15,6 +15,7 @@ public class Audio : MonoBehaviour {
     public AudioClip hikerDeath1, hikerDeath2, hikerDeath3;
     public AudioClip frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
     public AudioClip timerTick, timerLow;
+    public AudioClip error, timer_warning;
     public MasterManager master;
     public bool sfxOn;
 

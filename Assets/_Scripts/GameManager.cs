@@ -56,14 +56,15 @@ public class GameManager : MonoBehaviour {
     public List<Costume> costumesList;
     // character
     public GameObject yetiCharacter, yetiCharacter_gameOver;
+    // effects
+    public GameObject fallingBones;
+    public bool fallingBonesIsOn;
     // events
     public UnityEvent scoreBounceSmall = new UnityEvent();
     public UnityEvent scoreBounceBig = new UnityEvent();
     public UnityEvent cameraShake = new UnityEvent();
     public UnityEvent platformShake = new UnityEvent();
     public UnityEvent yetiShake = new UnityEvent();
-
-
 
 
 
@@ -80,6 +81,8 @@ public class GameManager : MonoBehaviour {
         allowInput = true;
         isGameOver = false;
         newHighScore = false;
+
+        
     }
 
     private void Start()
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour {
         // set debug data
         if (Application.isEditor)
         {
-            noTimerDeath = true;
+            //noTimerDeath = true;
             //noTouchDeath = true;
             //sound = false;
         }
@@ -100,6 +103,8 @@ public class GameManager : MonoBehaviour {
         hikers.InitHikers();
         hikers.SpawnHiker();
         CalculateNextGoldModeSpawn();
+
+        FallingBones(false);
     }
 
     public void HandleInput(string command) {
@@ -232,6 +237,19 @@ public class GameManager : MonoBehaviour {
         hikers.DisableAnimations();
 
      }
+
+    public void FallingBones(bool isOn)
+    {
+        // get all falling bones components
+        Component[] spawners = fallingBones.GetComponentsInChildren<BoneSpawner>();
+
+        foreach (BoneSpawner spawner in spawners)
+        {
+            spawner.spawn = isOn;
+        }
+
+        fallingBonesIsOn = isOn;
+    }
 
     public void SetScoreUI() {
         text_score.GetComponent<TextMeshPro>().text = score == 0 ? "o" : score.ToString();

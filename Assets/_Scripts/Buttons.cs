@@ -84,6 +84,12 @@ public class Buttons : MonoBehaviour
                 Application.LoadLevel("Menu");
                 break;
 
+            case "remove_ads":
+                break;
+
+            case "restore":
+                break;
+
             default:
                 break;
         }
