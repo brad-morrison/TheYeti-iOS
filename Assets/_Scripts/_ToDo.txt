@@ -20,6 +20,7 @@ things to add for MVP release
 [ ] center all UI
 [ ] make frenzy ui at start faster
 [ ] add bomb to frenzy hikers
+[ ] try adding some post process effects
 [ ] quick tutorial
 [ ] finalise costume unlocks scores
 [ ] optimise gameplay variables
