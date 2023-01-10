@@ -39,4 +39,5 @@ things to add for next version release
 [ ] notification bubble on costumes button when new unlock
 [ ] coins system which can be spent on vending machine for yeti accesories (hats, glasses etc)
 [ ] levels
+[ ] hold costume buttons to move quickly through costumes
 
