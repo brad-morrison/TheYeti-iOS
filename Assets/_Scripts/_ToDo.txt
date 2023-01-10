@@ -12,10 +12,13 @@ things to add for MVP release
 [#] yeti headbob animation on menu
 [#] add sfx to frenzy faces
 [#] let player know about new highscore while playing
-[ ] Change the haptics to be stronger
-[ ] 
+[#] center all UI
+[#] make frenzy ui at start faster
 [ ] add randomized blizzard turning on and off
 [ ] leaderboards
+[ ] gold mode face sfx still playing when sfx off
+[ ] sfx not playing if only music switched off
+[ ] Change the haptics to be stronger
 [ ] add smashing particles
 [ ] make sky go red in frenzy
 [ ] make sky go dark for storm
@@ -24,6 +27,9 @@ things to add for MVP release
 [ ] add bomb to frenzy hikers
 [ ] try adding some post process effects
 [ ] quick tutorial
+
+---- Just before release ----
+[ ] check that high scores and sound settings are working
 [ ] finalise costume unlocks scores
 [ ] optimise gameplay variables
 
@@ -40,4 +46,5 @@ things to add for next version release
 [ ] coins system which can be spent on vending machine for yeti accesories (hats, glasses etc)
 [ ] levels
 [ ] hold costume buttons to move quickly through costumes
+[ ] different languages
 

@@ -90,6 +90,10 @@ public class Buttons : MonoBehaviour
             case "restore":
                 break;
 
+            case "leaderboard":
+                master.leaderboards.OpenLeaderboard();
+                break;
+
             default:
                 break;
         }

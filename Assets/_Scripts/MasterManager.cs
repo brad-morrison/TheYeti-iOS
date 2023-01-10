@@ -8,6 +8,7 @@ public class MasterManager : MonoBehaviour
     public Audio audio;
     public Buttons buttons;
 	public PlayerData playerData;
+	public Leaderboards leaderboards;
 	//
 	public GameManager gameManager;
 	public MainMenu mainMenu;
@@ -19,8 +20,12 @@ public class MasterManager : MonoBehaviour
 		audio = GetComponentInChildren<Audio>();
 		buttons = GetComponentInChildren<Buttons>();
 		playerData = GetComponentInChildren<PlayerData>();
+		leaderboards = GetComponentInChildren<Leaderboards>();
 
-		SceneChanged();
+		
+
+
+        SceneChanged();
 
     }
 
