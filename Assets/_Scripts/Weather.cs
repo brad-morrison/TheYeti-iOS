@@ -56,11 +56,11 @@ public class Weather : MonoBehaviour
 
     public void Rain()
     {
+        Instantiate(rain);
     }
 
     public void Storm()
     {
-        Instantiate(snow);
         Instantiate(blizzard);
     }
 }
