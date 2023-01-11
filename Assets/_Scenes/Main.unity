@@ -17201,9 +17201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weather: 0
-  snow: {fileID: 7087077713729776439, guid: aa1b51c11a84b4dac9ac4d873c471c39, type: 3}
-  rain: {fileID: 6203535230966524989, guid: 2ea13340d17cd419db5c5a29acfededd, type: 3}
-  blizzard: {fileID: 6203535230966524989, guid: 2ea13340d17cd419db5c5a29acfededd, type: 3}
+  snow: {fileID: 335383449781564835, guid: aa1b51c11a84b4dac9ac4d873c471c39, type: 3}
+  rain: {fileID: 2009250076860101637, guid: 7caf427d8babd42ff95625d4c7ac049b, type: 3}
+  blizzard: {fileID: 7155562828347294028, guid: 2ea13340d17cd419db5c5a29acfededd, type: 3}
   storm: {fileID: 6203535230966524989, guid: 2ea13340d17cd419db5c5a29acfededd, type: 3}
 --- !u!1 &2082695322
 GameObject:
