@@ -1593,9 +1593,9 @@ TextureImporter:
       name: costumes_1
       rect:
         serializedVersion: 2
-        x: 326
+        x: 324
         y: 1726
-        width: 69
+        width: 71
         height: 58
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -1719,9 +1719,9 @@ TextureImporter:
       name: costumes_9
       rect:
         serializedVersion: 2
-        x: 325
+        x: 324
         y: 1510
-        width: 70
+        width: 71
         height: 62
       alignment: 7
       pivot: {x: 0.5, y: 0}
