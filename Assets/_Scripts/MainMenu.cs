@@ -4,8 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
 
-public class MainMenu : MonoBehaviour {
-    public MasterManager master;
+public class MainMenu : TheYeti {
     public GameObject settingsUI, mainUI;
     public GameObject musicButton, musicButtonMuted, sfxButton, sfxButtonMuted;
     public GameObject yeti;
@@ -17,25 +16,23 @@ public class MainMenu : MonoBehaviour {
 
     private void Awake()
     {
-        // get master
-        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
-        master.SceneChanged();
+        GM.SceneChanged();
 
         // set chosen costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle1;
+        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle1;
         StartCoroutine(YetiAnimate());
         //yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].both;
 
         // set audio settings
-        Music(master.playerData.GetMusic());
-        Sfx(master.playerData.GetSfx());
+        Music(GM.playerData.GetMusic());
+        Sfx(GM.playerData.GetSfx());
 
         
 
         // DEBUG
-        highscore_text.GetComponent<TextMeshPro>().text = master.playerData.GetHighScore().ToString();
-        kills_text.GetComponent<TextMeshPro>().text = master.playerData.GetKills().ToString();
+        highscore_text.GetComponent<TextMeshPro>().text = GM.playerData.GetHighScore().ToString();
+        kills_text.GetComponent<TextMeshPro>().text = GM.playerData.GetKills().ToString();
     }
 
     public void ShowSettingsUI(bool on) {
@@ -48,7 +45,7 @@ public class MainMenu : MonoBehaviour {
 
     public void Music(bool value)
     {
-        master.playerData.SetMusic(value);
+        GM.playerData.SetMusic(value);
 
         musicButton.SetActive(value);
         musicButtonMuted.SetActive(!value);
@@ -57,7 +54,7 @@ public class MainMenu : MonoBehaviour {
 
     public void Sfx(bool value)
     {
-        master.playerData.SetSfx(value);
+        GM.playerData.SetSfx(value);
 
         sfxButton.SetActive(value);
         sfxButtonMuted.SetActive(!value);
@@ -69,9 +66,9 @@ public class MainMenu : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle2;
+            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle2;
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].idle1;
+            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle1;
         }
     }
 }

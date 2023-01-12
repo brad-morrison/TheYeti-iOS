@@ -5,28 +5,19 @@ using UnityEngine.SocialPlatforms;
 using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class Leaderboards : MonoBehaviour
+public class Leaderboards : TheYeti
 {
     private ILeaderboard leaderboard;
+    private ILeaderboard leaderboard2;
     private string leaderboard_id_bestscore = "bestscore";
     private string leaderboard_id_kills = "kills";
+    public bool userAuthenticated;
 
     void Start()
     {
 
         // Authenticate user first
-        Social.localUser.Authenticate(success => {
-            if (success)
-            {
-                Debug.Log("Authentication successful");
-                string userInfo = "Username: " + Social.localUser.userName +
-                    "\nUser ID: " + Social.localUser.id +
-                    "\nIsUnderage: " + Social.localUser.underage;
-                Debug.Log(userInfo);
-            }
-            else
-                Debug.Log("Authentication failed");
-        });
+        AuthenticateUser();
 
         // create social leaderboard
         leaderboard = Social.CreateLeaderboard();
@@ -39,13 +30,30 @@ public class Leaderboards : MonoBehaviour
         });
 
         // create social leaderboard
-        leaderboard = Social.CreateLeaderboard();
-        leaderboard.id = leaderboard_id_kills;
-        leaderboard.LoadScores(result =>
+        leaderboard2 = Social.CreateLeaderboard();
+        leaderboard2.id = leaderboard_id_kills;
+        leaderboard2.LoadScores(result =>
         {
-            Debug.Log("Received " + leaderboard.scores.Length + " scores");
-            foreach (IScore score in leaderboard.scores)
+            Debug.Log("Received " + leaderboard2.scores.Length + " scores");
+            foreach (IScore score in leaderboard2.scores)
                 Debug.Log(score);
+        });
+    }
+
+    public void AuthenticateUser()
+    {
+        Social.localUser.Authenticate(success => {
+            if (success)
+            {
+                userAuthenticated = true;
+                Debug.Log("Authentication successful");
+                string userInfo = "Username: " + Social.localUser.userName +
+                    "\nUser ID: " + Social.localUser.id +
+                    "\nIsUnderage: " + Social.localUser.underage;
+                Debug.Log(userInfo);
+            }
+            else
+                Debug.Log("Authentication failed");
         });
     }
 
@@ -59,6 +67,9 @@ public class Leaderboards : MonoBehaviour
 
     public void OpenLeaderboard()
     {
-        Social.ShowLeaderboardUI();
+        if (userAuthenticated)
+            Social.ShowLeaderboardUI();
+        else
+            AuthenticateUser();
     }
 }

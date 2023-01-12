@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Buttons : MonoBehaviour
+public class Buttons : TheYeti
 {
-    public MasterManager master;
-
-    private void Start()
-    {
-        // get master
-        master = gameObject.transform.parent.GetComponent<MasterManager>();
-    }
-
     // listen to events
     private void OnEnable()
     {
@@ -32,47 +24,47 @@ public class Buttons : MonoBehaviour
                 break;
 
             case "settings":
-                master.mainMenu.ShowSettingsUI(true);
-                master.mainMenu.ShowMainUI(false);
+                GM.mainMenu.ShowSettingsUI(true);
+                GM.mainMenu.ShowMainUI(false);
                 break;
 
             case "close_settings":
-                master.mainMenu.ShowSettingsUI(false);
-                master.mainMenu.ShowMainUI(true);
+                GM.mainMenu.ShowSettingsUI(false);
+                GM.mainMenu.ShowMainUI(true);
                 break;
 
             case "music":
-                master.mainMenu.Music(false);
-                master.audio.Music(false);
+                GM.mainMenu.Music(false);
+                GM.audio.Music(false);
                 break;
 
             case "music_mute":
-                master.mainMenu.Music(true);
-                master.audio.Music(true);
+                GM.mainMenu.Music(true);
+                GM.audio.Music(true);
                 break;
 
             case "sfx":
-                master.mainMenu.Sfx(false);
-                master.audio.sfxOn = false;
+                GM.mainMenu.Sfx(false);
+                GM.audio.sfxOn = false;
                 PlayerPrefs.SetInt("sfx", 0);
                 break;
 
             case "sfx_mute":
-                master.mainMenu.Sfx(true);
-                master.audio.sfxOn = true;
+                GM.mainMenu.Sfx(true);
+                GM.audio.sfxOn = true;
                 PlayerPrefs.SetInt("sfx", 1);
                 break;
 
             case "costumes_next":
-                master.costumeManager.NextCostume();
+                GM.costumeManager.NextCostume();
                 break;
             
             case "costumes_prev":
-                master.costumeManager.PreviousCostume();
+                GM.costumeManager.PreviousCostume();
                 break;
 
             case "costumes_select":
-                master.costumeManager.SetCostume();
+                GM.costumeManager.SetCostume();
                 Application.LoadLevel("Menu");
                 break;
 
@@ -91,7 +83,7 @@ public class Buttons : MonoBehaviour
                 break;
 
             case "leaderboard":
-                master.leaderboards.OpenLeaderboard();
+                GM.leaderboards.OpenLeaderboard();
                 break;
 
             default:

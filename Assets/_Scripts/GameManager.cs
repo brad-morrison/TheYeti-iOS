@@ -4,9 +4,9 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
+//using static UnityEngine.GraphicsBuffer;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : TheYeti {
     // DEBUG
     [Header("FOR TESTING")]
     public bool noTimerDeath;
@@ -20,12 +20,10 @@ public class GameManager : MonoBehaviour {
     public float deviceScreenWidth;
     public float deviceScreenHeight;
     // scripts
-    public MasterManager master;
     public Hikers hikers;
     public Yeti yeti;
     public GoldMode goldMode;
     public GameOver gameOver;
-    public Audio audio;
     public Particles particles;
     public FrenzyMode frenzyMode;
     // gameplay
@@ -74,9 +72,7 @@ public class GameManager : MonoBehaviour {
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
 
-        // get master
-        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
-        master.SceneChanged();
+        GM.SceneChanged();
 
         // costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
@@ -98,7 +94,7 @@ public class GameManager : MonoBehaviour {
         }
 
         // get score data
-        highScore = master.playerData.GetHighScore();
+        highScore = GM.playerData.GetHighScore();
 
         score = 0;
         lifeBar_ScrollSpeed = -0.5f;
@@ -116,7 +112,7 @@ public class GameManager : MonoBehaviour {
         yetiShake.Invoke();
 
         if (goldMode.goldMode) { 
-            master.audio.PlaySound(master.audio.coin);
+            GM.audio.PlaySound(GM.audio.coin);
             goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
 
             scoreBounceBig.Invoke();
@@ -142,7 +138,7 @@ public class GameManager : MonoBehaviour {
         if (IsPlayerCorrect(side))
         {
             totalKills_counter++;
-            master.audio.PlaySound(master.audio.punchSmall);
+            GM.audio.PlaySound(GM.audio.punchSmall);
             SetScore(AddToScore());
             SetScoreUI();
             lifebar.PunchScale();
@@ -153,9 +149,9 @@ public class GameManager : MonoBehaviour {
             hikers.KillHiker();
             // play hiker death sound
             int rand = Random.Range(1, 6);
-            if (rand == 1) master.audio.PlaySound(master.audio.hikerDeath1);
-            if (rand == 2) master.audio.PlaySound(master.audio.hikerDeath2);
-            if (rand == 3) master.audio.PlaySound(master.audio.hikerDeath3);
+            if (rand == 1) GM.audio.PlaySound(GM.audio.hikerDeath1);
+            if (rand == 2) GM.audio.PlaySound(GM.audio.hikerDeath2);
+            if (rand == 3) GM.audio.PlaySound(GM.audio.hikerDeath3);
             // check for difficulty increase
             DifficultyIncreaseCheck();
         }

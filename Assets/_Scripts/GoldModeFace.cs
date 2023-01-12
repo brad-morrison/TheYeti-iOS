@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldModeFace : MonoBehaviour
+public class GoldModeFace : TheYeti
 {
     float step;
     AudioSource audioSource;
-    public MasterManager manager;
 
     private void Start() {
-        manager = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
-        audioSource = GetComponent<AudioSource>();
 
-        if (!manager.playerData.GetSfx()) // debug
+        if (!GM.playerData.GetSfx()) // debug
             audioSource.mute = true;
 
         step = 0.0009f;
     }
 
     private void OnMouseDown() {
-        manager.gameManager.ActivateGoldMode();
+        GM.gameManager.ActivateGoldMode();
         Destroy(gameObject);
     }
 
@@ -27,7 +24,7 @@ public class GoldModeFace : MonoBehaviour
         transform.position = new Vector3(gameObject.transform.position.x + step, gameObject.transform.position.y, gameObject.transform.position.z);
         if (transform.position.x > 1.5f)
         {
-            manager.gameManager.CalculateNextGoldModeSpawn();
+            GM.gameManager.CalculateNextGoldModeSpawn();
             Destroy(gameObject);
         }
             

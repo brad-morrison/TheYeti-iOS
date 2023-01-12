@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeBar : MonoBehaviour
+public class LifeBar : TheYeti
 {
     public Audio audio;
     public float punchAmount;
@@ -17,11 +17,9 @@ public class LifeBar : MonoBehaviour
     float startScale;
     float scalePreGoldmode;
     public bool animate;
-    public GameManager manager;
 
     private void Start()
     {
-        audio = GameObject.Find("Audio").GetComponent<Audio>();
         animate = true;
         current = blue;
         flashing = false;
@@ -39,7 +37,7 @@ public class LifeBar : MonoBehaviour
 
     public void PunchScale()
     {
-        if (!manager.goldMode.goldMode)
+        if (!GM.gameManager.goldMode.goldMode)
         {
             if (transform.localScale.x + punchAmount > 0)
             {
@@ -61,7 +59,7 @@ public class LifeBar : MonoBehaviour
         // set scale of bar to start
         transform.localScale = new Vector3(startScale, transform.localScale.y, transform.localScale.z);
         // change speed of texture scroll
-        manager.lifeBar_ScrollSpeed = manager.lifeBar_ScrollSpeed * 2;
+        GM.gameManager.lifeBar_ScrollSpeed = GM.gameManager.lifeBar_ScrollSpeed * 2;
     }
 
     public void NormalMode()
@@ -69,38 +67,38 @@ public class LifeBar : MonoBehaviour
         goldFrame.SetActive(false);
         SetTexture(current);
         transform.localScale = new Vector3(scalePreGoldmode, transform.localScale.y, transform.localScale.z);
-        manager.lifeBar_ScrollSpeed = manager.lifeBar_ScrollSpeed / 2;
+        GM.gameManager.lifeBar_ScrollSpeed = GM.gameManager.lifeBar_ScrollSpeed / 2;
     }
 
     private void Update()
     {
         // scale by difficulty OR linearly if in goldmode
-        if (!manager.goldMode.goldMode && animate)
+        if (!GM.gameManager.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), manager.difficultyMultiplier * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.difficultyMultiplier * Time.deltaTime);
         }
-        else if (manager.goldMode.goldMode && animate)
+        else if (GM.gameManager.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), manager.goldMode.goldModeLength * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.goldMode.goldModeLength * Time.deltaTime);
         }
         
         // turn red if below certain size
         if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
-        if (!flashing && !manager.goldMode.goldMode) { SetTexture(current); }
+        if (!flashing && !GM.gameManager.goldMode.goldMode) { SetTexture(current); }
 
         // when bar reaches 0
         // extra check to only run if gameover is false to avoid infinite loop
-        if (transform.localScale.x > 2.944f && !manager.gameOver.gameOver)
+        if (transform.localScale.x > 2.944f && !GM.gameManager.gameOver.gameOver)
         {
-            if (manager.goldMode.goldMode)
+            if (GM.gameManager.goldMode.goldMode)
             {
-                manager.DeactivateGoldMode();
+                GM.gameManager.DeactivateGoldMode();
             }
             else
             {
-                if (!manager.noTimerDeath) // for debug
-                    manager.gameOver.SetGameOver();
+                if (!GM.gameManager.noTimerDeath) // for debug
+                    GM.gameManager.gameOver.SetGameOver();
             }
         }
     }

@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
-public class CostumeManager : MonoBehaviour {
-    public MasterManager master;
+public class CostumeManager : TheYeti {
     public GameObject yeti, nameText, scoreText, killsText;
     public GameObject unlockedText, lockedText;
     public GameObject leftButton, rightButton, selectButton, unlockAllButton;
@@ -19,18 +18,16 @@ public class CostumeManager : MonoBehaviour {
 
     private void Awake() {
 
-        // get master
-        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>(); 
-        master.SceneChanged();
+         GM.SceneChanged();
 
         // get score data
-        highScore = master.playerData.GetHighScore();
-        totalKills = master.playerData.GetKills();
+        highScore = GM.playerData.GetHighScore();
+        totalKills = GM.playerData.GetKills();
 
         // set to current costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-        currentCostume = costumesList[master.playerData.GetCostume()];
-        costumeIndex = master.playerData.GetCostume();
+        currentCostume = costumesList[GM.playerData.GetCostume()];
+        costumeIndex = GM.playerData.GetCostume();
         ShowCostume(currentCostume);
 
 
@@ -103,7 +100,7 @@ public class CostumeManager : MonoBehaviour {
 
     public void SetCostume() {
         // set playerpref
-        master.playerData.SetCostume(costumeIndex);
+        GM.playerData.SetCostume(costumeIndex);
     }
 
     public bool IsLocked(Costume costume) {

@@ -16,6 +16,7 @@ things to add for MVP release
 [#] make frenzy ui at start faster
 [#] add randomized blizzard turning on and off
 [ ] leaderboards
+[ ] switch pattern to singleton
 [ ] gold mode face sfx still playing when sfx off
 [ ] sfx not playing if only music switched off
 [ ] Change the haptics to be stronger

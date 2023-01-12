@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FrenzyMode : MonoBehaviour
+public class FrenzyMode : TheYeti
 {
-    public MasterManager master;
-    public GameManager manager;
     public bool frenzyMode;
     public int frenzyTokenCount;
     public int frenzyLength;
@@ -16,15 +14,9 @@ public class FrenzyMode : MonoBehaviour
     public UnityEvent UI_finished = new UnityEvent();
     public UnityEvent<int> countdownTick;
 
-    private void Start()
-    {
-        master = GameObject.Find("MASTER_MANAGER").GetComponent<MasterManager>();
-        manager = transform.parent.GetComponent<GameManager>();
-    }
-
     public void FrenzyCheck()
     {
-        if (manager.hikers.hikers[0].GetComponent<Hiker>().frenzyTagged && !frenzyMode)
+        if (GM.gameManager.hikers.hikers[0].GetComponent<Hiker>().frenzyTagged && !frenzyMode)
         {
             frenzyTokenCount++;
             Instantiate(frenzyCounterPrefab);
@@ -35,10 +27,10 @@ public class FrenzyMode : MonoBehaviour
     {
         frenzyMode = true;
         frenzyUI.SetActive(true);
-        manager.allowInput = false;
-        master.audio.PlaySound(master.audio.frenzyStart1);
-        master.audio.PlaySound(master.audio.frenzyStart2);
-        master.audio.PlaySound(master.audio.goldModeStart);
+        GM.gameManager.allowInput = false;
+        GM.audio.PlaySound(GM.audio.frenzyStart1);
+        GM.audio.PlaySound(GM.audio.frenzyStart2);
+        GM.audio.PlaySound(GM.audio.goldModeStart);
     }
 
     public void StartFrenzyMode()
@@ -47,18 +39,18 @@ public class FrenzyMode : MonoBehaviour
         frenzyMode = true;
         StartCoroutine(FrenzyCountdown());
         frenzyUI.SetActive(false);
-        manager.yetiCharacter.GetComponent<SpriteRenderer>().color = Color.red;
-        manager.allowInput = true;
+        GM.gameManager.yetiCharacter.GetComponent<SpriteRenderer>().color = Color.red;
+        GM.gameManager.allowInput = true;
     }
 
     public void StopFrenzyMode()
     {
         Debug.Log("Frenzy mode ended");
-        manager.yetiCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+        GM.gameManager.yetiCharacter.GetComponent<SpriteRenderer>().color = Color.white;
         frenzyTokenCount = 0;
         frenzyMode = false;
         frenzyTokenCount = 0;
-        master.audio.PlaySound(master.audio.frenzyEnd);
+        GM.audio.PlaySound(GM.audio.frenzyEnd);
     }
 
     public IEnumerator FrenzyCountdown()
@@ -66,7 +58,7 @@ public class FrenzyMode : MonoBehaviour
         // wait until final 3 seconds
         yield return new WaitForSeconds(frenzyLength-3);
         // create timer ui object and start
-        GameObject timer = Instantiate(manager.timer);
+        GameObject timer = Instantiate(GM.gameManager.timer);
         timer.GetComponent<Timer>().StartCountdown(3);
         // continue timer
         yield return new WaitForSeconds(3);

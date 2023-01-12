@@ -5,17 +5,11 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.Events;
 
-public class Timer : MonoBehaviour
+public class Timer : TheYeti
 {
-    public Audio audio;
     public GameObject top, outline;
     public UnityEvent tick;
     public int _time;
-
-    private void Awake()
-    {
-        audio = GameObject.Find("Audio").GetComponent<Audio>();
-    }
 
     public void StartCountdown(int time)
     {
@@ -40,7 +34,7 @@ public class Timer : MonoBehaviour
             GetComponent<DOTweenAnimation>().DOPlayById("tick");
             GetComponent<DOTweenAnimation>().DORestartById("tick");
             // play audio
-            audio.PlaySound(audio.timerTick);
+            GM.audio.PlaySound(GM.audio.timerTick);
             // wait
             yield return new WaitForSeconds(1);
             

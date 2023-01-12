@@ -4,19 +4,18 @@ using UnityEngine;
 using TMPro;
 using HutongGames.PlayMaker;
 
-public class Yeti : MonoBehaviour {
+public class Yeti : TheYeti {
     
-    public GameManager manager;
     public float yetiPunchInterval; // 0.1
     public GameObject yeti, yeti_goldOutline;
     public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
     public Costume currentCostume;
 
     private void Start() {
-        
-        currentCostume = manager.costumesList[PlayerPrefs.GetInt("costume")];
+
+        currentCostume = GM.gameManager.costumesList[PlayerPrefs.GetInt("costume")];
         yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
-        manager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
+        GM.gameManager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
 
     public void SetSprite(string sprite) {

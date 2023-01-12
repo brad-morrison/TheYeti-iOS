@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerData: MonoBehaviour
+public class PlayerData: TheYeti
 {
-	public MasterManager master;
-
-    // data variables
+	// data variables
     public int highScore, totalKills;
     public int musicOn, sfxOn;
     public int purchasedAds, purchasedCostumes;
@@ -13,8 +11,6 @@ public class PlayerData: MonoBehaviour
 
 	void Start()
 	{
-        // get master
-        master = gameObject.transform.parent.GetComponent<MasterManager>();
         GetAllPrefs();
     }
 

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using DG.Tweening.Core.Easing;
 
-public class Audio : MonoBehaviour {
+public class Audio : TheYeti {
     public AudioSource source;
     // yeti sounds
     public AudioClip punchSmall, punchLarge;
@@ -16,16 +16,13 @@ public class Audio : MonoBehaviour {
     public AudioClip frenzyCounter, frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
     public AudioClip timerTick, timerLow;
     public AudioClip error, timer_warning;
-    public MasterManager master;
     public bool sfxOn;
 
     private void Start() {
 
-        source = gameObject.GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
 
-        // get master
-        master = transform.parent.GetComponent<MasterManager>();
-
+        /*
         // init music
         Music(master.playerData.GetMusic());
 
@@ -34,9 +31,10 @@ public class Audio : MonoBehaviour {
             sfxOn = true;
         else
             sfxOn = false;
+        */
 
-        source = GetComponent<AudioSource>();
-        
+
+
     }
 
     public void Music(bool value)

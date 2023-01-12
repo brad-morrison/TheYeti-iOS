@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class Hikers : MonoBehaviour {
-    public GameManager manager;
+public class Hikers : TheYeti {
     // gameplay variables
     public float hikerOffsetX; // 0.22
     public float hikerOffsetY; // 0.3
@@ -70,8 +69,8 @@ public class Hikers : MonoBehaviour {
         }
 
         // tag with frenzy roll
-        int frenzyRoll = Random.Range(1, manager.frenzyHikerChance);
-        if (frenzyRoll == 1 && !manager.goldMode.goldMode && !manager.frenzyMode.frenzyMode && manager.allowFrenzyMode)
+        int frenzyRoll = Random.Range(1, GM.gameManager.frenzyHikerChance);
+        if (frenzyRoll == 1 && !GM.gameManager.goldMode.goldMode && !GM.gameManager.frenzyMode.frenzyMode && GM.gameManager.allowFrenzyMode)
         {
             newHiker.GetComponent<Hiker>().frenzyTagged = true;
             newHiker.GetComponent<SpriteRenderer>().color = Color.red;
