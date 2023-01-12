@@ -3,73 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.SocialPlatforms.GameCenter;
-using UnityEngine.SocialPlatforms.Impl;
+using SA.iOS.GameKit;
 
 public class Leaderboards : TheYeti
 {
-    private ILeaderboard leaderboard;
-    private ILeaderboard leaderboard2;
-    private string leaderboard_id_bestscore = "bestscore";
-    private string leaderboard_id_kills = "kills";
-    public bool userAuthenticated;
-
-    void Start()
+    private void Start()
     {
-
-        // Authenticate user first
-        AuthenticateUser();
-
-        // create social leaderboard
-        leaderboard = Social.CreateLeaderboard();
-        leaderboard.id = leaderboard_id_bestscore;
-        leaderboard.LoadScores(result =>
-        {
-            Debug.Log("Received " + leaderboard.scores.Length + " scores");
-            foreach (IScore score in leaderboard.scores)
-                Debug.Log(score);
-        });
-
-        // create social leaderboard
-        leaderboard2 = Social.CreateLeaderboard();
-        leaderboard2.id = leaderboard_id_kills;
-        leaderboard2.LoadScores(result =>
-        {
-            Debug.Log("Received " + leaderboard2.scores.Length + " scores");
-            foreach (IScore score in leaderboard2.scores)
-                Debug.Log(score);
-        });
+        StartCoroutine(AuthenticatePlayer());
     }
 
-    public void AuthenticateUser()
+    IEnumerator AuthenticatePlayer()
     {
-        Social.localUser.Authenticate(success => {
-            if (success)
+        bool done = false;
+
+        ISN_GKLocalPlayer.SetAuthenticateHandler(result => {
+            if (result.IsSucceeded)
             {
-                userAuthenticated = true;
-                Debug.Log("Authentication successful");
-                string userInfo = "Username: " + Social.localUser.userName +
-                    "\nUser ID: " + Social.localUser.id +
-                    "\nIsUnderage: " + Social.localUser.underage;
-                Debug.Log(userInfo);
+                Debug.Log("Authenticate is succeeded!");
+                var player = ISN_GKLocalPlayer.LocalPlayer;
+                Debug.Log($"player id: {player.PlayerID}");
+                Debug.Log($"player Alias: {player.Alias}");
+                Debug.Log($"player DisplayName: {player.DisplayName}");
+                Debug.Log($"player Authenticated: {player.Authenticated}");
+                Debug.Log($"player Underage: {player.Underage}");
+                player.GenerateIdentityVerificationSignatureWithCompletionHandler(signatureResult => {
+                    if (signatureResult.IsSucceeded)
+                    {
+                        Debug.Log($"signatureResult.PublicKeyUrl: {signatureResult.PublicKeyUrl}");
+                        Debug.Log($"signatureResult.Timestamp: {signatureResult.Timestamp}");
+                        Debug.Log($"signatureResult.Salt.Length: {signatureResult.Salt.Length}");
+                        Debug.Log($"signatureResult.Signature.Length: {signatureResult.Signature.Length}");
+                    }
+                    else
+                    {
+                        Debug.LogError($"IdentityVerificationSignature has failed: {signatureResult.Error.FullMessage}");
+                    }
+                });
+                done = true;
             }
             else
-                Debug.Log("Authentication failed");
+            {
+                Debug.LogError($"Authenticate is failed! Error with code: {result.Error.Code} and description: {result.Error.Message}");
+                done = true;
+            }
         });
+
+        yield return new WaitWhile(() => done == false);
     }
 
-    public void ReportScore(long score, string leaderboardID)
+    public void ShowLeaderboards()
     {
-        Debug.Log("Reporting score " + score + " on leaderboard " + leaderboardID);
-        Social.ReportScore(score, leaderboardID, success => {
-            Debug.Log(success ? "Reported score successfully" : "Failed to report score");
-        });
-    }
-
-    public void OpenLeaderboard()
-    {
-        if (userAuthenticated)
-            Social.ShowLeaderboardUI();
-        else
-            AuthenticateUser();
+        ISN_GKGameCenterViewController viewController = new ISN_GKGameCenterViewController();
+        viewController.ViewState = ISN_GKGameCenterViewControllerState.Leaderboards;
+        viewController.Show();
     }
 }

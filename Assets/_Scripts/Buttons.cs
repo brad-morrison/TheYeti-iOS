@@ -83,7 +83,7 @@ public class Buttons : TheYeti
                 break;
 
             case "leaderboard":
-                GM.leaderboards.OpenLeaderboard();
+                GM.leaderboards.ShowLeaderboards();
                 break;
 
             default:
