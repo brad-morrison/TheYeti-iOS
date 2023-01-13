@@ -8,19 +8,22 @@ public class GoldMode : TheYeti {
     public int goldModeMultiplier;
     // gameobjects & prefabs
     public GameObject goldMode_announceUI;
-    public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierPop;
+    public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierAnnounce_shadow, multiplierPop;
 
     public void GoldModeAnnounce() {
         // roll and set gold multiplier
         goldModeMultiplier = GoldMultiplierRoll();
         // set multiplier text
         multiplierAnnounce.GetComponent<TextMeshPro>().text = "x" + goldModeMultiplier.ToString();
-        
+        multiplierAnnounce_shadow.GetComponent<TextMeshPro>().text = "x" + goldModeMultiplier.ToString();
+
         goldMode_announceUI.SetActive(true);
         GM.gameManager.lifebar.animate = false;
         GM.audio.PlaySound(GM.audio.goldModeStart);
         // turn off input
         GM.gameManager.allowInput = false;
+        // sky
+        GM.gameManager.sky.GoldModeSky(true);
     }
 
     public void ActivateGoldMode() {
@@ -52,6 +55,8 @@ public class GoldMode : TheYeti {
         GM.audio.PlaySound(GM.audio.goldModeEnd);
         // calc next goldmode spawn
         GM.gameManager.CalculateNextGoldModeSpawn();
+        // sky
+        GM.gameManager.sky.GoldModeSky(false);
     }
 
     public int GoldMultiplierRoll() {

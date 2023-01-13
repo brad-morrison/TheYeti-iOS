@@ -26,6 +26,8 @@ public class GameManager : TheYeti {
     public GameOver gameOver;
     public Particles particles;
     public FrenzyMode frenzyMode;
+    public Weather weather;
+    public Sky sky;
     // gameplay
     [Header("Gameplay")]
     public int frenzyHikerChance; // large number = less chance
@@ -58,6 +60,7 @@ public class GameManager : TheYeti {
     public GameObject fallingBones;
     public bool fallingBonesIsOn;
     public GameObject newHighScore_text;
+    public GameObject smashLeft, smashRight;
     // events
     public UnityEvent scoreBounceSmall = new UnityEvent();
     public UnityEvent scoreBounceBig = new UnityEvent();
@@ -85,6 +88,9 @@ public class GameManager : TheYeti {
 
     private void Start()
     {
+        // setting score to test game centre
+        totalKills_counter = 5000;
+
         // set debug data
         if (Application.isEditor)
         {
@@ -135,11 +141,18 @@ public class GameManager : TheYeti {
         else
             yeti.SetSprite(side);
 
+        /*
+        if (frenzyMode.frenzyMode)
+            cameraShake.Invoke();
+        */
+
+        SmashEffect(side);
+
         if (IsPlayerCorrect(side))
         {
             totalKills_counter++;
             GM.audio.PlaySound(GM.audio.punchSmall);
-            SetScore(AddToScore());
+            AddToScore();
             SetScoreUI();
             lifebar.PunchScale();
             // frenzy check
@@ -158,7 +171,10 @@ public class GameManager : TheYeti {
         else
         {
             if (!noTouchDeath) // for debug
+            {
+                HandleFinalScores();
                 gameOver.SetGameOver();
+            }
         }
     }
 
@@ -176,35 +192,52 @@ public class GameManager : TheYeti {
         return false;
     }
 
-    public int AddToScore() {
-        if (goldMode.goldMode) {
-            return goldMode.goldModeMultiplier;
-        } else {
-            return 1;
-        }
-    }
+    public void AddToScore() {
+        int amount;
 
-    public void SetScore(int amount)
-    {
-        score = score + amount;
+        // amount to add to score depending on mode
+        if (goldMode.goldMode)
+            amount = goldMode.goldModeMultiplier;
+        else 
+            amount = 1;
 
+        // set score
+        score += amount;
+
+        // check for new high score so that player can be alerted
         if (score > highScore)
         {
-            if (!newHighScore) // only get 1 high score per game
-                NewHighScore(score);
+            highScore = score;
+            AlertNewHighScore(); // this has no logic attached, just visual things for the player
         }
+
     }
 
-    public void NewHighScore(int score)
+    public void HandleFinalScores()
     {
-        //_newHighScore.Invoke();
-        newHighScore = true;
-        highScore = score;
-        StartCoroutine(FallingBonesFor(3.0f));
+        // high score
+        if (score > GM.playerData.GetHighScore())
+        {
+            newHighScore = true;
+            GM.playerData.SetHighScore(score);
+        }
+
+        // kills
+        int totalKills_final = GM.playerData.GetKills() + totalKills_counter;
+        GM.playerData.SetKills(totalKills_final);
+
+        // publish to leaderboards
+        GM.leaderboards.SendScores(GM.playerData.GetHighScore(), totalKills_final);
+    }
+
+
+    public void AlertNewHighScore()
+    {
+        // effects
+        StartCoroutine(FallingBonesFor(1.0f));
         newHighScore_text.SetActive(true);
         //audio.PlaySound(audio.high_score);
-        PlayerPrefs.SetInt("high_score", highScore);
-        PlayerPrefs.Save();
+        
     }
 
     public void DifficultyIncreaseCheck()
@@ -257,6 +290,21 @@ public class GameManager : TheYeti {
                 spawner.spawn = false;
         }
 
+    }
+
+    public void SmashEffect(string side)
+    {
+        if (frenzyMode.frenzyMode)
+        {
+            Instantiate(smashLeft);
+            Instantiate(smashRight);
+            return;
+        }
+
+        if (side == "left")
+            Instantiate(smashLeft);
+        else
+            Instantiate(smashRight);
     }
 
     public void SetScoreUI() {

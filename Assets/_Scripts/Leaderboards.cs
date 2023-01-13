@@ -57,4 +57,28 @@ public class Leaderboards : TheYeti
         viewController.ViewState = ISN_GKGameCenterViewControllerState.Leaderboards;
         viewController.Show();
     }
+
+    public void SendScores(int high, int kills)
+    {
+        ISN_GKScore scoreReporter1 = new ISN_GKScore("bestscore");
+        scoreReporter1.Value = high;
+        scoreReporter1.Context = 1;
+
+        ISN_GKScore scoreReporter2 = new ISN_GKScore("totalkills");
+        scoreReporter2.Value = kills;
+        scoreReporter2.Context = 1;
+
+        var scores = new List<ISN_GKScore>() { scoreReporter1, scoreReporter2 };
+
+        ISN_GKScore.ReportScores(scores, (result) => {
+            if (result.IsSucceeded)
+            {
+                Debug.Log("Score Report Success");
+            }
+            else
+            {
+                Debug.Log("Score Report failed! Code: " + result.Error.Code + " Message: " + result.Error.Message);
+            }
+        });
+    }
 }

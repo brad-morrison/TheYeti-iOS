@@ -31,6 +31,7 @@ public class FrenzyMode : TheYeti
         GM.audio.PlaySound(GM.audio.frenzyStart1);
         GM.audio.PlaySound(GM.audio.frenzyStart2);
         GM.audio.PlaySound(GM.audio.goldModeStart);
+        GM.gameManager.sky.FrenzyModeSky(true);
     }
 
     public void StartFrenzyMode()
@@ -51,6 +52,7 @@ public class FrenzyMode : TheYeti
         frenzyMode = false;
         frenzyTokenCount = 0;
         GM.audio.PlaySound(GM.audio.frenzyEnd);
+        GM.gameManager.sky.FrenzyModeSky(false);
     }
 
     public IEnumerator FrenzyCountdown()
@@ -59,7 +61,7 @@ public class FrenzyMode : TheYeti
         yield return new WaitForSeconds(frenzyLength-3);
         // create timer ui object and start
         GameObject timer = Instantiate(GM.gameManager.timer);
-        timer.GetComponent<Timer>().StartCountdown(3);
+        timer.GetComponent<Timer>().StartCountdown(6);
         // continue timer
         yield return new WaitForSeconds(3);
         StopFrenzyMode();

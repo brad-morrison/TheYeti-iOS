@@ -26,7 +26,7 @@ public class BoneSpawner : MonoBehaviour
 
     private void Start()
     {
-        
+        spawn = false;
         if (spawnRate != 0)
             StartCoroutine(SpawnIn());
     }

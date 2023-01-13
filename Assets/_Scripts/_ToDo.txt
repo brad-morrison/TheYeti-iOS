@@ -15,15 +15,20 @@ things to add for MVP release
 [#] center all UI
 [#] make frenzy ui at start faster
 [#] add randomized blizzard turning on and off
-[ ] leaderboards
-[ ] switch pattern to singleton
+[#] leaderboards
+[#] switch pattern to singleton
+[#] make sky go red in frenzy
+[#] make sky go gold in goldMode
+[#] make gold face move better
+[#] center all UI
+[#] add smashing particles
+[#] moving clouds on menu
+[#] turn off goldface at game over and frenzy mode
+[ ] screen shake at frenzymode
 [ ] gold mode face sfx still playing when sfx off
 [ ] sfx not playing if only music switched off
 [ ] Change the haptics to be stronger
-[ ] add smashing particles
-[ ] make sky go red in frenzy
 [ ] make sky go dark for storm
-[ ] center all UI
 [ ] make frenzy ui at start faster
 [ ] add bomb to frenzy hikers
 [ ] try adding some post process effects

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weather : MonoBehaviour
+public class Weather : TheYeti
 {
     public enum WeatherType
     {
@@ -19,7 +19,8 @@ public class Weather : MonoBehaviour
 
     void Start()
     {
-        RollForWeather();
+        //RollForWeather();
+        SetWeather(WeatherType.storm);
     }
 
     public void RollForWeather()
@@ -61,6 +62,8 @@ public class Weather : MonoBehaviour
 
     public void Storm()
     {
+        Debug.Log("calling storm");
         Instantiate(blizzard);
+        GM.gameManager.sky.StormSky();
     }
 }

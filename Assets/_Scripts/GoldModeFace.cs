@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class GoldModeFace : TheYeti
 {
-    float step;
     AudioSource audioSource;
 
     private void Start() {
 
         if (!GM.playerData.GetSfx()) // debug
             audioSource.mute = true;
-
-        step = 0.0009f;
     }
 
     private void OnMouseDown() {
@@ -21,13 +18,15 @@ public class GoldModeFace : TheYeti
     }
 
     private void Update() {
-        transform.position = new Vector3(gameObject.transform.position.x + step, gameObject.transform.position.y, gameObject.transform.position.z);
         if (transform.position.x > 1.5f)
         {
             GM.gameManager.CalculateNextGoldModeSpawn();
             Destroy(gameObject);
         }
-            
+
+        if (GM.gameManager.gameOver.gameOver || GM.gameManager.frenzyMode.frenzyMode)
+            Destroy(gameObject);
+
     }
 
     public IEnumerator KillAfter(float time)

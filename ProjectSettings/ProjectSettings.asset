@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 0
   companyName: Bradley Morrison
-  productName: Yeti 3.0
+  productName: The Yeti
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -162,7 +162,7 @@ PlayerSettings:
     Android: com.DefaultCompany.com.unity.template.mobile2D
     Lumin: com.DefaultCompany.com.unity.template.mobile2D
     Standalone: com.DefaultCompany.com.unity.template.mobile2D
-    iPhone: com.victoriuspanda.yeti-
+    iPhone: com.victoriuspanda.yeti
     tvOS: com.DefaultCompany.com.unity.template.mobile2D
   buildNumber:
     Standalone: 0
@@ -233,7 +233,7 @@ PlayerSettings:
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
-  appleDeveloperTeamID: 
+  appleDeveloperTeamID: 49GQP3E9CJ
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0

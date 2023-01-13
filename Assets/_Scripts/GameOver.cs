@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.Timeline;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameOver : TheYeti {
 
@@ -10,6 +11,7 @@ public class GameOver : TheYeti {
     public GameObject hiker, yeti, crown;
 
     public void SetGameOver() {
+
         gameOver = true;
         gameOver_UI.SetActive(true);
         GM.audio.PlaySound(GM.audio.gameOver);
