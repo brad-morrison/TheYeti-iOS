@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-//using UnityEngine.SocialPlatforms.GameCenter;
+using UnityEngine.SocialPlatforms.GameCenter;
 using SA.iOS.GameKit;
 
 public class Leaderboards : TheYeti
 {
-    public bool ios = false;
+    public bool ios = true;
 
     private void Start()
     {
