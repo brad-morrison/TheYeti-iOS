@@ -47,6 +47,9 @@ public class GameOver : TheYeti {
         }
     }
 
+    // Coroutines
+    //
+    
     IEnumerator NoHighScore() {
         GM.audio.PlaySoundAfter(GM.audio.pop, 1);
         yeti.GetComponent<SpriteRenderer>().sprite = GM.gameManager.yeti.currentCostume.dead;

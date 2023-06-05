@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls the Frenzy Mode counter interface
+// 
+
 public class FrenzyCounter : TheYeti
 {
     public GameObject face1, face2, face3;

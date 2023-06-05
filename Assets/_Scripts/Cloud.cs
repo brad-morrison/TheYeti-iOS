@@ -6,12 +6,6 @@ public class Cloud : MonoBehaviour
 {
     public float step;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Update()
     {
         // move cloud every frame

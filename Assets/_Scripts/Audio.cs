@@ -19,41 +19,32 @@ public class Audio : TheYeti {
     public bool sfxOn;
 
     private void Start() {
-
         source = GetComponent<AudioSource>();
-
-        /*
-        // init music
-        Music(master.playerData.GetMusic());
-
-        // check if player has sfx on
-        if (master.playerData.GetSfx())
-            sfxOn = true;
-        else
-            sfxOn = false;
-        */
-
-
-
     }
 
+    // set music on or off
     public void Music(bool value)
     {
         source.mute = !value;
     }
 
+    // play sound once
     public void PlaySound(AudioClip sound) {
         if (sfxOn)
             source.PlayOneShot(sound);
     }
 
+    // play sound after delay in seconds
     public void PlaySoundAfter(AudioClip sound, float delay) {
         if (sfxOn)
             StartCoroutine(_PlaySoundAfter(sound, delay));
     }
 
-    IEnumerator _PlaySoundAfter(AudioClip sound, float delay) {
+    
+    // Coroutines
+    // ----------
 
+    IEnumerator _PlaySoundAfter(AudioClip sound, float delay) {
         yield return new WaitForSeconds(delay);
         if (sfxOn)
             source.PlayOneShot(sound);

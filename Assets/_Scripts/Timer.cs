@@ -5,6 +5,9 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.Events;
 
+// Controls UI for countdown timer
+//
+
 public class Timer : TheYeti
 {
     public GameObject top, outline;

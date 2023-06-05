@@ -7734,6 +7734,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1028917828
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10225,7 +10226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4306947216152218448, guid: 4b92d117adfa9466394fa14b8b048895, type: 3}
       propertyPath: spawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306947216152218448, guid: 4b92d117adfa9466394fa14b8b048895, type: 3}
       propertyPath: aliveTime
@@ -10590,6 +10591,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1370254366
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11375,7 +11377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4306947216152218448, guid: 4b92d117adfa9466394fa14b8b048895, type: 3}
       propertyPath: spawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306947216152218448, guid: 4b92d117adfa9466394fa14b8b048895, type: 3}
       propertyPath: collide

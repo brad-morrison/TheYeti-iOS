@@ -7,14 +7,16 @@ using SA.iOS.GameKit;
 
 public class Leaderboards : TheYeti
 {
-    public bool ios = true;
+    public bool ios = true; // is app playing on iOS?
 
     private void Start()
     {
+        // Authenticate player
         if (ios)
             StartCoroutine(AuthenticatePlayer());
     }
 
+    // Tries to authenticate the user through Game Center on iOS
     IEnumerator AuthenticatePlayer()
     {
         bool done = false;
@@ -54,6 +56,7 @@ public class Leaderboards : TheYeti
         yield return new WaitWhile(() => done == false);
     }
 
+    // Open Game Centre Leaderboard UI in iOS
     public void ShowLeaderboards()
     {
         if (ios)
@@ -64,6 +67,7 @@ public class Leaderboards : TheYeti
         }
     }
 
+    // Sends scores to Game Centre servers
     public void SendScores(int high, int kills)
     {
         if (ios)

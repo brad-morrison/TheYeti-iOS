@@ -73,6 +73,12 @@ public class GameControls : TheYeti
             PlayerPrefs.Save();
         }
 
+        // for debug - start frenzy mode
+        if (Input.GetKeyDown("f") && GM.gameManager.allowInput)
+        {
+            GM.gameManager.frenzyMode.StartFrenzyTransition();
+        }
+
         // TOUCH CONTROLS
 
         if (Input.GetMouseButtonUp(0) && GM.gameManager.allowInput)

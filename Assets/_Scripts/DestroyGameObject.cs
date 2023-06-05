@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Utility class to destroy any object
 public class DestroyGameObject : MonoBehaviour
 {
 	public void DestroySelf() {

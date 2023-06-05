@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "\"**/*.meta\": true": true,
+        "**/*.meta": true
+    }
+}

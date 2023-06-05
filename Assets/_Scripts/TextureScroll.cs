@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Scrolls the texture on the lifebar object
+//
+
 public class TextureScroll : TheYeti
 {
     Renderer renderer;
     public bool animate;
 
-    // Start is called before the first frame update
     void Start()
     {
         renderer = gameObject.GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float offset = Time.time * GM.gameManager.lifeBar_ScrollSpeed;

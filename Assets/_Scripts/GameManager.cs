@@ -24,7 +24,7 @@ public class GameManager : TheYeti {
     public Yeti yeti;
     public GoldMode goldMode;
     public GameOver gameOver;
-    public Particles particles;
+    //public Particles particles;
     public FrenzyMode frenzyMode;
     public Weather weather;
     public Sky sky;

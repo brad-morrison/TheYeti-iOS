@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Controller for Frenzy Mode
+//
+
 public class FrenzyMode : TheYeti
 {
     public bool frenzyMode;
@@ -61,7 +64,7 @@ public class FrenzyMode : TheYeti
         yield return new WaitForSeconds(frenzyLength-3);
         // create timer ui object and start
         GameObject timer = Instantiate(GM.gameManager.timer);
-        timer.GetComponent<Timer>().StartCountdown(6);
+        timer.GetComponent<Timer>().StartCountdown(3);
         // continue timer
         yield return new WaitForSeconds(3);
         StopFrenzyMode();

@@ -26,7 +26,6 @@ public class BoneSpawner : MonoBehaviour
 
     private void Start()
     {
-        spawn = false;
         if (spawnRate != 0)
             StartCoroutine(SpawnIn());
     }
@@ -79,6 +78,9 @@ public class BoneSpawner : MonoBehaviour
         obj.transform.parent = gameObject.transform;
     }
 
+    // Coroutines
+    // ----------
+    
     public IEnumerator SpawnIn()
     {
         yield return new WaitForSeconds(1/spawnRate);
