@@ -9,7 +9,7 @@ public class PlayerData: TheYeti
     public int purchasedAds, purchasedCostumes;
     public int currentCostume;
 
-	void Start()
+	void Awake()
 	{
         GetAllPrefs();
     }

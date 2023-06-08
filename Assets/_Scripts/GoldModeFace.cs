@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GoldModeFace : TheYeti
 {
-    AudioSource audioSource;
+    public AudioSource audioSource;
 
     private void Start() {
-
+        audioSource = GetComponent<AudioSource>();
         if (!GM.playerData.GetSfx()) // debug
             audioSource.mute = true;
     }

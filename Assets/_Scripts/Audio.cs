@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 using DG.Tweening.Core.Easing;
 
 public class Audio : TheYeti {
-    public AudioSource source;
+    // two audio sources
+    public AudioSource source_music, source_sfx;
     // yeti sounds
     public AudioClip punchSmall, punchLarge;
     // game event sounds
@@ -18,20 +19,30 @@ public class Audio : TheYeti {
     public AudioClip error, timer_warning;
     public bool sfxOn;
 
-    private void Start() {
-        source = GetComponent<AudioSource>();
+    public void Start() {
+        Debug.Log("started audio script");
+        Music(GM.playerData.GetMusic());
+        if (GM.playerData.sfxOn == 1)
+        {
+            sfxOn = true;
+        }
+        else
+        {
+            sfxOn = false;
+        }
     }
 
     // set music on or off
     public void Music(bool value)
     {
-        source.mute = !value;
+        Debug.Log("turning music " + value);
+        source_music.mute = !value;
     }
 
     // play sound once
     public void PlaySound(AudioClip sound) {
         if (sfxOn)
-            source.PlayOneShot(sound);
+            source_sfx.PlayOneShot(sound);
     }
 
     // play sound after delay in seconds
@@ -47,6 +58,6 @@ public class Audio : TheYeti {
     IEnumerator _PlaySoundAfter(AudioClip sound, float delay) {
         yield return new WaitForSeconds(delay);
         if (sfxOn)
-            source.PlayOneShot(sound);
+            source_sfx.PlayOneShot(sound);
     }
 }

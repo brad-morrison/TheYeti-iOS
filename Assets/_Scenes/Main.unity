@@ -1861,7 +1861,7 @@ MonoBehaviour:
   on: {fileID: -8761496183629611704, guid: bdb4fe5b2a34249b980245886daef5f3, type: 3}
   on_inActive: {fileID: 0}
   off_inActive: {fileID: 0}
-  function: Menu
+  function: leaderboard
   pressActive: 0
   active: 1
 --- !u!61 &408114069
@@ -10065,7 +10065,6 @@ MonoBehaviour:
   yeti: {fileID: 1698079764}
   goldMode: {fileID: 325891824}
   gameOver: {fileID: 174863982}
-  particles: {fileID: 1075519576}
   frenzyMode: {fileID: 948941191}
   weather: {fileID: 2052500925}
   sky: {fileID: 1897536636}

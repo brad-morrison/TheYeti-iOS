@@ -26,17 +26,17 @@ Target for release 20th May 2023
 [#] add smashing particles
 [#] moving clouds on menu
 [#] turn off goldface at game over and frenzy mode
-[ ] screen shake at frenzymode
-[ ] fix frenzy countdown
-[ ] gold mode face sfx still playing when sfx off
-[ ] sfx not playing if only music switched off
+[x] screen shake at frenzymode
+[x] fix frenzy countdown
+[x] gold mode face sfx still playing when sfx off
+[x] sfx not playing if only music switched off
 [ ] Change the haptics to be stronger
 [ ] make sky go dark for storm
-[ ] make frenzy ui at start faster
-[ ] add bomb to frenzy hikers
+[x] make frenzy ui at start faster
+[x] add bomb to frenzy hikers
 [ ] try adding some post process effects
 [ ] quick tutorial
-[ ] hook up leaderboard button at game over screen (or replace with menu button)
+[x] hook up leaderboard button at game over screen (or replace with menu button)
 
 ---- Just before release ----
 [ ] check that high scores and sound settings are working

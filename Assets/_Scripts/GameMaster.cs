@@ -16,21 +16,21 @@ public class TheYeti : MonoBehaviour
 // singleton class
 public class GameMaster : MonoBehaviour
 {
+    public PlayerData playerData;
     public Audio audio;
     public Buttons buttons;
-    public PlayerData playerData;
     public Leaderboards leaderboards;
     //
     public MainMenu mainMenu;
     public GameManager gameManager;
     public CostumeManager costumeManager;
 
-    void Start()
+    void Awake()
     {
         // refs
+        playerData = GetComponentInChildren<PlayerData>();
         audio = GetComponentInChildren<Audio>();
         buttons = GetComponentInChildren<Buttons>();
-        playerData = GetComponentInChildren<PlayerData>();
         leaderboards = GetComponentInChildren<Leaderboards>();
         // scene refs
 
