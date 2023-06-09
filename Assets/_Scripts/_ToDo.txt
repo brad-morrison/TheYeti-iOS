@@ -36,10 +36,14 @@ Target for release 20th May 2023
 [x] quick tutorial
 [x] hook up leaderboard button at game over screen (or replace with menu button)
 [x] rate button
-[ ] fix tutorial arrow
-[ ] only let user click on correct side in tutorial
-[ ] pause timer while in tutorial
-[ ] freeze goldmode when in tutorial
+[x] fix tutorial arrow
+[x] only let user click on correct side in tutorial
+[x] pause timer while in tutorial
+[x] freeze goldmode when in tutorial
+[x] make all gameplay control variables be accessed from single script for easy tweaking
+[x] remove in-app purchase buttons for now
+[x] add gold mode text to gold lifebar
+[x] make sure frenzy mode ui announce stops timer 
 
 
 ---- Just before release ----
@@ -49,6 +53,8 @@ Target for release 20th May 2023
 
 things to add for next version release
 
+[ ] better background
+[ ] seperate tutorial for gold mode and frenzy mode
 [ ] hook up socials
 [ ] re-add haptic feedbacks
 [ ] ads

@@ -105,6 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &929374126585526806
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &929374126585526804
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +427,6 @@ MonoBehaviour:
   face1: {fileID: 929374128026969887}
   face2: {fileID: 929374126715938803}
   face3: {fileID: 929374126569057478}
-  master: {fileID: 0}
 --- !u!1 &929374126715938803
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +532,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &929374128026969887
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +639,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &929374128026969875
 MonoBehaviour:
   m_ObjectHideFlags: 0

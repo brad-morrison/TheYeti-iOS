@@ -20,6 +20,7 @@ public class GameManager : TheYeti {
     public float deviceScreenWidth;
     public float deviceScreenHeight;
     // scripts
+    public GameplayVariables gameplayVariables;
     public Hikers hikers;
     public Yeti yeti;
     public GoldMode goldMode;
@@ -29,18 +30,14 @@ public class GameManager : TheYeti {
     public FrenzyMode frenzyMode;
     public Weather weather;
     public Sky sky;
-    // gameplay
-    [Header("Gameplay")]
-    public int frenzyHikerChance; // large number = less chance
-    public float goldModeWaitTime_min; // min wait time for face spawn
-    public float goldModeWaitTime_max; // max wait time for face spawn
+
     [Header("")]
     // model variables
     public int score;
     public int highScore;
     public int totalKills_counter;
     public int totalKills;
-    public float difficultyMultiplier;
+    public float difficulty;
     // ui
     public GameObject text_score;
     public GameObject finalScore;
@@ -90,8 +87,6 @@ public class GameManager : TheYeti {
 
     private void Start()
     {
-        
-
         // setting score to test game centre
         totalKills_counter = 5000;
 
@@ -115,10 +110,13 @@ public class GameManager : TheYeti {
         FallingBones(false);
 
         // check for tutorial
-        if (GM.playerData.timesPlayed == 0)
+        if (GM.playerData.timesPlayed > 0)
         {
             tutorial.ActivateTutorial();
         }
+
+        // set difficulty
+        difficulty = gameplayVariables.baseDifficulty;
     }
 
     public void HandleInput(string command) {
@@ -254,10 +252,8 @@ public class GameManager : TheYeti {
         if (score % 10 == 0)
         {
             // ends in 0
-            difficultyMultiplier += 0.02f;
-            lifeBar_ScrollSpeed -= 0.1f;
-
-            print(difficultyMultiplier);
+            difficulty += gameplayVariables.difficultyIncreaseStep;
+            lifeBar_ScrollSpeed -= 0.1f; // controls speed of the scrolling animation, not speed of shrinkage
         }
         else
         {
@@ -316,6 +312,11 @@ public class GameManager : TheYeti {
             Instantiate(smashRight);
     }
 
+    public void LifebarState(bool value)
+    {
+        lifebar.animate = value;
+    }
+
     public void SetScoreUI() {
         text_score.GetComponent<TextMeshPro>().text = score == 0 ? "o" : score.ToString();
     }
@@ -323,7 +324,7 @@ public class GameManager : TheYeti {
     public void CalculateNextGoldModeSpawn()
     {
         // choose a random time to wait until the next gold mode
-        float time = Random.Range(goldModeWaitTime_min, goldModeWaitTime_max);
+        float time = Random.Range(gameplayVariables.goldModeWaitTime_min, gameplayVariables.goldModeWaitTime_max);
         // call the coroutine
         StartCoroutine(GoldModeFaceCountdown(time));
     }

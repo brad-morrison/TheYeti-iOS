@@ -69,7 +69,7 @@ public class Hikers : TheYeti {
         }
 
         // tag with frenzy roll
-        int frenzyRoll = Random.Range(1, GM.gameManager.frenzyHikerChance);
+        int frenzyRoll = Random.Range(1, GM.gameManager.gameplayVariables.frenzyHikerChance);
         if (frenzyRoll == 1 && !GM.gameManager.goldMode.goldMode && !GM.gameManager.frenzyMode.frenzyMode && GM.gameManager.allowFrenzyMode)
         {
             newHiker.GetComponent<Hiker>().frenzyTagged = true;

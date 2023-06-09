@@ -75,7 +75,7 @@ public class LifeBar : TheYeti
         // scale by difficulty OR linearly if in goldmode
         if (!GM.gameManager.goldMode.goldMode && animate)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.difficultyMultiplier * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.difficulty * Time.deltaTime); ;
         }
         else if (GM.gameManager.goldMode.goldMode && animate)
         {

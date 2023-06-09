@@ -30,6 +30,7 @@ public class FrenzyMode : TheYeti
     {
         frenzyMode = true;
         frenzyUI.SetActive(true);
+        GM.gameManager.LifebarState(false); // pause lifebar
         GM.gameManager.allowInput = false;
         GM.audio.PlaySound(GM.audio.frenzyStart1);
         GM.audio.PlaySound(GM.audio.frenzyStart2);
@@ -40,6 +41,7 @@ public class FrenzyMode : TheYeti
     public void StartFrenzyMode()
     {
         Debug.Log("Frenzy mode started");
+        GM.gameManager.LifebarState(true); // restart lifebar
         frenzyMode = true;
         StartCoroutine(FrenzyCountdown());
         frenzyUI.SetActive(false);
@@ -68,5 +70,13 @@ public class FrenzyMode : TheYeti
         // continue timer
         yield return new WaitForSeconds(3);
         StopFrenzyMode();
+    }
+
+    public void HideAllUI()
+    {
+        frenzyCounterPrefab.SetActive(false);
+        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face1.SetActive(false);
+        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face2.SetActive(false);
+        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face3.SetActive(false);
     }
 }

@@ -17,6 +17,7 @@ public class GameOver : TheYeti {
         GM.audio.PlaySound(GM.audio.gameOver);
         GM.audio.PlaySoundAfter(GM.audio.hit, 1.1f);
         GM.gameManager.isGameOver = true;
+        GM.gameManager.frenzyMode.HideAllUI();
         // setkills
         int totalKills = GM.playerData.GetKills();
         GM.playerData.SetKills(totalKills + GM.gameManager.totalKills_counter);

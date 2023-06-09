@@ -17,7 +17,7 @@ public class TextureScroll : TheYeti
 
     void Update()
     {
-        float offset = Time.time * GM.gameManager.lifeBar_ScrollSpeed;
+        float offset = Time.time * -GM.gameManager.difficulty;
         renderer.material.SetTextureOffset("_MainTex", new Vector2(offset, 0));
     }
 }
