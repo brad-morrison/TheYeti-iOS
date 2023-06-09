@@ -36,6 +36,9 @@ public class CostumeManager : TheYeti {
         
 
         RefreshButtons();
+
+        // animate yeti
+        StartCoroutine(YetiAnimate());
     }
 
     public void NextCostume() {
@@ -98,9 +101,19 @@ public class CostumeManager : TheYeti {
         } 
     }
 
-    public void SetCostume() {
-        // set playerpref
-        GM.playerData.SetCostume(costumeIndex);
+    public bool SetCostume() {
+
+        if (!IsLocked(currentCostume))
+        {
+            // set player pref
+            GM.playerData.SetCostume(costumeIndex);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool IsLocked(Costume costume) {
@@ -130,6 +143,15 @@ public class CostumeManager : TheYeti {
         }
     }
 
-    
+    public IEnumerator YetiAnimate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);
+            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+            yield return new WaitForSeconds(0.3f);
+            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+        }
+    }
 
 }

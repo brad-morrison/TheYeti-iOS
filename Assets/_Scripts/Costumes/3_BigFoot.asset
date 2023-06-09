@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3_BigFoot
   m_EditorClassIdentifier: 
   name: Big Foot
-  best: 200
+  best: 150
   kills: 200
   both: {fileID: -796068947, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -189548390, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

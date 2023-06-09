@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 6_CaptainFuzz
   m_EditorClassIdentifier: 
   name: Captain Fuzz
-  best: 500
-  kills: 500
+  best: 300
+  kills: 1200
   both: {fileID: -1374332565, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -1815840452, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 277494064, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

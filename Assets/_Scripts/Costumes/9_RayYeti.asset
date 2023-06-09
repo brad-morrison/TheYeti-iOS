@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 9_RayYeti
   m_EditorClassIdentifier: 
   name: Ray Yeti
-  best: 800
-  kills: 800
+  best: 420
+  kills: 2500
   both: {fileID: 215956161, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 948951387, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -393505035, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

@@ -11,6 +11,7 @@ public class FrenzyCounter : TheYeti
 
     private void Start()
     {
+        print("frenzy counter created");
         ActivateFaces();
         StartCoroutine(DestroyAfter());
     }
@@ -52,5 +53,12 @@ public class FrenzyCounter : TheYeti
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+    }
+
+    public void HideCounters()
+    {
+        face1.active = false;
+        face2.active = false;
+        face3.active = false;
     }
 }

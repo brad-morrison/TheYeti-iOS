@@ -43,7 +43,13 @@ Target for release 20th May 2023
 [x] make all gameplay control variables be accessed from single script for easy tweaking
 [x] remove in-app purchase buttons for now
 [x] add gold mode text to gold lifebar
-[x] make sure frenzy mode ui announce stops timer 
+[x] make sure frenzy mode ui announce stops timer
+[x] fix sailor costume clipping
+[x] loop music
+[x] add kill count to gameover screen
+[x] make costumes animate on costume screen
+[x] fix kill counter issue
+[ ] frenzy mode not working
 
 
 ---- Just before release ----

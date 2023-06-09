@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 16_Vintage
   m_EditorClassIdentifier: 
   name: Vintage Yeti
-  best: 1500
-  kills: 1500
+  best: 560
+  kills: 6500
   both: {fileID: -916101019, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 1479518809, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 295872086, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

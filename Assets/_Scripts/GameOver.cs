@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameOver : TheYeti {
 
     public bool gameOver;
-    public GameObject gameOver_UI, finalScoreLabel, highScoreLabel, newHighScoreLabel;
+    public GameObject gameOver_UI, finalScoreLabel, highScoreLabel, newHighScoreLabel, killsLabel;
     public GameObject hiker, yeti, crown;
 
     public void SetGameOver() {
@@ -17,10 +17,7 @@ public class GameOver : TheYeti {
         GM.audio.PlaySound(GM.audio.gameOver);
         GM.audio.PlaySoundAfter(GM.audio.hit, 1.1f);
         GM.gameManager.isGameOver = true;
-        GM.gameManager.frenzyMode.HideAllUI();
-        // setkills
-        int totalKills = GM.playerData.GetKills();
-        GM.playerData.SetKills(totalKills + GM.gameManager.totalKills_counter);
+        GM.gameManager.frenzyMode.HideAllUI(true);
         
 
         // switch on high score items if true
@@ -31,12 +28,15 @@ public class GameOver : TheYeti {
         SetScoreUI();
         GM.gameManager.allowInput = false;
         GM.gameManager.DisableAllAnimations();
+
+        GM.gameManager.frenzyMode.HideAllUI(true);
     }
 
     public void SetScoreUI() {
         // if 0 then use the letter 'o' instead, 0 looks like an 8 with chosen font
         finalScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.score == 0 ? "o" : GM.gameManager.score.ToString();
         highScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.highScore == 0 ? "o" : GM.gameManager.highScore.ToString();
+        killsLabel.GetComponent<TextMeshPro>().text = GM.playerData.GetKills() == 0 ? "o" : GM.playerData.GetKills().ToString();
     }
 
     public void ChangeSprites() {

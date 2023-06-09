@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 5_Ghost
   m_EditorClassIdentifier: 
   name: Ghost Yeti
-  best: 400
-  kills: 400
+  best: 250
+  kills: 800
   both: {fileID: 1124944325, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -1206791685, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 386590705, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

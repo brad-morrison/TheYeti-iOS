@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 11_Wonka
   m_EditorClassIdentifier: 
   name: Yeti Wonka
-  best: 1000
-  kills: 1000
+  best: 460
+  kills: 3500
   both: {fileID: 1614800756, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -1538736577, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -482063608, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

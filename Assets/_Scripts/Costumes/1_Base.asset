@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1_Base
   m_EditorClassIdentifier: 
   name: Yeti
-  best: -1
-  kills: -1
+  best: 0
+  kills: 0
   both: {fileID: 930950972, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -535560384, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -581324784, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

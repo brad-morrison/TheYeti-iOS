@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 4_DrFrog
   m_EditorClassIdentifier: 
   name: Dr Frog
-  best: 300
-  kills: 300
+  best: 200
+  kills: 500
   both: {fileID: -1605027818, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -568980932, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 1359354621, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

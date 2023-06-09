@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 12_Wizard
   m_EditorClassIdentifier: 
   name: Wizard
-  best: 1100
-  kills: 1100
+  best: 480
+  kills: 4000
   both: {fileID: 1563805635, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 661772060, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -1465824565, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

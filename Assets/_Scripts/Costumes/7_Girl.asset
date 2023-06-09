@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 7_Girl
   m_EditorClassIdentifier: 
   name: Yeti Girl
-  best: 600
-  kills: 600
+  best: 350
+  kills: 1500
   both: {fileID: 1467418482, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -1235735257, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -628260061, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

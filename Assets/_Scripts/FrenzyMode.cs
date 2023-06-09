@@ -17,17 +17,24 @@ public class FrenzyMode : TheYeti
     public UnityEvent UI_finished = new UnityEvent();
     public UnityEvent<int> countdownTick;
 
+    private void Start()
+    {
+        HideAllUI(false);
+    }
+
     public void FrenzyCheck()
     {
         if (GM.gameManager.hikers.hikers[0].GetComponent<Hiker>().frenzyTagged && !frenzyMode)
         {
             frenzyTokenCount++;
             Instantiate(frenzyCounterPrefab);
+            print("frenzy check true");
         }
     }
 
     public void StartFrenzyTransition()
     {
+        print("frenzy transition started");
         frenzyMode = true;
         frenzyUI.SetActive(true);
         GM.gameManager.LifebarState(false); // pause lifebar
@@ -72,11 +79,9 @@ public class FrenzyMode : TheYeti
         StopFrenzyMode();
     }
 
-    public void HideAllUI()
+    public void HideAllUI(bool value)
     {
-        frenzyCounterPrefab.SetActive(false);
-        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face1.SetActive(false);
-        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face2.SetActive(false);
-        frenzyCounterPrefab.GetComponent<FrenzyCounter>().face3.SetActive(false);
+        frenzyCounterPrefab.SetActive(!value);
+        frenzyCounterPrefab.GetComponent<FrenzyCounter>().HideCounters();
     }
 }

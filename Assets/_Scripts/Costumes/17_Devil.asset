@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 17_Devil
   m_EditorClassIdentifier: 
   name: Devil Yeti
-  best: 1600
-  kills: 1600
+  best: 580
+  kills: 6666
   both: {fileID: 827946625, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 1655730738, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 1169165274, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

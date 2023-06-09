@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 15_Unicorn
   m_EditorClassIdentifier: 
   name: Dream Yeti
-  best: 1400
-  kills: 1400
+  best: 540
+  kills: 6000
   both: {fileID: -1294264230, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 2012961722, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -1176416668, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

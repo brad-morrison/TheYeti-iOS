@@ -65,8 +65,10 @@ public class Buttons : TheYeti
                 break;
 
             case "costumes_select":
-                GM.costumeManager.SetCostume();
-                Application.LoadLevel("Menu");
+                if (GM.costumeManager.SetCostume())
+                {
+                    Application.LoadLevel("Menu");
+                }
                 break;
 
             case "costumes":

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 14_Zombie
   m_EditorClassIdentifier: 
   name: Zombie Yeti
-  best: 1300
-  kills: 1300
+  best: 520
+  kills: 5000
   both: {fileID: 1789334282, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 943655848, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 543091151, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

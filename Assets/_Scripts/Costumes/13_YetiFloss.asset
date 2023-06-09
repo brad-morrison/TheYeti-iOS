@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 13_YetiFloss
   m_EditorClassIdentifier: 
   name: Yeti Floss
-  best: 1200
-  kills: 1200
+  best: 500
+  kills: 4500
   both: {fileID: -1790457668, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: 1569772909, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -1342272040, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

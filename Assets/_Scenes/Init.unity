@@ -275,6 +275,8 @@ MonoBehaviour:
   purchasedAds: 0
   purchasedCostumes: 0
   currentCostume: 0
+  timesPlayed: 0
+  timesAppOpened: 0
 --- !u!1 &735390868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1002,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

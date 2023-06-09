@@ -87,9 +87,6 @@ public class GameManager : TheYeti {
 
     private void Start()
     {
-        // setting score to test game centre
-        totalKills_counter = 5000;
-
         // set debug data
         if (Application.isEditor)
         {
@@ -158,6 +155,7 @@ public class GameManager : TheYeti {
         if (IsPlayerCorrect(side))
         {
             totalKills_counter++;
+            print("total kills in this game - " + totalKills_counter);
             GM.audio.PlaySound(GM.audio.punchSmall);
             AddToScore();
             SetScoreUI();
@@ -231,6 +229,8 @@ public class GameManager : TheYeti {
 
         // kills
         int totalKills_final = GM.playerData.GetKills() + totalKills_counter;
+        print("kills from pp - " + GM.playerData.GetKills() + " kill counter - " + totalKills_counter);
+        print("setting kills to " + totalKills_final);
         GM.playerData.SetKills(totalKills_final);
 
         // publish to leaderboards
