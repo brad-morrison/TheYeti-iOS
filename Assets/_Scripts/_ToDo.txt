@@ -49,13 +49,22 @@ Target for release 20th May 2023
 [x] add kill count to gameover screen
 [x] make costumes animate on costume screen
 [x] fix kill counter issue
-[ ] frenzy mode not working
-
+[x] frenzy mode not working
+[ ] yeti costume not allowing to be chosen on first play
 
 ---- Just before release ----
-[ ] check that high scores and sound settings are working
-[ ] finalise costume unlocks scores
-[ ] optimise gameplay variables
+[x] check that high scores and sound settings are working
+[x] finalise costume unlocks scores
+[x] optimise gameplay variables
+[x] tidy code
+
+-- About to submit - 9th June 2023
+
+looks like I have to allow build for iPad as you can't remove a device from future updates.
+
+[x] optimise for ipad
+
+-- Submitted to Apple servers - 10th June 2023
 
 things to add for next version release
 

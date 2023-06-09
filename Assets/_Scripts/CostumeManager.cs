@@ -46,6 +46,10 @@ public class CostumeManager : TheYeti {
         // move if button is active
         if (rightButton.GetComponent<Button>().active)
         {
+            // show text
+            scoreText.active = true;
+            killsText.active = true;
+
             costumeIndex++;
             RefreshButtons();
             
@@ -61,6 +65,10 @@ public class CostumeManager : TheYeti {
         // move if button is active
         if (leftButton.GetComponent<Button>().active)
         {
+            // show text
+            scoreText.active = true;
+            killsText.active = true;
+
             costumeIndex--;
             RefreshButtons();
             
@@ -71,6 +79,15 @@ public class CostumeManager : TheYeti {
     }
 
     public void ShowCostume(Costume costume) {
+
+        // hide info if base yeti
+        if (costumeIndex == 0)
+        {
+            scoreText.active = false;
+            killsText.active = false;
+            
+        }
+
         // reset lock things
         yeti.GetComponent<SpriteRenderer>().color = Color.white;
         lockedText.SetActive(false);
@@ -118,7 +135,7 @@ public class CostumeManager : TheYeti {
 
     public bool IsLocked(Costume costume) {
 
-        if(highScore > costume.best || totalKills > costume.kills)
+        if(highScore >= costume.best || totalKills >= costume.kills)
         {
             return false;
         }
