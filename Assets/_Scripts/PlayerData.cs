@@ -8,6 +8,7 @@ public class PlayerData: TheYeti
     public int musicOn, sfxOn;
     public int purchasedAds, purchasedCostumes;
     public int currentCostume;
+    public int timesPlayed;
 
 	void Awake()
 	{
@@ -22,12 +23,15 @@ public class PlayerData: TheYeti
         musicOn = PlayerPrefs.GetInt("music");
         sfxOn = PlayerPrefs.GetInt("sfx");
         currentCostume = PlayerPrefs.GetInt("current_costume");
+        timesPlayed = PlayerPrefs.GetInt("playedCount");
         Debug.Log(
             "highScore - " + highScore + "      " + 
             "totalKills - " + totalKills + "      " +
             "music - " + musicOn + "      " +
             "sfx - " + sfxOn + "      " +
-            "currentCostume - " + currentCostume + "      "
+            "currentCostume - " + currentCostume + "      " +
+            "times played = " + timesPlayed + "       "
+
             );
     }
 
@@ -108,6 +112,13 @@ public class PlayerData: TheYeti
     public void SetCostume(int value)
     {
         PlayerPrefs.SetInt("costume", value);
+        PlayerPrefs.Save();
+    }
+
+    public void PlayedCountAdd()
+    {
+        timesPlayed++;
+        PlayerPrefs.SetInt("playedCount", timesPlayed);
         PlayerPrefs.Save();
     }
 

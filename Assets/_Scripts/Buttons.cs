@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using SA.iOS.StoreKit;
 
 public class Buttons : TheYeti
 {
@@ -84,6 +85,12 @@ public class Buttons : TheYeti
 
             case "leaderboard":
                 GM.leaderboards.ShowLeaderboards();
+                break;
+
+            case "rate":
+                ISN_SKStoreReviewController.RequestReview();
+                print("rating pressed");
+                UnityEngine.iOS.Device.RequestStoreReview();
                 break;
 
             default:

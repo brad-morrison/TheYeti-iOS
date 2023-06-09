@@ -48,7 +48,6 @@ public class Button : MonoBehaviour {
         if (active)
         {
             GetComponent<SpriteRenderer>().sprite = on;
-            iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)1);
         }
         else
         {

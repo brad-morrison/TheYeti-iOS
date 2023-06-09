@@ -19,8 +19,8 @@ public class Weather : TheYeti
 
     void Start()
     {
-        //RollForWeather();
-        SetWeather(WeatherType.storm);
+        RollForWeather();
+        //SetWeather(WeatherType.storm);
     }
 
     public void RollForWeather()

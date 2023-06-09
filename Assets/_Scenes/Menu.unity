@@ -7348,6 +7348,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1321447871
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8908,7 +8909,7 @@ GameObject:
   - component: {fileID: 1657982560}
   - component: {fileID: 1657982559}
   m_Layer: 0
-  m_Name: sfx_label
+  m_Name: rate_label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10255,7 +10256,7 @@ GameObject:
   - component: {fileID: 1904190996}
   - component: {fileID: 1904190995}
   m_Layer: 0
-  m_Name: sfx_button
+  m_Name: rate_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

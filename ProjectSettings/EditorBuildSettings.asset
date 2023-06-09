@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/iOSHapticFeedback/Scenes/iOSHapticFeedbackExampleScene.unity
     guid: 416084cd217d04eb087adaf4b7da578b
   - enabled: 1

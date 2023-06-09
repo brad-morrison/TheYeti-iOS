@@ -30,13 +30,17 @@ Target for release 20th May 2023
 [x] fix frenzy countdown
 [x] gold mode face sfx still playing when sfx off
 [x] sfx not playing if only music switched off
-[ ] Change the haptics to be stronger
-[ ] make sky go dark for storm
+[x] make sky go dark for storm
 [x] make frenzy ui at start faster
 [x] add bomb to frenzy hikers
-[ ] try adding some post process effects
-[ ] quick tutorial
+[x] quick tutorial
 [x] hook up leaderboard button at game over screen (or replace with menu button)
+[x] rate button
+[ ] fix tutorial arrow
+[ ] only let user click on correct side in tutorial
+[ ] pause timer while in tutorial
+[ ] freeze goldmode when in tutorial
+
 
 ---- Just before release ----
 [ ] check that high scores and sound settings are working
@@ -45,6 +49,8 @@ Target for release 20th May 2023
 
 things to add for next version release
 
+[ ] hook up socials
+[ ] re-add haptic feedbacks
 [ ] ads
 [ ] In-app purchases ?
 [ ] different scene backgrounds

@@ -24,6 +24,7 @@ public class GameManager : TheYeti {
     public Yeti yeti;
     public GoldMode goldMode;
     public GameOver gameOver;
+    public Tutorial tutorial;
     //public Particles particles;
     public FrenzyMode frenzyMode;
     public Weather weather;
@@ -83,11 +84,14 @@ public class GameManager : TheYeti {
         isGameOver = false;
         newHighScore = false;
 
-        
+        // increment play counter
+        GM.playerData.PlayedCountAdd();
     }
 
     private void Start()
     {
+        
+
         // setting score to test game centre
         totalKills_counter = 5000;
 
@@ -109,6 +113,12 @@ public class GameManager : TheYeti {
         CalculateNextGoldModeSpawn();
 
         FallingBones(false);
+
+        // check for tutorial
+        if (GM.playerData.timesPlayed == 0)
+        {
+            tutorial.ActivateTutorial();
+        }
     }
 
     public void HandleInput(string command) {
@@ -131,7 +141,6 @@ public class GameManager : TheYeti {
 
     public void Hit(string side)
     {
-        iOSHapticFeedback.Instance.Trigger((iOSHapticFeedback.iOSFeedbackType)(goldMode.goldMode ? 2 : 1));
 
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
