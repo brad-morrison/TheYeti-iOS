@@ -2408,6 +2408,132 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: costumes_82
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 391
+        width: 76
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44dc6b4449614624b25c181915652d6
+      internalID: 288543994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: costumes_83
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 391
+        width: 72
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60a32352df68743d68bed7e33ddd6afe
+      internalID: -1135606130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: costumes_84
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 392
+        width: 71
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 263abc675071b47579ffc1f3a8170707
+      internalID: -856660706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: costumes_85
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 391
+        width: 74
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5416e215cf9f1444c9b5087362df4c39
+      internalID: -82855257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: costumes_86
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 391
+        width: 74
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b7b83472b8f0444281248eae9ea5b0b
+      internalID: 796877464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: costumes_87
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 391
+        width: 74
+        height: 69
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81f2a95be51604bc18abf58cb7cb7c2a
+      internalID: -1166641128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2516,6 +2642,12 @@ TextureImporter:
       costumes_8: -1420437763
       costumes_80: -32012830
       costumes_81: -379576560
+      costumes_82: 288543994
+      costumes_83: -1135606130
+      costumes_84: -856660706
+      costumes_85: -82855257
+      costumes_86: 796877464
+      costumes_87: -1166641128
       costumes_9: -568980932
       ghost_both: 1124944325
       ghost_dead: -1192183342
