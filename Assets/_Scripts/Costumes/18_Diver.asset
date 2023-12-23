@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 18_Diver
   m_EditorClassIdentifier: 
   name: The Diver
-  best: 10
-  kills: 10
+  best: 600
+  kills: 7000
   both: {fileID: -789134027, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -1640077575, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: -32012830, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}

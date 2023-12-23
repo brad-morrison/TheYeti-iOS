@@ -135,7 +135,7 @@ public class CostumeManager : TheYeti {
 
     public bool IsLocked(Costume costume) {
 
-        if(highScore >= costume.best || totalKills >= costume.kills)
+        if(highScore >= costume.best || totalKills >= costume.kills || GM.playerData.globalUnlock == 1)
         {
             return false;
         }
@@ -159,6 +159,7 @@ public class CostumeManager : TheYeti {
             leftButton.GetComponent<Button>().Grey(false);
         }
     }
+
 
     public IEnumerator YetiAnimate()
     {

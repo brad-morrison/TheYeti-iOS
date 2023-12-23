@@ -10,6 +10,7 @@ public class PlayerData: TheYeti
     public int currentCostume;
     public int timesPlayed;
     public int timesAppOpened;
+    public int globalUnlock;
 
 	void Awake()
 	{
@@ -26,6 +27,7 @@ public class PlayerData: TheYeti
         currentCostume = PlayerPrefs.GetInt("current_costume");
         timesPlayed = PlayerPrefs.GetInt("playedCount");
         timesAppOpened = PlayerPrefs.GetInt("timesAppOpened");
+        globalUnlock = PlayerPrefs.GetInt("global_unlock");
         Debug.Log(
             "highScore - " + highScore + "      " + 
             "totalKills - " + totalKills + "      " +
@@ -140,6 +142,31 @@ public class PlayerData: TheYeti
         timesPlayed++;
         PlayerPrefs.SetInt("playedCount", timesPlayed);
         PlayerPrefs.Save();
+    }
+
+    public bool IsGlobalUnlocked()
+    {
+        if (globalUnlock == 0)
+            return false;
+        else
+            return true;
+    }
+
+    public void SetGlobalUnlockCheat(bool val) {
+        if (val)
+        {
+            PlayerPrefs.SetInt("global_unlock", 1);
+            globalUnlock = 1;
+            print("unlocked all costumes cheat activated");
+            
+        }
+        else 
+        {
+            PlayerPrefs.SetInt("global_unlock", 0);
+            globalUnlock = 0;
+        }
+
+        
     }
 
     // for debug //

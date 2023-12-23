@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 19_Druid
   m_EditorClassIdentifier: 
   name: Druid Yeti
-  best: 0
-  kills: 0
+  best: 610
+  kills: 8000
   both: {fileID: -1135606130, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle1: {fileID: -82855257, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
   idle2: {fileID: 796877464, guid: d402ccd6bb23542a995a34d3b1bc00c7, type: 3}
