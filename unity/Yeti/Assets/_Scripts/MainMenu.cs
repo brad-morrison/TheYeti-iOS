@@ -16,8 +16,6 @@ public class MainMenu : TheYeti {
 
     private void Awake()
     {
-        GM.SceneChanged();
-
         // set chosen costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
         yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle1;

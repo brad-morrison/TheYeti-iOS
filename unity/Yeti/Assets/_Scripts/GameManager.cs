@@ -73,8 +73,6 @@ public class GameManager : TheYeti {
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
 
-        GM.SceneChanged();
-
         // costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
         allowInput = true;
@@ -348,4 +346,3 @@ public class GameManager : TheYeti {
     
 
 }
-

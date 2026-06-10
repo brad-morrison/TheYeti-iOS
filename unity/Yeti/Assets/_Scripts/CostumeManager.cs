@@ -18,8 +18,6 @@ public class CostumeManager : TheYeti {
 
     private void Awake() {
 
-         GM.SceneChanged();
-
         // get score data
         highScore = GM.playerData.GetHighScore();
         totalKills = GM.playerData.GetKills();
