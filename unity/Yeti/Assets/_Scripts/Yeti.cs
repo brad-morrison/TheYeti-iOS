@@ -1,8 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using HutongGames.PlayMaker;
+
+public enum YetiPose
+{
+    Both,
+    Dead,
+    Idle1,
+    Idle2
+}
 
 public class Yeti : TheYeti {
     
@@ -33,42 +37,65 @@ public class Yeti : TheYeti {
                 break;
         }
 
-        Invoke("ResetSprite", yetiPunchInterval);
+        Invoke(nameof(ResetSprite), yetiPunchInterval);
+    }
+
+    public void SetSprite(YetiPose pose)
+    {
+        switch (pose)
+        {
+            case YetiPose.Both:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
+                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
+                break;
+
+            case YetiPose.Dead:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.dead;
+                break;
+
+            case YetiPose.Idle1:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+                break;
+
+            case YetiPose.Idle2:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+                break;
+        }
+
+        Invoke(nameof(ResetSprite), yetiPunchInterval);
     }
 
     public void SetSprite(string sprite) {
         switch(sprite)
         {
             case "left":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.left;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_right;
+                SetSprite(PunchSide.Left);
                 break;
 
             case "both":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
+                SetSprite(YetiPose.Both);
                 break;
 
             case "right":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.right;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_left;
+                SetSprite(PunchSide.Right);
                 break;
 
             case "dead":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.dead;
+                SetSprite(YetiPose.Dead);
                 break;
 
             case "idle1":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+                SetSprite(YetiPose.Idle1);
                 break;
 
             case "idle2":
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+                SetSprite(YetiPose.Idle2);
+                break;
+
+            default:
+                Debug.LogWarning("Unknown yeti sprite: " + sprite);
                 break;
         }
-
-        // reset sprite back to idle
-        Invoke("ResetSprite", yetiPunchInterval);
     }
 
     public void ResetSprite()

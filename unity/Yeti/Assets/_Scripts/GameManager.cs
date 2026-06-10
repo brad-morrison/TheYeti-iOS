@@ -145,7 +145,7 @@ public class GameManager : TheYeti {
             scoreBounceSmall.Invoke();
 
         if (frenzyMode.frenzyMode)
-            yeti.SetSprite("idle1");
+            yeti.SetSprite(YetiPose.Idle1);
         else
             yeti.SetSprite(side);
 
