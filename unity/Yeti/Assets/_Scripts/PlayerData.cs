@@ -172,9 +172,10 @@ public class PlayerData: TheYeti
 
     // for debug //
 
+#if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown("x"))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             print("resetting high scores");
             // reset playerprefs
@@ -185,4 +186,5 @@ public class PlayerData: TheYeti
 
         }
     }
+#endif
 }

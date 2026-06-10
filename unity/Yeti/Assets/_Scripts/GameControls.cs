@@ -1,36 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
-using DG.Tweening.Core.Easing;
 
 public class GameControls : TheYeti
 {
-    Vector3 touch;
+    private void Update()
+    {
+#if UNITY_EDITOR
+        HandleDebugKeyboardInput();
+#endif
+        HandlePointerInput();
+    }
 
-	// Update is called once per frame
-	void Update()
-	{
-        // DEBUG CONTROLS (Keyboard)
-        if (Input.GetKeyDown("a") && GM.gameManager.allowInput)
+#if UNITY_EDITOR
+    private void HandleDebugKeyboardInput()
+    {
+        if (!GM.gameManager.allowInput)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.A))
         {
             GM.gameManager.HandleInput(PunchSide.Left);
         }
 
-        if (Input.GetKeyDown("d") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             GM.gameManager.HandleInput(PunchSide.Right);
         }
 
-        if (Input.GetKeyDown("b") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.B))
         {
             GM.gameManager.FallingBones(true);
         }
 
-        if (Input.GetKeyDown("n") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.N))
         {
             GM.gameManager.FallingBones(false);
         }
 
-        if (Input.GetKeyDown("g") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.G))
         {
             if (!GM.gameManager.goldMode.goldMode)
             {
@@ -43,7 +49,7 @@ public class GameControls : TheYeti
         }
 
         // flush high score
-        if (Input.GetKeyDown("s") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("reset scores");
             GM.playerData.SetHighScore(0);
@@ -53,7 +59,7 @@ public class GameControls : TheYeti
         }
 
         // for debug - add 100 to high score
-        if (Input.GetKeyDown("h") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("added 100 to high score | now - " + GM.gameManager.highScore);
             int data = GM.playerData.GetHighScore();
@@ -62,7 +68,7 @@ public class GameControls : TheYeti
         }
 
         // for debug - add 100 to kills
-        if (Input.GetKeyDown("k") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("added 100 to kills | now - " + GM.gameManager.totalKills_counter);
             int data = GM.playerData.GetKills();
@@ -71,33 +77,27 @@ public class GameControls : TheYeti
         }
 
         // for debug - start frenzy mode
-        if (Input.GetKeyDown("f") && GM.gameManager.allowInput)
+        if (Input.GetKeyDown(KeyCode.F))
         {
             GM.gameManager.frenzyMode.StartFrenzyTransition();
         }
+    }
+#endif
 
-        // TOUCH CONTROLS
+    private void HandlePointerInput()
+    {
+        if (!Input.GetMouseButtonUp(0) || !GM.gameManager.allowInput)
+            return;
 
-        if (Input.GetMouseButtonUp(0) && GM.gameManager.allowInput)
-        {
-            touch = Input.mousePosition;
+        Vector3 touch = Input.mousePosition;
 
-            // if touch is in lower half of screen
-            if (touch.y < GM.gameManager.deviceScreenHeight / 2)
-            {
-                // check if touch is on the left or right of screen
-                if (touch.x < GM.gameManager.deviceScreenWidth / 2)
-                {
+        if (touch.y >= GM.gameManager.deviceScreenHeight / 2)
+            return;
 
-                    GM.gameManager.HandleInput(PunchSide.Left);
-                }
-                else
-                {
+        PunchSide side = touch.x < GM.gameManager.deviceScreenWidth / 2
+            ? PunchSide.Left
+            : PunchSide.Right;
 
-                    GM.gameManager.HandleInput(PunchSide.Right);
-                }
-            }
-
-        }
+        GM.gameManager.HandleInput(side);
     }
 }
