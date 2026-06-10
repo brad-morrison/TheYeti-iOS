@@ -42,6 +42,14 @@ The project includes:
 
 ---
 
+## Play Online
+
+An online version of the game is available here:
+
+[Play The Yeti Online](https://bejewelled-souffle-c18d77.netlify.app)
+
+---
+
 ## Repository Structure
 
 ```text
