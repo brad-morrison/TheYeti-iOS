@@ -18,6 +18,24 @@ public class Yeti : TheYeti {
         GM.gameManager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
 
+    public void SetSprite(PunchSide side)
+    {
+        switch (side)
+        {
+            case PunchSide.Left:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.left;
+                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_right;
+                break;
+
+            case PunchSide.Right:
+                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.right;
+                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_left;
+                break;
+        }
+
+        Invoke("ResetSprite", yetiPunchInterval);
+    }
+
     public void SetSprite(string sprite) {
         switch(sprite)
         {

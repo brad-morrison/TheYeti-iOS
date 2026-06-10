@@ -12,12 +12,12 @@ public class GameControls : TheYeti
         // DEBUG CONTROLS (Keyboard)
         if (Input.GetKeyDown("a") && GM.gameManager.allowInput)
         {
-            GM.gameManager.HandleInput("left");
+            GM.gameManager.HandleInput(PunchSide.Left);
         }
 
         if (Input.GetKeyDown("d") && GM.gameManager.allowInput)
         {
-            GM.gameManager.HandleInput("right");
+            GM.gameManager.HandleInput(PunchSide.Right);
         }
 
         if (Input.GetKeyDown("b") && GM.gameManager.allowInput)
@@ -89,12 +89,12 @@ public class GameControls : TheYeti
                 if (touch.x < GM.gameManager.deviceScreenWidth / 2)
                 {
 
-                    GM.gameManager.HandleInput("left");
+                    GM.gameManager.HandleInput(PunchSide.Left);
                 }
                 else
                 {
 
-                    GM.gameManager.HandleInput("right");
+                    GM.gameManager.HandleInput(PunchSide.Right);
                 }
             }
 

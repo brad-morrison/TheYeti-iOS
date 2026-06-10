@@ -6,6 +6,12 @@ using DG.Tweening;
 using UnityEngine.Events;
 //using static UnityEngine.GraphicsBuffer;
 
+public enum PunchSide
+{
+    Left,
+    Right
+}
+
 public class GameManager : TheYeti {
     // DEBUG
     [Header("FOR TESTING")]
@@ -114,7 +120,7 @@ public class GameManager : TheYeti {
         difficulty = gameplayVariables.baseDifficulty;
     }
 
-    public void HandleInput(string command) {
+    public void HandleInput(PunchSide side) {
 
         //cameraShake.Invoke();
         platformShake.Invoke();
@@ -129,10 +135,10 @@ public class GameManager : TheYeti {
             Instantiate(goldMode.multiplierPop);
         }
 
-        Hit(command);
+        Hit(side);
     }
 
-    public void Hit(string side)
+    public void Hit(PunchSide side)
     {
 
         if (!goldMode.goldMode)
@@ -181,18 +187,13 @@ public class GameManager : TheYeti {
         }
     }
 
-    public bool IsPlayerCorrect(string side)
+    public bool IsPlayerCorrect(PunchSide side)
     {
         if (frenzyMode.frenzyMode)
             return true;
 
-        if (!hikers.activeHiker.GetComponent<Hiker>().left && side == "left")
-            return true;
-
-        if (hikers.activeHiker.GetComponent<Hiker>().left && side == "right")
-            return true;
-
-        return false;
+        bool hikerIsLeft = hikers.activeHiker.GetComponent<Hiker>().left;
+        return hikerIsLeft ? side == PunchSide.Right : side == PunchSide.Left;
     }
 
     public void AddToScore() {
@@ -295,7 +296,7 @@ public class GameManager : TheYeti {
 
     }
 
-    public void SmashEffect(string side)
+    public void SmashEffect(PunchSide side)
     {
         if (frenzyMode.frenzyMode)
         {
@@ -304,7 +305,7 @@ public class GameManager : TheYeti {
             return;
         }
 
-        if (side == "left")
+        if (side == PunchSide.Left)
             Instantiate(smashLeft);
         else
             Instantiate(smashRight);
