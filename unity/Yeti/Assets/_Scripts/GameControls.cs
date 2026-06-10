@@ -46,9 +46,8 @@ public class GameControls : TheYeti
         if (Input.GetKeyDown("s") && GM.gameManager.allowInput)
         {
             Debug.Log("reset scores");
-            PlayerPrefs.SetInt("high_score", 0);
-            PlayerPrefs.SetInt("kills", 0);
-            PlayerPrefs.Save();
+            GM.playerData.SetHighScore(0);
+            GM.playerData.SetKills(0);
             GM.gameManager.highScore = 0;
             GM.gameManager.totalKills_counter = 0;
         }
@@ -57,20 +56,18 @@ public class GameControls : TheYeti
         if (Input.GetKeyDown("h") && GM.gameManager.allowInput)
         {
             Debug.Log("added 100 to high score | now - " + GM.gameManager.highScore);
-            int data = PlayerPrefs.GetInt("high_score", 0);
+            int data = GM.playerData.GetHighScore();
             GM.gameManager.highScore = GM.gameManager.highScore + 100;
-            PlayerPrefs.SetInt("high_score", data + 100);
-            PlayerPrefs.Save();
+            GM.playerData.SetHighScore(data + 100);
         }
 
         // for debug - add 100 to kills
         if (Input.GetKeyDown("k") && GM.gameManager.allowInput)
         {
             Debug.Log("added 100 to kills | now - " + GM.gameManager.totalKills_counter);
-            int data = PlayerPrefs.GetInt("total_kills", 0);
+            int data = GM.playerData.GetKills();
             GM.gameManager.totalKills = GM.gameManager.totalKills_counter + 100;
-            PlayerPrefs.SetInt("high_score", data + 100);
-            PlayerPrefs.Save();
+            GM.playerData.SetKills(data + 100);
         }
 
         // for debug - start frenzy mode
@@ -104,4 +101,3 @@ public class GameControls : TheYeti
         }
     }
 }
-

@@ -6,6 +6,10 @@ using System;
 public static class Actions
 {
     public static Action<string> onButtonPressed;
-}
 
+    public static void ButtonPressed(string function)
+    {
+        onButtonPressed?.Invoke(function);
+    }
+}
 

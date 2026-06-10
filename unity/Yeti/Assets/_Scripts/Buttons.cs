@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using SA.iOS.StoreKit;
 
 public class Buttons : TheYeti
@@ -21,7 +22,7 @@ public class Buttons : TheYeti
 
         switch(function) {
             case "replay":
-                Application.LoadLevel("Main");
+                SceneManager.LoadScene("Main");
                 break;
 
             case "settings":
@@ -47,13 +48,11 @@ public class Buttons : TheYeti
             case "sfx":
                 GM.mainMenu.Sfx(false);
                 GM.audio.sfxOn = false;
-                PlayerPrefs.SetInt("sfx", 0);
                 break;
 
             case "sfx_mute":
                 GM.mainMenu.Sfx(true);
                 GM.audio.sfxOn = true;
-                PlayerPrefs.SetInt("sfx", 1);
                 break;
 
             case "costumes_next":
@@ -67,16 +66,16 @@ public class Buttons : TheYeti
             case "costumes_select":
                 if (GM.costumeManager.SetCostume())
                 {
-                    Application.LoadLevel("Menu");
+                    SceneManager.LoadScene("Menu");
                 }
                 break;
 
             case "costumes":
-                Application.LoadLevel("Costumes");
+                SceneManager.LoadScene("Costumes");
                 break;
 
             case "Menu":
-                Application.LoadLevel("Menu");
+                SceneManager.LoadScene("Menu");
                 break;
 
             case "remove_ads":

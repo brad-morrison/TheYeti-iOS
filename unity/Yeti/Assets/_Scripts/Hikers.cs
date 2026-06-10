@@ -104,10 +104,10 @@ public class Hikers : TheYeti {
     public void KillHiker()
     {
         GameObject target = hikers[0];
-        
+        Hiker targetHiker = target.GetComponent<Hiker>();
 
         target.GetComponent<SpriteRenderer>().sortingOrder = 10;
-        target.GetComponent<Hiker>().StartCoroutine("Die");
+        targetHiker.StartCoroutine(targetHiker.Die());
         target.GetComponent<Animator>().SetBool("Dead", true);
         hikers.RemoveAt(0);
         

@@ -57,8 +57,8 @@ public class FrenzyCounter : TheYeti
 
     public void HideCounters()
     {
-        face1.active = false;
-        face2.active = false;
-        face3.active = false;
+        face1.SetActive(false);
+        face2.SetActive(false);
+        face3.SetActive(false);
     }
 }

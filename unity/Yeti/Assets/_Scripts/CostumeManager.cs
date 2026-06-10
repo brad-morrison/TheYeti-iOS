@@ -47,8 +47,8 @@ public class CostumeManager : TheYeti {
         if (rightButton.GetComponent<Button>().active)
         {
             // show text
-            scoreText.active = true;
-            killsText.active = true;
+            scoreText.SetActive(true);
+            killsText.SetActive(true);
 
             costumeIndex++;
             RefreshButtons();
@@ -66,8 +66,8 @@ public class CostumeManager : TheYeti {
         if (leftButton.GetComponent<Button>().active)
         {
             // show text
-            scoreText.active = true;
-            killsText.active = true;
+            scoreText.SetActive(true);
+            killsText.SetActive(true);
 
             costumeIndex--;
             RefreshButtons();
@@ -83,8 +83,8 @@ public class CostumeManager : TheYeti {
         // hide info if base yeti
         if (costumeIndex == 0)
         {
-            scoreText.active = false;
-            killsText.active = false;
+            scoreText.SetActive(false);
+            killsText.SetActive(false);
             
         }
 

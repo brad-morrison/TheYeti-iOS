@@ -13,7 +13,7 @@ public class Yeti : TheYeti {
 
     private void Start() {
 
-        currentCostume = GM.gameManager.costumesList[PlayerPrefs.GetInt("costume")];
+        currentCostume = GM.gameManager.costumesList[GM.playerData.GetCostume()];
         yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
         GM.gameManager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
