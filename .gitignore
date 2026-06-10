@@ -9,3 +9,7 @@ Desktop.ini
 
 # Logs / scratch
 *.log
+
+# Build outputs
+builds/*
+!builds/.gitkeep
