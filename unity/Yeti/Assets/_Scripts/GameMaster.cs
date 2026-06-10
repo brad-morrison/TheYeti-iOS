@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +7,25 @@ using UnityEngine.SceneManagement;
 // this derives from Monobehaviour so anything inheriting from this class also does
 public class TheYeti : MonoBehaviour
 {
-    public GameMaster GM { get { return GameObject.FindObjectOfType<GameMaster>(); } }
+    public GameMaster GM { get { return GameMaster.Instance; } }
 }
 
 // singleton class
 public class GameMaster : MonoBehaviour
 {
+    private static GameMaster instance;
+
+    public static GameMaster Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<GameMaster>();
+
+            return instance;
+        }
+    }
+
     public PlayerData playerData;
     public Audio audio;
     public Buttons buttons;
@@ -27,6 +37,16 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         // refs
         playerData = GetComponentInChildren<PlayerData>();
         audio = GetComponentInChildren<Audio>();
@@ -34,11 +54,21 @@ public class GameMaster : MonoBehaviour
         leaderboards = GetComponentInChildren<Leaderboards>();
         // scene refs
 
-
         SceneChanged();
+    }
 
-        DontDestroyOnLoad(this);
+    void OnDestroy()
+    {
+        if (instance != this)
+            return;
 
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        instance = null;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneChanged();
     }
 
     public void SceneChanged()
@@ -46,13 +76,8 @@ public class GameMaster : MonoBehaviour
         Debug.Log("new scene loaded");
 
         // refresh  connections
-        if (GameObject.Find("GameManager"))
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-        if (GameObject.Find("MainMenu"))
-            mainMenu = GameObject.Find("MainMenu").GetComponent<MainMenu>();
-
-        if (GameObject.Find("CostumeManager"))
-            costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
+        gameManager = FindObjectOfType<GameManager>();
+        mainMenu = FindObjectOfType<MainMenu>();
+        costumeManager = FindObjectOfType<CostumeManager>();
     }
 }
