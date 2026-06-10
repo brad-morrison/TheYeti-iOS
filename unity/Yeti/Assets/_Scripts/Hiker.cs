@@ -6,13 +6,19 @@ public class Hiker : MonoBehaviour
 {
     public bool left;
     public bool frenzyTagged;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public IEnumerator Die() {
         yield return new WaitForSeconds(1);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void DisableAnimations() {
-        this.gameObject.GetComponent<Animator>().enabled = false;
+        animator.enabled = false;
     }
 }

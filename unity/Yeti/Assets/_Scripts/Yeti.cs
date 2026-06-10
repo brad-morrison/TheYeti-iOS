@@ -14,11 +14,20 @@ public class Yeti : TheYeti {
     public GameObject yeti, yeti_goldOutline;
     public Sprite yetiGold_left, yetiGold_right, yetiGold_bothUp;
     public Costume currentCostume;
+    private SpriteRenderer yetiRenderer;
+    private SpriteRenderer goldOutlineRenderer;
 
-    private void Start() {
+    private void Awake()
+    {
+        yetiRenderer = yeti.GetComponent<SpriteRenderer>();
+        goldOutlineRenderer = yeti_goldOutline.GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
 
         currentCostume = GM.gameManager.costumesList[GM.playerData.GetCostume()];
-        yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
+        yetiRenderer.sprite = currentCostume.both;
         GM.gameManager.yetiCharacter_gameOver.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
     }
 
@@ -27,13 +36,13 @@ public class Yeti : TheYeti {
         switch (side)
         {
             case PunchSide.Left:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.left;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_right;
+                yetiRenderer.sprite = currentCostume.left;
+                goldOutlineRenderer.sprite = yetiGold_right;
                 break;
 
             case PunchSide.Right:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.right;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_left;
+                yetiRenderer.sprite = currentCostume.right;
+                goldOutlineRenderer.sprite = yetiGold_left;
                 break;
         }
 
@@ -45,20 +54,20 @@ public class Yeti : TheYeti {
         switch (pose)
         {
             case YetiPose.Both:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
-                yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
+                yetiRenderer.sprite = currentCostume.both;
+                goldOutlineRenderer.sprite = yetiGold_bothUp;
                 break;
 
             case YetiPose.Dead:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.dead;
+                yetiRenderer.sprite = currentCostume.dead;
                 break;
 
             case YetiPose.Idle1:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+                yetiRenderer.sprite = currentCostume.idle1;
                 break;
 
             case YetiPose.Idle2:
-                yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+                yetiRenderer.sprite = currentCostume.idle2;
                 break;
         }
 
@@ -100,7 +109,7 @@ public class Yeti : TheYeti {
 
     public void ResetSprite()
     {
-        yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.both;
-        yeti_goldOutline.GetComponent<SpriteRenderer>().sprite = yetiGold_bothUp;
+        yetiRenderer.sprite = currentCostume.both;
+        goldOutlineRenderer.sprite = yetiGold_bothUp;
     }
 }

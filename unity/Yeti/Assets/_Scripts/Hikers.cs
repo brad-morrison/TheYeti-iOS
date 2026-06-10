@@ -19,6 +19,12 @@ public class Hikers : TheYeti {
     public GameObject activeHiker;
     // events
     public UnityEvent hikerShake = new UnityEvent();
+    private DOTweenAnimation shakeAnimation;
+
+    private void Awake()
+    {
+        shakeAnimation = GetComponent<DOTweenAnimation>();
+    }
 
     public void InitHikers() {
         SpawnHiker();
@@ -31,34 +37,24 @@ public class Hikers : TheYeti {
 
     public void SpawnHiker()
     {
-        GameObject newHiker;
-
-        // random colour
-        if (Random.Range(0,2) > 0)
-        {
-            // red
-            newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            // green
-            newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
-
-        }
+        GameObject newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
+        Hiker hikerComponent = newHiker.GetComponent<Hiker>();
+        SpriteRenderer spriteRenderer = newHiker.GetComponent<SpriteRenderer>();
+        Animator animator = newHiker.GetComponent<Animator>();
 
         // random position
         if (Random.Range(0, 2) > 0)
         {
             // left
-            newHiker.GetComponent<Hiker>().left = true;
-            newHiker.GetComponent<SpriteRenderer>().flipX = true;
-            newHiker.GetComponent<Animator>().SetBool("Left", false);
+            hikerComponent.left = true;
+            spriteRenderer.flipX = true;
+            animator.SetBool("Left", false);
             newHiker.transform.position = new Vector2(newHiker.transform.position.x + hikerOffsetX, newHiker.transform.position.y);
         }
         else
         {
             // right
-            newHiker.GetComponent<Hiker>().left = false;
+            hikerComponent.left = false;
             newHiker.transform.position = new Vector2(newHiker.transform.position.x - hikerOffsetX, newHiker.transform.position.y);
         }
 
@@ -72,8 +68,8 @@ public class Hikers : TheYeti {
         int frenzyRoll = Random.Range(1, GM.gameManager.gameplayVariables.frenzyHikerChance);
         if (frenzyRoll == 1 && !GM.gameManager.goldMode.goldMode && !GM.gameManager.frenzyMode.frenzyMode && GM.gameManager.allowFrenzyMode)
         {
-            newHiker.GetComponent<Hiker>().frenzyTagged = true;
-            newHiker.GetComponent<SpriteRenderer>().color = Color.red;
+            hikerComponent.frenzyTagged = true;
+            spriteRenderer.color = Color.red;
         }
 
         // add hiker to list of hikers
@@ -95,20 +91,19 @@ public class Hikers : TheYeti {
 
     public void ShakeHikers()
     {
-        
-        gameObject.GetComponent<DOTweenAnimation>().DORestart();
-        
-        
+        shakeAnimation.DORestart();
     }
 
     public void KillHiker()
     {
         GameObject target = hikers[0];
         Hiker targetHiker = target.GetComponent<Hiker>();
+        SpriteRenderer targetRenderer = target.GetComponent<SpriteRenderer>();
+        Animator targetAnimator = target.GetComponent<Animator>();
 
-        target.GetComponent<SpriteRenderer>().sortingOrder = 10;
+        targetRenderer.sortingOrder = 10;
         targetHiker.StartCoroutine(targetHiker.Die());
-        target.GetComponent<Animator>().SetBool("Dead", true);
+        targetAnimator.SetBool("Dead", true);
         hikers.RemoveAt(0);
         
         activeHiker = hikers[0];
