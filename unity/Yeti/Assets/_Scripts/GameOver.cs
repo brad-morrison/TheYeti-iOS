@@ -34,9 +34,9 @@ public class GameOver : TheYeti {
 
     public void SetScoreUI() {
         // if 0 then use the letter 'o' instead, 0 looks like an 8 with chosen font
-        finalScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.score == 0 ? "o" : GM.gameManager.score.ToString();
-        highScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.highScore == 0 ? "o" : GM.gameManager.highScore.ToString();
-        killsLabel.GetComponent<TextMeshPro>().text = GM.playerData.GetKills() == 0 ? "o" : GM.playerData.GetKills().ToString();
+        finalScoreLabel.GetComponent<TextMeshPro>().text = GameManager.FormatScore(GM.gameManager.score);
+        highScoreLabel.GetComponent<TextMeshPro>().text = GameManager.FormatScore(GM.gameManager.highScore);
+        killsLabel.GetComponent<TextMeshPro>().text = GameManager.FormatScore(GM.playerData.GetKills());
     }
 
     public void ChangeSprites() {

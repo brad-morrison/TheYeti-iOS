@@ -13,6 +13,10 @@ public enum PunchSide
 }
 
 public class GameManager : TheYeti {
+    private const float StartingLifeBarScrollSpeed = -0.5f;
+    private const int DifficultyIncreaseScoreInterval = 10;
+    private const float LifeBarScrollSpeedDifficultyStep = 0.1f;
+
     // DEBUG
     [Header("FOR TESTING")]
     public bool noTimerDeath;
@@ -72,12 +76,14 @@ public class GameManager : TheYeti {
     public UnityEvent platformShake = new UnityEvent();
     public UnityEvent yetiShake = new UnityEvent();
     public UnityEvent _newHighScore = new UnityEvent();
+    private TextMeshPro scoreText;
 
 
 
     private void Awake() {
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
+        scoreText = text_score.GetComponent<TextMeshPro>();
 
         // costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
@@ -103,7 +109,7 @@ public class GameManager : TheYeti {
         highScore = GM.playerData.GetHighScore();
 
         score = 0;
-        lifeBar_ScrollSpeed = -0.5f;
+        lifeBar_ScrollSpeed = StartingLifeBarScrollSpeed;
         hikers.InitHikers();
         hikers.SpawnHiker();
         CalculateNextGoldModeSpawn();
@@ -158,32 +164,11 @@ public class GameManager : TheYeti {
 
         if (IsPlayerCorrect(side))
         {
-            totalKills_counter++;
-            print("total kills in this game - " + totalKills_counter);
-            GM.audio.PlaySound(GM.audio.punchSmall);
-            AddToScore();
-            SetScoreUI();
-            lifebar.PunchScale();
-            // frenzy check
-            if (!frenzyMode.frenzyMode)
-                frenzyMode.FrenzyCheck();
-
-            hikers.KillHiker();
-            // play hiker death sound
-            int rand = Random.Range(1, 6);
-            if (rand == 1) GM.audio.PlaySound(GM.audio.hikerDeath1);
-            if (rand == 2) GM.audio.PlaySound(GM.audio.hikerDeath2);
-            if (rand == 3) GM.audio.PlaySound(GM.audio.hikerDeath3);
-            // check for difficulty increase
-            DifficultyIncreaseCheck();
+            HandleCorrectHit();
         }
         else
         {
-            if (!noTouchDeath) // for debug
-            {
-                HandleFinalScores();
-                gameOver.SetGameOver();
-            }
+            HandleMissedHit();
         }
     }
 
@@ -196,17 +181,36 @@ public class GameManager : TheYeti {
         return hikerIsLeft ? side == PunchSide.Right : side == PunchSide.Left;
     }
 
-    public void AddToScore() {
-        int amount;
+    public void HandleCorrectHit()
+    {
+        totalKills_counter++;
+        print("total kills in this game - " + totalKills_counter);
+        GM.audio.PlaySound(GM.audio.punchSmall);
+        AddToScore();
+        SetScoreUI();
+        lifebar.PunchScale();
 
-        // amount to add to score depending on mode
-        if (goldMode.goldMode)
-            amount = goldMode.goldModeMultiplier;
-        else 
-            amount = 1;
+        if (!frenzyMode.frenzyMode)
+            frenzyMode.FrenzyCheck();
+
+        hikers.KillHiker();
+        PlayRandomHikerDeathSound();
+        DifficultyIncreaseCheck();
+    }
+
+    public void HandleMissedHit()
+    {
+        if (noTouchDeath)
+            return;
+
+        HandleFinalScores();
+        gameOver.SetGameOver();
+    }
+
+    public void AddToScore() {
 
         // set score
-        score += amount;
+        score += ScoreIncrement();
 
         // check for new high score so that player can be alerted
         if (score > highScore)
@@ -215,6 +219,14 @@ public class GameManager : TheYeti {
             AlertNewHighScore(); // this has no logic attached, just visual things for the player
         }
 
+    }
+
+    public int ScoreIncrement()
+    {
+        if (goldMode.goldMode)
+            return goldMode.goldModeMultiplier;
+
+        return 1;
     }
 
     public void HandleFinalScores()
@@ -227,13 +239,22 @@ public class GameManager : TheYeti {
         }
 
         // kills
-        int totalKills_final = GM.playerData.GetKills() + totalKills_counter;
-        print("kills from pp - " + GM.playerData.GetKills() + " kill counter - " + totalKills_counter);
+        int storedKills = GM.playerData.GetKills();
+        int totalKills_final = storedKills + totalKills_counter;
+        print("kills from pp - " + storedKills + " kill counter - " + totalKills_counter);
         print("setting kills to " + totalKills_final);
         GM.playerData.SetKills(totalKills_final);
 
         // publish to leaderboards
         GM.leaderboards.SendScores(GM.playerData.GetHighScore(), totalKills_final);
+    }
+
+    public void PlayRandomHikerDeathSound()
+    {
+        int rand = Random.Range(1, 6);
+        if (rand == 1) GM.audio.PlaySound(GM.audio.hikerDeath1);
+        if (rand == 2) GM.audio.PlaySound(GM.audio.hikerDeath2);
+        if (rand == 3) GM.audio.PlaySound(GM.audio.hikerDeath3);
     }
 
 
@@ -248,15 +269,11 @@ public class GameManager : TheYeti {
 
     public void DifficultyIncreaseCheck()
     {
-        if (score % 10 == 0)
+        if (score % DifficultyIncreaseScoreInterval == 0)
         {
             // ends in 0
             difficulty += gameplayVariables.difficultyIncreaseStep;
-            lifeBar_ScrollSpeed -= 0.1f; // controls speed of the scrolling animation, not speed of shrinkage
-        }
-        else
-        {
-            return;
+            lifeBar_ScrollSpeed -= LifeBarScrollSpeedDifficultyStep; // controls speed of the scrolling animation, not speed of shrinkage
         }
     }
 
@@ -317,7 +334,12 @@ public class GameManager : TheYeti {
     }
 
     public void SetScoreUI() {
-        text_score.GetComponent<TextMeshPro>().text = score == 0 ? "o" : score.ToString();
+        scoreText.text = FormatScore(score);
+    }
+
+    public static string FormatScore(int value)
+    {
+        return value == 0 ? "o" : value.ToString();
     }
 
     public void CalculateNextGoldModeSpawn()
