@@ -24,7 +24,7 @@ public class FrenzyMode : TheYeti
 
     public void FrenzyCheck()
     {
-        if (GM.gameManager.hikers.hikers[0].GetComponent<Hiker>().frenzyTagged && !frenzyMode)
+        if (GM.gameManager.hikers.IsActiveHikerFrenzyTagged() && !frenzyMode)
         {
             frenzyTokenCount++;
             Instantiate(frenzyCounterPrefab);

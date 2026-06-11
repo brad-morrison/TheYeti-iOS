@@ -189,7 +189,7 @@ public class GameManager : TheYeti {
         if (IsFrenzyModeActive)
             return true;
 
-        bool hikerIsLeft = hikers.activeHiker.GetComponent<Hiker>().left;
+        bool hikerIsLeft = hikers.IsActiveHikerOnLeft();
         return hikerIsLeft ? side == PunchSide.Right : side == PunchSide.Left;
     }
 

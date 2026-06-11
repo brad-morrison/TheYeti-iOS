@@ -15,7 +15,7 @@ public class Tutorial : TheYeti
         GM.gameManager.allowGoldMode = false; // stop gold mode from spawning
 
         // activate correct side of tutorial items
-        if (!GM.gameManager.hikers.activeHiker.GetComponent<Hiker>().left)
+        if (!GM.gameManager.hikers.IsActiveHikerOnLeft())
         {
             leftArrow.SetActive(true);
             leftCollider.enabled = true;
