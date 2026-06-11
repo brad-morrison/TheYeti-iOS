@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SplashScreen : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class SplashScreen : MonoBehaviour
 	public IEnumerator LoadMenu(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-        Application.LoadLevel("Menu");
+        SceneManager.LoadScene("Menu");
     }
 
 	public void PlaySound()
@@ -25,4 +26,3 @@ public class SplashScreen : MonoBehaviour
 		audio.PlayOneShot(clip);
 	}
 }
-

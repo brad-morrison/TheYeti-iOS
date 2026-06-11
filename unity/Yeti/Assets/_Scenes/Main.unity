@@ -10456,13 +10456,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18c70f15d7694ff2bb5af4a5f84afb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyIncreaseStep: 0
-  baseDifficulty: 0
-  goldModeWaitTime_min: 0
-  goldModeWaitTime_max: 0
-  goldModeFaceSpeed: 0
-  goldModeDurationSpeed: 0
-  frenzyHikerChance: 0
+  difficultyIncreaseStep: 0.028
+  baseDifficulty: 0.2
+  goldModeWaitTime_min: 5
+  goldModeWaitTime_max: 20
+  goldModeFaceSpeed: 1.5
+  goldModeDurationSpeed: 2
+  frenzyHikerChance: 20
   frenzyTimeDuration: 0
 --- !u!1 &1343221187
 GameObject:

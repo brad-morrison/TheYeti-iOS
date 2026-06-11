@@ -37,7 +37,7 @@ public class LifeBar : TheYeti
 
     public void PunchScale()
     {
-        if (!GM.gameManager.goldMode.goldMode)
+        if (!GM.gameManager.IsGoldModeActive)
         {
             if (transform.localScale.x + punchAmount > 0)
             {
@@ -73,11 +73,11 @@ public class LifeBar : TheYeti
     private void Update()
     {
         // scale by difficulty OR linearly if in goldmode
-        if (!GM.gameManager.goldMode.goldMode && animate)
+        if (!GM.gameManager.IsGoldModeActive && animate)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.difficulty * Time.deltaTime); ;
         }
-        else if (GM.gameManager.goldMode.goldMode && animate)
+        else if (GM.gameManager.IsGoldModeActive && animate)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(3, transform.localScale.y, transform.localScale.z), GM.gameManager.goldMode.goldModeLength * Time.deltaTime);
         }
@@ -85,13 +85,13 @@ public class LifeBar : TheYeti
         // turn red if below certain size
         if (transform.localScale.x > 2.0f) { current = red; } else { current = blue; }
 
-        if (!flashing && !GM.gameManager.goldMode.goldMode) { SetTexture(current); }
+        if (!flashing && !GM.gameManager.IsGoldModeActive) { SetTexture(current); }
 
         // when bar reaches 0
         // extra check to only run if gameover is false to avoid infinite loop
-        if (transform.localScale.x > 2.944f && !GM.gameManager.gameOver.gameOver)
+        if (transform.localScale.x > 2.944f && !GM.gameManager.IsGameOver)
         {
-            if (GM.gameManager.goldMode.goldMode)
+            if (GM.gameManager.IsGoldModeActive)
             {
                 GM.gameManager.DeactivateGoldMode();
             }

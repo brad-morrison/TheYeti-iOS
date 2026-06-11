@@ -15,10 +15,22 @@ public class CostumeManager : TheYeti {
     public int costumeIndex;
     // get from prefs
     public int highScore, totalKills;
+    private SpriteRenderer yetiRenderer;
+    private TextMeshPro nameLabel;
+    private TextMeshPro scoreLabel;
+    private TextMeshPro killsLabel;
+    private Button leftButtonControl;
+    private Button rightButtonControl;
+    private Button selectButtonControl;
 
     private void Awake() {
-
-         GM.SceneChanged();
+        yetiRenderer = yeti.GetComponent<SpriteRenderer>();
+        nameLabel = nameText.GetComponent<TextMeshPro>();
+        scoreLabel = scoreText.GetComponent<TextMeshPro>();
+        killsLabel = killsText.GetComponent<TextMeshPro>();
+        leftButtonControl = leftButton.GetComponent<Button>();
+        rightButtonControl = rightButton.GetComponent<Button>();
+        selectButtonControl = selectButton.GetComponent<Button>();
 
         // get score data
         highScore = GM.playerData.GetHighScore();
@@ -30,11 +42,6 @@ public class CostumeManager : TheYeti {
         costumeIndex = GM.playerData.GetCostume();
         ShowCostume(currentCostume);
 
-
-        //SetCostume();
-
-        
-
         RefreshButtons();
 
         // animate yeti
@@ -44,38 +51,30 @@ public class CostumeManager : TheYeti {
     public void NextCostume() {
 
         // move if button is active
-        if (rightButton.GetComponent<Button>().active)
-        {
-            // show text
-            scoreText.active = true;
-            killsText.active = true;
+        if (!rightButtonControl.active)
+            return;
 
-            costumeIndex++;
-            RefreshButtons();
-            
-            // show new costume
-            currentCostume = costumesList[costumeIndex];
-            ShowCostume(currentCostume);
-        }
-
+        ShowRequirementText(true);
+        ShowCostumeAt(costumeIndex + 1);
     }
 
     public void PreviousCostume() {
         
         // move if button is active
-        if (leftButton.GetComponent<Button>().active)
-        {
-            // show text
-            scoreText.active = true;
-            killsText.active = true;
+        if (!leftButtonControl.active)
+            return;
 
-            costumeIndex--;
-            RefreshButtons();
-            
-            // show new costume
-            currentCostume = costumesList[costumeIndex];
-            ShowCostume(currentCostume);
-        }
+        ShowRequirementText(true);
+        ShowCostumeAt(costumeIndex - 1);
+    }
+
+    private void ShowCostumeAt(int index)
+    {
+        costumeIndex = index;
+        RefreshButtons();
+
+        currentCostume = costumesList[costumeIndex];
+        ShowCostume(currentCostume);
     }
 
     public void ShowCostume(Costume costume) {
@@ -83,81 +82,66 @@ public class CostumeManager : TheYeti {
         // hide info if base yeti
         if (costumeIndex == 0)
         {
-            scoreText.active = false;
-            killsText.active = false;
-            
+            ShowRequirementText(false);
         }
 
-        // reset lock things
-        yeti.GetComponent<SpriteRenderer>().color = Color.white;
+        ApplyUnlockedState();
+        SetCostumeLabels(costume);
+        yetiRenderer.sprite = costume.both;
+
+        if (IsLocked(costume)) {
+            ApplyLockedState();
+        }
+    }
+
+    private void ShowRequirementText(bool isVisible)
+    {
+        scoreText.SetActive(isVisible);
+        killsText.SetActive(isVisible);
+    }
+
+    private void SetCostumeLabels(Costume costume)
+    {
+        scoreLabel.text = costume.best.ToString();
+        killsLabel.text = costume.kills.ToString();
+        nameLabel.text = costume.name.ToString();
+    }
+
+    private void ApplyUnlockedState()
+    {
+        yetiRenderer.color = Color.white;
         lockedText.SetActive(false);
         unlockedText.SetActive(true);
         unlockAllButton.SetActive(false);
-        selectButton.GetComponent<Button>().Grey(false);
+        selectButtonControl.Grey(false);
+    }
 
-        // set generals
-        scoreText.GetComponent<TextMeshPro>().text = costume.best.ToString();
-        killsText.GetComponent<TextMeshPro>().text = costume.kills.ToString();
-        nameText.GetComponent<TextMeshPro>().text = costume.name.ToString();
-
-        // set lockables
-        yeti.GetComponent<SpriteRenderer>().sprite = costume.both;
-
-        // do things if costume is locked
-        if (IsLocked(costume)) {
-            // blackout sprite
-            yeti.GetComponent<SpriteRenderer>().color = Color.black;
-            // show locked text
-            lockedText.SetActive(true);
-            // hide unlocked text
-            unlockedText.SetActive(false);
-            // show unlockAll button
-            unlockAllButton.SetActive(true);
-            // lock select button
-            selectButton.GetComponent<Button>().Grey(true);
-        } 
+    private void ApplyLockedState()
+    {
+        yetiRenderer.color = Color.black;
+        lockedText.SetActive(true);
+        unlockedText.SetActive(false);
+        unlockAllButton.SetActive(true);
+        selectButtonControl.Grey(true);
     }
 
     public bool SetCostume() {
 
-        if (!IsLocked(currentCostume))
-        {
-            // set player pref
-            GM.playerData.SetCostume(costumeIndex);
-            return true;
-        }
-        else
-        {
+        if (IsLocked(currentCostume))
             return false;
-        }
-        
-    }
 
-    public bool IsLocked(Costume costume) {
-
-        if(highScore >= costume.best || totalKills >= costume.kills || GM.playerData.globalUnlock == 1)
-        {
-            return false;
-        }
-
+        // set player pref
+        GM.playerData.SetCostume(costumeIndex);
         return true;
     }
 
+    public bool IsLocked(Costume costume) {
+        return highScore < costume.best && totalKills < costume.kills && GM.playerData.globalUnlock != 1;
+    }
+
     public void RefreshButtons() {
-
-        // grey out right button if no other costumes
-        if (costumeIndex == costumesList.Count-1) {
-            rightButton.GetComponent<Button>().Grey(true);
-        } else {
-            rightButton.GetComponent<Button>().Grey(false);
-        }
-
-        // grey out left button if at 0
-        if (costumeIndex == 0) {
-            leftButton.GetComponent<Button>().Grey(true);
-        } else {
-            leftButton.GetComponent<Button>().Grey(false);
-        }
+        rightButtonControl.Grey(costumeIndex == costumesList.Count-1);
+        leftButtonControl.Grey(costumeIndex == 0);
     }
 
 
@@ -166,9 +150,9 @@ public class CostumeManager : TheYeti {
         while (true)
         {
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+            yetiRenderer.sprite = currentCostume.idle2;
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+            yetiRenderer.sprite = currentCostume.idle1;
         }
     }
 

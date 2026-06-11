@@ -1,14 +1,26 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
-using UnityEngine.Timeline;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameOver : TheYeti {
 
     public bool gameOver;
     public GameObject gameOver_UI, finalScoreLabel, highScoreLabel, newHighScoreLabel, killsLabel;
     public GameObject hiker, yeti, crown;
+    private TextMeshPro finalScoreText;
+    private TextMeshPro highScoreText;
+    private TextMeshPro killsText;
+    private SpriteRenderer hikerRenderer;
+    private SpriteRenderer yetiRenderer;
+
+    private void Awake()
+    {
+        finalScoreText = finalScoreLabel.GetComponent<TextMeshPro>();
+        highScoreText = highScoreLabel.GetComponent<TextMeshPro>();
+        killsText = killsLabel.GetComponent<TextMeshPro>();
+        hikerRenderer = hiker.GetComponent<SpriteRenderer>();
+        yetiRenderer = yeti.GetComponent<SpriteRenderer>();
+    }
 
     public void SetGameOver() {
 
@@ -34,9 +46,9 @@ public class GameOver : TheYeti {
 
     public void SetScoreUI() {
         // if 0 then use the letter 'o' instead, 0 looks like an 8 with chosen font
-        finalScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.score == 0 ? "o" : GM.gameManager.score.ToString();
-        highScoreLabel.GetComponent<TextMeshPro>().text = GM.gameManager.highScore == 0 ? "o" : GM.gameManager.highScore.ToString();
-        killsLabel.GetComponent<TextMeshPro>().text = GM.playerData.GetKills() == 0 ? "o" : GM.playerData.GetKills().ToString();
+        finalScoreText.text = GameManager.FormatScore(GM.gameManager.score);
+        highScoreText.text = GameManager.FormatScore(GM.gameManager.highScore);
+        killsText.text = GameManager.FormatScore(GM.playerData.GetKills());
     }
 
     public void ChangeSprites() {
@@ -52,13 +64,13 @@ public class GameOver : TheYeti {
     
     IEnumerator NoHighScore() {
         GM.audio.PlaySoundAfter(GM.audio.pop, 1);
-        yeti.GetComponent<SpriteRenderer>().sprite = GM.gameManager.yeti.currentCostume.dead;
+        yetiRenderer.sprite = GM.gameManager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(1);
-        hiker.GetComponent<SpriteRenderer>().sprite = GM.gameManager.hikers.hikerRed_smiling;
+        hikerRenderer.sprite = GM.gameManager.hikers.hikerRed_smiling;
     }
 
     IEnumerator HighScore() {
-        yeti.GetComponent<SpriteRenderer>().sprite = GM.gameManager.yeti.currentCostume.dead;
+        yetiRenderer.sprite = GM.gameManager.yeti.currentCostume.dead;
         yield return new WaitForSeconds(0);
         crown.SetActive(true);
         GM.audio.PlaySound(GM.audio.crown);

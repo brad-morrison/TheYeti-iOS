@@ -9,13 +9,24 @@ public class GoldMode : TheYeti {
     // gameobjects & prefabs
     public GameObject goldMode_announceUI;
     public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierAnnounce_shadow, multiplierPop;
+    private TextMeshPro multiplierText;
+    private TextMeshPro multiplierShadowText;
+    private TextMeshPro multiplierPopText;
+    private SpriteRenderer[] goldFlameRenderers;
+
+    private void Awake()
+    {
+        multiplierText = multiplierAnnounce.GetComponent<TextMeshPro>();
+        multiplierShadowText = multiplierAnnounce_shadow.GetComponent<TextMeshPro>();
+        multiplierPopText = multiplierPop.GetComponent<TextMeshPro>();
+        goldFlameRenderers = goldFlames.GetComponentsInChildren<SpriteRenderer>();
+    }
 
     public void GoldModeAnnounce() {
         // roll and set gold multiplier
         goldModeMultiplier = GoldMultiplierRoll();
         // set multiplier text
-        multiplierAnnounce.GetComponent<TextMeshPro>().text = "x" + goldModeMultiplier.ToString();
-        multiplierAnnounce_shadow.GetComponent<TextMeshPro>().text = "x" + goldModeMultiplier.ToString();
+        SetAnnouncementText(MultiplierLabel());
 
         goldMode_announceUI.SetActive(true);
         GM.gameManager.lifebar.animate = false;
@@ -24,6 +35,23 @@ public class GoldMode : TheYeti {
         GM.gameManager.allowInput = false;
         // sky
         GM.gameManager.sky.GoldModeSky(true);
+    }
+
+    public void ShowMultiplierPop()
+    {
+        multiplierPopText.text = MultiplierLabel();
+        Instantiate(multiplierPop);
+    }
+
+    private void SetAnnouncementText(string label)
+    {
+        multiplierText.text = label;
+        multiplierShadowText.text = label;
+    }
+
+    private string MultiplierLabel()
+    {
+        return "x" + goldModeMultiplier.ToString();
     }
 
     public void ActivateGoldMode() {
@@ -66,9 +94,9 @@ public class GoldMode : TheYeti {
     }
 
     public void GoldFlames(bool state) {
-        foreach(Transform flame in GM.gameManager.goldMode.goldFlames.transform)
+        foreach(SpriteRenderer flameRenderer in goldFlameRenderers)
         {
-            flame.GetComponent<SpriteRenderer>().enabled = state;
+            flameRenderer.enabled = state;
         }
     }
 }

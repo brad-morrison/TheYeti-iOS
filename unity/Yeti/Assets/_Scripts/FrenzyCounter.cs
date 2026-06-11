@@ -43,7 +43,7 @@ public class FrenzyCounter : TheYeti
         GM.audio.PlaySound(GM.audio.frenzyCounter);
         face.SetActive(true);
 
-        if (GM.gameManager.frenzyMode.frenzyTokenCount == 3 && !GM.gameManager.goldMode.goldMode)
+        if (GM.gameManager.frenzyMode.frenzyTokenCount == 3 && !GM.gameManager.IsGoldModeActive)
         {
             GM.gameManager.frenzyMode.StartFrenzyTransition();
         }
@@ -57,8 +57,8 @@ public class FrenzyCounter : TheYeti
 
     public void HideCounters()
     {
-        face1.active = false;
-        face2.active = false;
-        face3.active = false;
+        face1.SetActive(false);
+        face2.SetActive(false);
+        face3.SetActive(false);
     }
 }

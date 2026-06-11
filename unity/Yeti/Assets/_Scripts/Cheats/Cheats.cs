@@ -11,7 +11,7 @@ public class Cheats : MonoBehaviour
     string currentCheat;
 
     private void Start() {
-        GM = GameObject.Find("#GameMaster").GetComponent<GameMaster>();
+        GM = GameMaster.Instance;
     }
 
     public void LeftTick()

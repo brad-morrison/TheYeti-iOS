@@ -6,7 +6,17 @@ using DG.Tweening;
 using UnityEngine.Events;
 //using static UnityEngine.GraphicsBuffer;
 
+public enum PunchSide
+{
+    Left,
+    Right
+}
+
 public class GameManager : TheYeti {
+    private const float StartingLifeBarScrollSpeed = -0.5f;
+    private const int DifficultyIncreaseScoreInterval = 10;
+    private const float LifeBarScrollSpeedDifficultyStep = 0.1f;
+
     // DEBUG
     [Header("FOR TESTING")]
     public bool noTimerDeath;
@@ -66,14 +76,20 @@ public class GameManager : TheYeti {
     public UnityEvent platformShake = new UnityEvent();
     public UnityEvent yetiShake = new UnityEvent();
     public UnityEvent _newHighScore = new UnityEvent();
+    private TextMeshPro scoreText;
+    private GameSession session;
 
+    public bool IsGoldModeActive { get { return goldMode.goldMode; } }
+    public bool IsFrenzyModeActive { get { return frenzyMode.frenzyMode; } }
+    public bool IsGameOver { get { return isGameOver || (gameOver != null && gameOver.gameOver); } }
+    public bool CanTagFrenzyHiker { get { return !IsGoldModeActive && !IsFrenzyModeActive && allowFrenzyMode; } }
+    public bool CanSpawnGoldModeFace { get { return !IsGameOver && !IsFrenzyModeActive && allowGoldMode; } }
 
 
     private void Awake() {
         deviceScreenWidth = Display.main.systemWidth;
         deviceScreenHeight = Display.main.systemHeight;
-
-        GM.SceneChanged();
+        scoreText = text_score.GetComponent<TextMeshPro>();
 
         // costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
@@ -95,11 +111,9 @@ public class GameManager : TheYeti {
             //sound = false;
         }
 
-        // get score data
-        highScore = GM.playerData.GetHighScore();
-
-        score = 0;
-        lifeBar_ScrollSpeed = -0.5f;
+        session = new GameSession(GM.playerData.GetHighScore());
+        SyncSessionState();
+        lifeBar_ScrollSpeed = StartingLifeBarScrollSpeed;
         hikers.InitHikers();
         hikers.SpawnHiker();
         CalculateNextGoldModeSpawn();
@@ -116,125 +130,143 @@ public class GameManager : TheYeti {
         difficulty = gameplayVariables.baseDifficulty;
     }
 
-    public void HandleInput(string command) {
-
-        //cameraShake.Invoke();
-        platformShake.Invoke();
-        yetiShake.Invoke();
-
-        if (goldMode.goldMode) { 
-            GM.audio.PlaySound(GM.audio.coin);
-            goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
-
-            scoreBounceBig.Invoke();
-            
-            Instantiate(goldMode.multiplierPop);
-        }
-
-        Hit(command);
+    public void HandleInput(PunchSide side)
+    {
+        PlayInputFeedback();
+        PlayGoldModeHitFeedback();
+        Hit(side);
     }
 
-    public void Hit(string side)
+    public void PlayInputFeedback()
+    {
+        platformShake.Invoke();
+        yetiShake.Invoke();
+    }
+
+    public void PlayGoldModeHitFeedback()
+    {
+        if (!IsGoldModeActive)
+            return;
+
+        GM.audio.PlaySound(GM.audio.coin);
+
+        scoreBounceBig.Invoke();
+        goldMode.ShowMultiplierPop();
+    }
+
+    public void Hit(PunchSide side)
     {
 
-        if (!goldMode.goldMode)
+        if (!IsGoldModeActive)
             scoreBounceSmall.Invoke();
 
-        if (frenzyMode.frenzyMode)
-            yeti.SetSprite("idle1");
-        else
-            yeti.SetSprite(side);
-
-        /*
-        if (frenzyMode.frenzyMode)
-            cameraShake.Invoke();
-        */
-
+        ApplyYetiHitPose(side);
         SmashEffect(side);
 
         if (IsPlayerCorrect(side))
         {
-            totalKills_counter++;
-            print("total kills in this game - " + totalKills_counter);
-            GM.audio.PlaySound(GM.audio.punchSmall);
-            AddToScore();
-            SetScoreUI();
-            lifebar.PunchScale();
-            // frenzy check
-            if (!frenzyMode.frenzyMode)
-                frenzyMode.FrenzyCheck();
-
-            hikers.KillHiker();
-            // play hiker death sound
-            int rand = Random.Range(1, 6);
-            if (rand == 1) GM.audio.PlaySound(GM.audio.hikerDeath1);
-            if (rand == 2) GM.audio.PlaySound(GM.audio.hikerDeath2);
-            if (rand == 3) GM.audio.PlaySound(GM.audio.hikerDeath3);
-            // check for difficulty increase
-            DifficultyIncreaseCheck();
+            HandleCorrectHit();
         }
         else
         {
-            if (!noTouchDeath) // for debug
-            {
-                HandleFinalScores();
-                gameOver.SetGameOver();
-            }
+            HandleMissedHit();
         }
     }
 
-    public bool IsPlayerCorrect(string side)
+    public void ApplyYetiHitPose(PunchSide side)
     {
-        if (frenzyMode.frenzyMode)
+        if (IsFrenzyModeActive)
+        {
+            yeti.SetSprite(YetiPose.Idle1);
+            return;
+        }
+
+        yeti.SetSprite(side);
+    }
+
+    public bool IsPlayerCorrect(PunchSide side)
+    {
+        if (IsFrenzyModeActive)
             return true;
 
-        if (!hikers.activeHiker.GetComponent<Hiker>().left && side == "left")
-            return true;
+        bool hikerIsLeft = hikers.IsActiveHikerOnLeft();
+        return hikerIsLeft ? side == PunchSide.Right : side == PunchSide.Left;
+    }
 
-        if (hikers.activeHiker.GetComponent<Hiker>().left && side == "right")
-            return true;
+    public void HandleCorrectHit()
+    {
+        session.RegisterKill();
+        SyncSessionState();
+        print("total kills in this game - " + totalKills_counter);
+        GM.audio.PlaySound(GM.audio.punchSmall);
+        AddToScore();
+        SetScoreUI();
+        lifebar.PunchScale();
 
-        return false;
+        if (!IsFrenzyModeActive)
+            frenzyMode.FrenzyCheck();
+
+        hikers.KillHiker();
+        PlayRandomHikerDeathSound();
+        DifficultyIncreaseCheck();
+    }
+
+    public void HandleMissedHit()
+    {
+        if (noTouchDeath)
+            return;
+
+        HandleFinalScores();
+        gameOver.SetGameOver();
     }
 
     public void AddToScore() {
-        int amount;
 
-        // amount to add to score depending on mode
-        if (goldMode.goldMode)
-            amount = goldMode.goldModeMultiplier;
-        else 
-            amount = 1;
+        bool isNewHighScore = session.AddScore(ScoreIncrement());
+        SyncSessionState();
 
-        // set score
-        score += amount;
-
-        // check for new high score so that player can be alerted
-        if (score > highScore)
+        if (isNewHighScore)
         {
-            highScore = score;
             AlertNewHighScore(); // this has no logic attached, just visual things for the player
         }
 
     }
 
+    public int ScoreIncrement()
+    {
+        if (IsGoldModeActive)
+            return goldMode.goldModeMultiplier;
+
+        return 1;
+    }
+
     public void HandleFinalScores()
     {
         // high score
-        if (score > GM.playerData.GetHighScore())
+        if (session.ShouldSaveHighScore(GM.playerData.GetHighScore()))
         {
             newHighScore = true;
-            GM.playerData.SetHighScore(score);
+            GM.playerData.SetHighScore(session.Score);
         }
 
         // kills
-        int totalKills_final = GM.playerData.GetKills() + totalKills_counter;
-        print("kills from pp - " + GM.playerData.GetKills() + " kill counter - " + totalKills_counter);
+        int storedKills = GM.playerData.GetKills();
+        int totalKills_final = session.TotalKillsAfterRound(storedKills);
+        print("kills from pp - " + storedKills + " kill counter - " + totalKills_counter);
         print("setting kills to " + totalKills_final);
         GM.playerData.SetKills(totalKills_final);
 
         // publish to leaderboards
         GM.leaderboards.SendScores(GM.playerData.GetHighScore(), totalKills_final);
+    }
+
+    public void PlayRandomHikerDeathSound()
+    {
+        int rand = Random.Range(1, 6);
+        if (rand > 3)
+            return;
+
+        GM.audio.PlayRandomSound(GM.audio.hikerDeath1, GM.audio.hikerDeath2, GM.audio.hikerDeath3);
     }
 
 
@@ -249,15 +281,11 @@ public class GameManager : TheYeti {
 
     public void DifficultyIncreaseCheck()
     {
-        if (score % 10 == 0)
+        if (score % DifficultyIncreaseScoreInterval == 0)
         {
             // ends in 0
             difficulty += gameplayVariables.difficultyIncreaseStep;
-            lifeBar_ScrollSpeed -= 0.1f; // controls speed of the scrolling animation, not speed of shrinkage
-        }
-        else
-        {
-            return;
+            lifeBar_ScrollSpeed -= LifeBarScrollSpeedDifficultyStep; // controls speed of the scrolling animation, not speed of shrinkage
         }
     }
 
@@ -289,24 +317,21 @@ public class GameManager : TheYeti {
 
         foreach (BoneSpawner spawner in spawners)
         {
-            if (isOn)
-                spawner.spawn = true;
-            else
-                spawner.spawn = false;
+            spawner.spawn = isOn;
         }
 
     }
 
-    public void SmashEffect(string side)
+    public void SmashEffect(PunchSide side)
     {
-        if (frenzyMode.frenzyMode)
+        if (IsFrenzyModeActive)
         {
             Instantiate(smashLeft);
             Instantiate(smashRight);
             return;
         }
 
-        if (side == "left")
+        if (side == PunchSide.Left)
             Instantiate(smashLeft);
         else
             Instantiate(smashRight);
@@ -318,7 +343,46 @@ public class GameManager : TheYeti {
     }
 
     public void SetScoreUI() {
-        text_score.GetComponent<TextMeshPro>().text = score == 0 ? "o" : score.ToString();
+        scoreText.text = FormatScore(score);
+    }
+
+#if UNITY_EDITOR
+    public void ResetDebugScores()
+    {
+        GM.playerData.SetHighScore(0);
+        GM.playerData.SetKills(0);
+        session.Reset(0);
+        SyncSessionState();
+        SetScoreUI();
+    }
+
+    public void AddDebugHighScore(int amount)
+    {
+        int updatedHighScore = GM.playerData.GetHighScore() + amount;
+        GM.playerData.SetHighScore(updatedHighScore);
+        session.OverrideHighScore(updatedHighScore);
+        SyncSessionState();
+    }
+
+    public void AddDebugKills(int amount)
+    {
+        int updatedKills = GM.playerData.GetKills() + amount;
+        GM.playerData.SetKills(updatedKills);
+        totalKills = updatedKills;
+    }
+#endif
+
+    private void SyncSessionState()
+    {
+        score = session.Score;
+        highScore = session.HighScore;
+        totalKills_counter = session.RoundKills;
+        newHighScore = session.HasNewHighScore;
+    }
+
+    public static string FormatScore(int value)
+    {
+        return value == 0 ? "o" : value.ToString();
     }
 
     public void CalculateNextGoldModeSpawn()
@@ -334,7 +398,7 @@ public class GameManager : TheYeti {
         Debug.Log("Gold face spawning in " + from + " seconds");
         yield return new WaitForSeconds(from);
         // spawn gold face
-        if (!isGameOver && !frenzyMode.frenzyMode && allowGoldMode)
+        if (CanSpawnGoldModeFace)
             Instantiate(goldMode.goldModeFace);
     }
 
@@ -348,4 +412,3 @@ public class GameManager : TheYeti {
     
 
 }
-

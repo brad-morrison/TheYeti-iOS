@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using SA.iOS.StoreKit;
 
 public class Buttons : TheYeti
@@ -20,82 +18,81 @@ public class Buttons : TheYeti
     public void ButtonPress(string function) {
 
         switch(function) {
-            case "replay":
-                Application.LoadLevel("Main");
+            case ButtonCommands.Replay:
+                SceneManager.LoadScene("Main");
                 break;
 
-            case "settings":
+            case ButtonCommands.Settings:
                 GM.mainMenu.ShowSettingsUI(true);
                 GM.mainMenu.ShowMainUI(false);
                 break;
 
-            case "close_settings":
+            case ButtonCommands.CloseSettings:
                 GM.mainMenu.ShowSettingsUI(false);
                 GM.mainMenu.ShowMainUI(true);
                 break;
 
-            case "music":
+            case ButtonCommands.Music:
                 GM.mainMenu.Music(false);
                 GM.audio.Music(false);
                 break;
 
-            case "music_mute":
+            case ButtonCommands.MusicMute:
                 GM.mainMenu.Music(true);
                 GM.audio.Music(true);
                 break;
 
-            case "sfx":
+            case ButtonCommands.Sfx:
                 GM.mainMenu.Sfx(false);
                 GM.audio.sfxOn = false;
-                PlayerPrefs.SetInt("sfx", 0);
                 break;
 
-            case "sfx_mute":
+            case ButtonCommands.SfxMute:
                 GM.mainMenu.Sfx(true);
                 GM.audio.sfxOn = true;
-                PlayerPrefs.SetInt("sfx", 1);
                 break;
 
-            case "costumes_next":
+            case ButtonCommands.CostumesNext:
                 GM.costumeManager.NextCostume();
                 break;
             
-            case "costumes_prev":
+            case ButtonCommands.CostumesPrevious:
                 GM.costumeManager.PreviousCostume();
                 break;
 
-            case "costumes_select":
+            case ButtonCommands.CostumesSelect:
                 if (GM.costumeManager.SetCostume())
                 {
-                    Application.LoadLevel("Menu");
+                    SceneManager.LoadScene("Menu");
                 }
                 break;
 
-            case "costumes":
-                Application.LoadLevel("Costumes");
+            case ButtonCommands.Costumes:
+                SceneManager.LoadScene("Costumes");
                 break;
 
-            case "Menu":
-                Application.LoadLevel("Menu");
+            case ButtonCommands.Menu:
+                SceneManager.LoadScene("Menu");
                 break;
 
-            case "remove_ads":
+            case ButtonCommands.RemoveAds:
                 break;
 
-            case "restore":
+            case ButtonCommands.Restore:
                 break;
 
-            case "leaderboard":
+            case ButtonCommands.Leaderboard:
                 GM.leaderboards.ShowLeaderboards();
                 break;
 
-            case "rate":
+            case ButtonCommands.Rate:
                 ISN_SKStoreReviewController.RequestReview();
                 print("rating pressed");
                 UnityEngine.iOS.Device.RequestStoreReview();
                 break;
 
             default:
+                Debug.LogWarning("Unknown button command: " + function);
                 break;
         }
     }

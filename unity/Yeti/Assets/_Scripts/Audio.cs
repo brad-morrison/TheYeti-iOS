@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using DG.Tweening.Core.Easing;
 
 public class Audio : TheYeti {
     // two audio sources
@@ -22,14 +20,7 @@ public class Audio : TheYeti {
     public void Start() {
         Debug.Log("started audio script");
         Music(GM.playerData.GetMusic());
-        if (GM.playerData.sfxOn == 1)
-        {
-            sfxOn = true;
-        }
-        else
-        {
-            sfxOn = false;
-        }
+        sfxOn = GM.playerData.GetSfx();
     }
 
     // set music on or off
@@ -43,6 +34,14 @@ public class Audio : TheYeti {
     public void PlaySound(AudioClip sound) {
         if (sfxOn)
             source_sfx.PlayOneShot(sound);
+    }
+
+    public void PlayRandomSound(params AudioClip[] sounds)
+    {
+        if (sounds == null || sounds.Length == 0)
+            return;
+
+        PlaySound(sounds[Random.Range(0, sounds.Length)]);
     }
 
     // play sound after delay in seconds

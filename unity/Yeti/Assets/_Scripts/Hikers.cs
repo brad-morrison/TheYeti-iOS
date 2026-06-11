@@ -19,68 +19,59 @@ public class Hikers : TheYeti {
     public GameObject activeHiker;
     // events
     public UnityEvent hikerShake = new UnityEvent();
+    private DOTweenAnimation shakeAnimation;
+
+    private void Awake()
+    {
+        shakeAnimation = GetComponent<DOTweenAnimation>();
+    }
 
     public void InitHikers() {
-        SpawnHiker();
-        MoveHikersUp();
-        SpawnHiker();
-        MoveHikersUp();
-        SpawnHiker();
-        MoveHikersUp();
+        for (int i = 0; i < 3; i++)
+        {
+            SpawnHiker();
+            MoveHikersUp();
+        }
+    }
+
+    public bool IsActiveHikerOnLeft()
+    {
+        return ActiveHiker().left;
+    }
+
+    public bool IsActiveHikerFrenzyTagged()
+    {
+        return ActiveHiker().frenzyTagged;
+    }
+
+    private Hiker ActiveHiker()
+    {
+        return activeHiker.GetComponent<Hiker>();
     }
 
     public void SpawnHiker()
     {
-        GameObject newHiker;
-
-        // random colour
-        if (Random.Range(0,2) > 0)
-        {
-            // red
-            newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            // green
-            newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
-
-        }
-
-        // random position
-        if (Random.Range(0, 2) > 0)
-        {
-            // left
-            newHiker.GetComponent<Hiker>().left = true;
-            newHiker.GetComponent<SpriteRenderer>().flipX = true;
-            newHiker.GetComponent<Animator>().SetBool("Left", false);
-            newHiker.transform.position = new Vector2(newHiker.transform.position.x + hikerOffsetX, newHiker.transform.position.y);
-        }
-        else
-        {
-            // right
-            newHiker.GetComponent<Hiker>().left = false;
-            newHiker.transform.position = new Vector2(newHiker.transform.position.x - hikerOffsetX, newHiker.transform.position.y);
-        }
-
-        // if first hiker then set to active
-        if (hikers.Count < 1)
-        {
-            activeHiker = newHiker;
-        }
+        GameObject newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
+        Hiker hikerComponent = newHiker.GetComponent<Hiker>();
+        HikerSide side = Random.Range(0, 2) > 0 ? HikerSide.Left : HikerSide.Right;
+        hikerComponent.SetSide(side, hikerOffsetX);
 
         // tag with frenzy roll
         int frenzyRoll = Random.Range(1, GM.gameManager.gameplayVariables.frenzyHikerChance);
-        if (frenzyRoll == 1 && !GM.gameManager.goldMode.goldMode && !GM.gameManager.frenzyMode.frenzyMode && GM.gameManager.allowFrenzyMode)
+        if (frenzyRoll == 1 && GM.gameManager.CanTagFrenzyHiker)
         {
-            newHiker.GetComponent<Hiker>().frenzyTagged = true;
-            newHiker.GetComponent<SpriteRenderer>().color = Color.red;
+            hikerComponent.SetFrenzyTagged(true);
         }
 
-        // add hiker to list of hikers
-        hikers.Add(newHiker);
-
         // add as child of hikers object
-        newHiker.transform.parent = this.gameObject.transform;
+        newHiker.transform.parent = transform;
+        EnqueueHiker(newHiker);
+    }
+
+    private void EnqueueHiker(GameObject newHiker)
+    {
+        hikers.Add(newHiker);
+        UpdateActiveHiker();
     }
 
     public void MoveHikersUp()
@@ -95,26 +86,31 @@ public class Hikers : TheYeti {
 
     public void ShakeHikers()
     {
-        
-        gameObject.GetComponent<DOTweenAnimation>().DORestart();
-        
-        
+        shakeAnimation.DORestart();
     }
 
     public void KillHiker()
     {
-        GameObject target = hikers[0];
-        
+        GameObject target = DequeueActiveHiker();
+        Hiker targetHiker = target.GetComponent<Hiker>();
 
-        target.GetComponent<SpriteRenderer>().sortingOrder = 10;
-        target.GetComponent<Hiker>().StartCoroutine("Die");
-        target.GetComponent<Animator>().SetBool("Dead", true);
-        hikers.RemoveAt(0);
-        
-        activeHiker = hikers[0];
+        targetHiker.PlayDeath();
         MoveHikersUp();
         SpawnHiker();
         
+    }
+
+    private GameObject DequeueActiveHiker()
+    {
+        GameObject target = hikers[0];
+        hikers.RemoveAt(0);
+        UpdateActiveHiker();
+        return target;
+    }
+
+    private void UpdateActiveHiker()
+    {
+        activeHiker = hikers.Count > 0 ? hikers[0] : null;
     }
 
     public void DisableAnimations() {

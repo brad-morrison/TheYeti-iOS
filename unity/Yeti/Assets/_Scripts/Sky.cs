@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Sky : TheYeti
 {
@@ -11,8 +9,12 @@ public class Sky : TheYeti
 
     private void Awake()
     {
-        GameObject sky = Instantiate(RandomBackground());
-        sky.transform.parent = gameObject.transform;
+        GameObject background = RandomBackground();
+        if (background == null)
+            return;
+
+        GameObject sky = Instantiate(background);
+        sky.transform.parent = transform;
     }
 
     public GameObject RandomBackground()
@@ -25,43 +27,49 @@ public class Sky : TheYeti
 
     public void FrenzyModeSky(bool isOn)
     {
-        Color target = isOn ? frenzyModeColour : Color.white;
-
-        if (!isOn && GM.gameManager.weather.weather == Weather.WeatherType.storm)
-            target = stormSkyColour;
-
-        StopAllCoroutines();
-
-        foreach (SpriteRenderer sprite in transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>())
-        {
-            StartCoroutine(ChangeColour(sprite, target, skyColourFadeTime));
-        }
+        FadeSkyTo(isOn ? frenzyModeColour : DefaultSkyColour());
     }
 
     public void GoldModeSky(bool isOn)
     {
-        Color target = isOn ? GoldModeColour : Color.white;
-
-        if (!isOn && GM.gameManager.weather.weather == Weather.WeatherType.storm)
-            target = stormSkyColour;
-
-        StopAllCoroutines();
-
-        foreach (SpriteRenderer sprite in transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>())
-        {
-            StartCoroutine(ChangeColour(sprite, target, skyColourFadeTime));
-        }
+        FadeSkyTo(isOn ? GoldModeColour : DefaultSkyColour());
     }
 
     public void StormSky()
     {
         StopAllCoroutines();
         Debug.Log("setting storm colours");
-        foreach (SpriteRenderer sprite in transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>())
+        foreach (SpriteRenderer sprite in SkySprites())
         {
             sprite.color = stormSkyColour;
             Debug.Log("setting " + sprite + " colour to " + stormSkyColour);
         }
+    }
+
+    private Color DefaultSkyColour()
+    {
+        if (GM.gameManager.weather.weather == Weather.WeatherType.storm)
+            return stormSkyColour;
+
+        return Color.white;
+    }
+
+    private void FadeSkyTo(Color target)
+    {
+        StopAllCoroutines();
+
+        foreach (SpriteRenderer sprite in SkySprites())
+        {
+            StartCoroutine(ChangeColour(sprite, target, skyColourFadeTime));
+        }
+    }
+
+    private SpriteRenderer[] SkySprites()
+    {
+        if (transform.childCount == 0)
+            return new SpriteRenderer[0];
+
+        return transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>();
     }
 
     public IEnumerator ChangeColour(SpriteRenderer sprite, Color targetColour, float duration)
@@ -75,6 +83,7 @@ public class Sky : TheYeti
             time += Time.deltaTime;
             yield return null;
         }
-        
+
+        sprite.color = targetColour;
     }
 }
