@@ -144,10 +144,9 @@ public class GameManager : TheYeti {
             return;
 
         GM.audio.PlaySound(GM.audio.coin);
-        goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
 
         scoreBounceBig.Invoke();
-        Instantiate(goldMode.multiplierPop);
+        goldMode.ShowMultiplierPop();
     }
 
     public void Hit(PunchSide side)

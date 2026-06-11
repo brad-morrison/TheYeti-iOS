@@ -11,12 +11,14 @@ public class GoldMode : TheYeti {
     public GameObject goldFlames, goldModeFace, multiplierAnnounce, multiplierAnnounce_shadow, multiplierPop;
     private TextMeshPro multiplierText;
     private TextMeshPro multiplierShadowText;
+    private TextMeshPro multiplierPopText;
     private SpriteRenderer[] goldFlameRenderers;
 
     private void Awake()
     {
         multiplierText = multiplierAnnounce.GetComponent<TextMeshPro>();
         multiplierShadowText = multiplierAnnounce_shadow.GetComponent<TextMeshPro>();
+        multiplierPopText = multiplierPop.GetComponent<TextMeshPro>();
         goldFlameRenderers = goldFlames.GetComponentsInChildren<SpriteRenderer>();
     }
 
@@ -24,9 +26,7 @@ public class GoldMode : TheYeti {
         // roll and set gold multiplier
         goldModeMultiplier = GoldMultiplierRoll();
         // set multiplier text
-        string multiplierLabel = "x" + goldModeMultiplier.ToString();
-        multiplierText.text = multiplierLabel;
-        multiplierShadowText.text = multiplierLabel;
+        SetAnnouncementText(MultiplierLabel());
 
         goldMode_announceUI.SetActive(true);
         GM.gameManager.lifebar.animate = false;
@@ -35,6 +35,23 @@ public class GoldMode : TheYeti {
         GM.gameManager.allowInput = false;
         // sky
         GM.gameManager.sky.GoldModeSky(true);
+    }
+
+    public void ShowMultiplierPop()
+    {
+        multiplierPopText.text = MultiplierLabel();
+        Instantiate(multiplierPop);
+    }
+
+    private void SetAnnouncementText(string label)
+    {
+        multiplierText.text = label;
+        multiplierShadowText.text = label;
+    }
+
+    private string MultiplierLabel()
+    {
+        return "x" + goldModeMultiplier.ToString();
     }
 
     public void ActivateGoldMode() {
