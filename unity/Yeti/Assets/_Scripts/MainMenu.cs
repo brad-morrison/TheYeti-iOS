@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
 
 public class MainMenu : TheYeti {
     public GameObject settingsUI, mainUI;
@@ -13,14 +12,20 @@ public class MainMenu : TheYeti {
     private List<Costume> costumesList;
     // DEBUG
     public GameObject highscore_text, kills_text;
+    private SpriteRenderer yetiRenderer;
+    private TextMeshPro highScoreText;
+    private TextMeshPro killsText;
 
     private void Awake()
     {
+        yetiRenderer = yeti.GetComponent<SpriteRenderer>();
+        highScoreText = highscore_text.GetComponent<TextMeshPro>();
+        killsText = kills_text.GetComponent<TextMeshPro>();
+
         // set chosen costume
         costumesList = costumesListPrefab.GetComponent<Costumes>().costumesList;
-        yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle1;
+        yetiRenderer.sprite = costumesList[GM.playerData.GetCostume()].idle1;
         StartCoroutine(YetiAnimate());
-        //yeti.GetComponent<SpriteRenderer>().sprite = costumesList[master.playerData.GetCostume()].both;
 
         // set audio settings
         Music(GM.playerData.GetMusic());
@@ -29,8 +34,8 @@ public class MainMenu : TheYeti {
         
 
         // DEBUG
-        highscore_text.GetComponent<TextMeshPro>().text = GM.playerData.GetHighScore().ToString();
-        kills_text.GetComponent<TextMeshPro>().text = GM.playerData.GetKills().ToString();
+        highScoreText.text = GM.playerData.GetHighScore().ToString();
+        killsText.text = GM.playerData.GetKills().ToString();
     }
 
     public void ShowSettingsUI(bool on) {
@@ -64,9 +69,9 @@ public class MainMenu : TheYeti {
         while (true)
         {
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle2;
+            yetiRenderer.sprite = costumesList[GM.playerData.GetCostume()].idle2;
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = costumesList[GM.playerData.GetCostume()].idle1;
+            yetiRenderer.sprite = costumesList[GM.playerData.GetCostume()].idle1;
         }
     }
 }

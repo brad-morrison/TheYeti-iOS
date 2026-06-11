@@ -15,8 +15,22 @@ public class CostumeManager : TheYeti {
     public int costumeIndex;
     // get from prefs
     public int highScore, totalKills;
+    private SpriteRenderer yetiRenderer;
+    private TextMeshPro nameLabel;
+    private TextMeshPro scoreLabel;
+    private TextMeshPro killsLabel;
+    private Button leftButtonControl;
+    private Button rightButtonControl;
+    private Button selectButtonControl;
 
     private void Awake() {
+        yetiRenderer = yeti.GetComponent<SpriteRenderer>();
+        nameLabel = nameText.GetComponent<TextMeshPro>();
+        scoreLabel = scoreText.GetComponent<TextMeshPro>();
+        killsLabel = killsText.GetComponent<TextMeshPro>();
+        leftButtonControl = leftButton.GetComponent<Button>();
+        rightButtonControl = rightButton.GetComponent<Button>();
+        selectButtonControl = selectButton.GetComponent<Button>();
 
         // get score data
         highScore = GM.playerData.GetHighScore();
@@ -42,7 +56,7 @@ public class CostumeManager : TheYeti {
     public void NextCostume() {
 
         // move if button is active
-        if (rightButton.GetComponent<Button>().active)
+        if (rightButtonControl.active)
         {
             // show text
             scoreText.SetActive(true);
@@ -61,7 +75,7 @@ public class CostumeManager : TheYeti {
     public void PreviousCostume() {
         
         // move if button is active
-        if (leftButton.GetComponent<Button>().active)
+        if (leftButtonControl.active)
         {
             // show text
             scoreText.SetActive(true);
@@ -87,24 +101,24 @@ public class CostumeManager : TheYeti {
         }
 
         // reset lock things
-        yeti.GetComponent<SpriteRenderer>().color = Color.white;
+        yetiRenderer.color = Color.white;
         lockedText.SetActive(false);
         unlockedText.SetActive(true);
         unlockAllButton.SetActive(false);
-        selectButton.GetComponent<Button>().Grey(false);
+        selectButtonControl.Grey(false);
 
         // set generals
-        scoreText.GetComponent<TextMeshPro>().text = costume.best.ToString();
-        killsText.GetComponent<TextMeshPro>().text = costume.kills.ToString();
-        nameText.GetComponent<TextMeshPro>().text = costume.name.ToString();
+        scoreLabel.text = costume.best.ToString();
+        killsLabel.text = costume.kills.ToString();
+        nameLabel.text = costume.name.ToString();
 
         // set lockables
-        yeti.GetComponent<SpriteRenderer>().sprite = costume.both;
+        yetiRenderer.sprite = costume.both;
 
         // do things if costume is locked
         if (IsLocked(costume)) {
             // blackout sprite
-            yeti.GetComponent<SpriteRenderer>().color = Color.black;
+            yetiRenderer.color = Color.black;
             // show locked text
             lockedText.SetActive(true);
             // hide unlocked text
@@ -112,7 +126,7 @@ public class CostumeManager : TheYeti {
             // show unlockAll button
             unlockAllButton.SetActive(true);
             // lock select button
-            selectButton.GetComponent<Button>().Grey(true);
+            selectButtonControl.Grey(true);
         } 
     }
 
@@ -145,16 +159,16 @@ public class CostumeManager : TheYeti {
 
         // grey out right button if no other costumes
         if (costumeIndex == costumesList.Count-1) {
-            rightButton.GetComponent<Button>().Grey(true);
+            rightButtonControl.Grey(true);
         } else {
-            rightButton.GetComponent<Button>().Grey(false);
+            rightButtonControl.Grey(false);
         }
 
         // grey out left button if at 0
         if (costumeIndex == 0) {
-            leftButton.GetComponent<Button>().Grey(true);
+            leftButtonControl.Grey(true);
         } else {
-            leftButton.GetComponent<Button>().Grey(false);
+            leftButtonControl.Grey(false);
         }
     }
 
@@ -164,9 +178,9 @@ public class CostumeManager : TheYeti {
         while (true)
         {
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle2;
+            yetiRenderer.sprite = currentCostume.idle2;
             yield return new WaitForSeconds(0.3f);
-            yeti.GetComponent<SpriteRenderer>().sprite = currentCostume.idle1;
+            yetiRenderer.sprite = currentCostume.idle1;
         }
     }
 
