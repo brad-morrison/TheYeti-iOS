@@ -77,6 +77,7 @@ public class GameManager : TheYeti {
     public UnityEvent yetiShake = new UnityEvent();
     public UnityEvent _newHighScore = new UnityEvent();
     private TextMeshPro scoreText;
+    private GameSession session;
 
 
 
@@ -105,10 +106,8 @@ public class GameManager : TheYeti {
             //sound = false;
         }
 
-        // get score data
-        highScore = GM.playerData.GetHighScore();
-
-        score = 0;
+        session = new GameSession(GM.playerData.GetHighScore());
+        SyncSessionState();
         lifeBar_ScrollSpeed = StartingLifeBarScrollSpeed;
         hikers.InitHikers();
         hikers.SpawnHiker();
@@ -192,7 +191,8 @@ public class GameManager : TheYeti {
 
     public void HandleCorrectHit()
     {
-        totalKills_counter++;
+        session.RegisterKill();
+        SyncSessionState();
         print("total kills in this game - " + totalKills_counter);
         GM.audio.PlaySound(GM.audio.punchSmall);
         AddToScore();
@@ -218,13 +218,11 @@ public class GameManager : TheYeti {
 
     public void AddToScore() {
 
-        // set score
-        score += ScoreIncrement();
+        bool isNewHighScore = session.AddScore(ScoreIncrement());
+        SyncSessionState();
 
-        // check for new high score so that player can be alerted
-        if (score > highScore)
+        if (isNewHighScore)
         {
-            highScore = score;
             AlertNewHighScore(); // this has no logic attached, just visual things for the player
         }
 
@@ -241,15 +239,15 @@ public class GameManager : TheYeti {
     public void HandleFinalScores()
     {
         // high score
-        if (score > GM.playerData.GetHighScore())
+        if (session.ShouldSaveHighScore(GM.playerData.GetHighScore()))
         {
             newHighScore = true;
-            GM.playerData.SetHighScore(score);
+            GM.playerData.SetHighScore(session.Score);
         }
 
         // kills
         int storedKills = GM.playerData.GetKills();
-        int totalKills_final = storedKills + totalKills_counter;
+        int totalKills_final = session.TotalKillsAfterRound(storedKills);
         print("kills from pp - " + storedKills + " kill counter - " + totalKills_counter);
         print("setting kills to " + totalKills_final);
         GM.playerData.SetKills(totalKills_final);
@@ -341,6 +339,40 @@ public class GameManager : TheYeti {
 
     public void SetScoreUI() {
         scoreText.text = FormatScore(score);
+    }
+
+#if UNITY_EDITOR
+    public void ResetDebugScores()
+    {
+        GM.playerData.SetHighScore(0);
+        GM.playerData.SetKills(0);
+        session.Reset(0);
+        SyncSessionState();
+        SetScoreUI();
+    }
+
+    public void AddDebugHighScore(int amount)
+    {
+        int updatedHighScore = GM.playerData.GetHighScore() + amount;
+        GM.playerData.SetHighScore(updatedHighScore);
+        session.OverrideHighScore(updatedHighScore);
+        SyncSessionState();
+    }
+
+    public void AddDebugKills(int amount)
+    {
+        int updatedKills = GM.playerData.GetKills() + amount;
+        GM.playerData.SetKills(updatedKills);
+        totalKills = updatedKills;
+    }
+#endif
+
+    private void SyncSessionState()
+    {
+        score = session.Score;
+        highScore = session.HighScore;
+        totalKills_counter = session.RoundKills;
+        newHighScore = session.HasNewHighScore;
     }
 
     public static string FormatScore(int value)

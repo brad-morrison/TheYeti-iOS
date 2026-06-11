@@ -52,28 +52,21 @@ public class GameControls : TheYeti
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("reset scores");
-            GM.playerData.SetHighScore(0);
-            GM.playerData.SetKills(0);
-            GM.gameManager.highScore = 0;
-            GM.gameManager.totalKills_counter = 0;
+            GM.gameManager.ResetDebugScores();
         }
 
         // for debug - add 100 to high score
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("added 100 to high score | now - " + GM.gameManager.highScore);
-            int data = GM.playerData.GetHighScore();
-            GM.gameManager.highScore = GM.gameManager.highScore + 100;
-            GM.playerData.SetHighScore(data + 100);
+            GM.gameManager.AddDebugHighScore(100);
         }
 
         // for debug - add 100 to kills
         if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("added 100 to kills | now - " + GM.gameManager.totalKills_counter);
-            int data = GM.playerData.GetKills();
-            GM.gameManager.totalKills = GM.gameManager.totalKills_counter + 100;
-            GM.playerData.SetKills(data + 100);
+            GM.gameManager.AddDebugKills(100);
         }
 
         // for debug - start frenzy mode
