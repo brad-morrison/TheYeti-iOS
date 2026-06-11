@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weather : TheYeti
@@ -20,7 +18,6 @@ public class Weather : TheYeti
     void Start()
     {
         RollForWeather();
-        //SetWeather(WeatherType.storm);
     }
 
     public void RollForWeather()
@@ -33,12 +30,25 @@ public class Weather : TheYeti
     public void SetWeather(WeatherType _weather)
     {
         weather = _weather;
-        if (weather == WeatherType.clear) Clear();
-        if (weather == WeatherType.blizzard) Blizzard();
-        if (weather == WeatherType.snow) Snow();
-        if (weather == WeatherType.rain) Rain();
-        if (weather == WeatherType.storm) Storm();
 
+        switch (weather)
+        {
+            case WeatherType.clear:
+                Clear();
+                break;
+            case WeatherType.rain:
+                Rain();
+                break;
+            case WeatherType.snow:
+                Snow();
+                break;
+            case WeatherType.blizzard:
+                Blizzard();
+                break;
+            case WeatherType.storm:
+                Storm();
+                break;
+        }
     }
 
     public void Snow()
