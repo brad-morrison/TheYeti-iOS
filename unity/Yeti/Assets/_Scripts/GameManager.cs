@@ -263,9 +263,10 @@ public class GameManager : TheYeti {
     public void PlayRandomHikerDeathSound()
     {
         int rand = Random.Range(1, 6);
-        if (rand == 1) GM.audio.PlaySound(GM.audio.hikerDeath1);
-        if (rand == 2) GM.audio.PlaySound(GM.audio.hikerDeath2);
-        if (rand == 3) GM.audio.PlaySound(GM.audio.hikerDeath3);
+        if (rand > 3)
+            return;
+
+        GM.audio.PlayRandomSound(GM.audio.hikerDeath1, GM.audio.hikerDeath2, GM.audio.hikerDeath3);
     }
 
 
