@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerData: TheYeti
 {
@@ -25,30 +24,13 @@ public class PlayerData: TheYeti
 
 	void Awake()
 	{
-        GetAllPrefs();
+        Initialize();
     }
 
-    // get all for debug
-    public void GetAllPrefs()
+    public void Initialize()
     {
-        highScore = GetHighScore();
-        totalKills = GetKills();
-        musicOn = PlayerPrefs.GetInt(MusicKey);
-        sfxOn = PlayerPrefs.GetInt(SfxKey);
-        currentCostume = GetCostume();
-        timesPlayed = PlayerPrefs.GetInt(PlayedCountKey);
-        timesAppOpened = PlayerPrefs.GetInt(TimesAppOpenedKey);
-        globalUnlock = PlayerPrefs.GetInt(GlobalUnlockKey);
-        Debug.Log(
-            "highScore - " + highScore + "      " + 
-            "totalKills - " + totalKills + "      " +
-            "music - " + musicOn + "      " +
-            "sfx - " + sfxOn + "      " +
-            "currentCostume - " + currentCostume + "      " +
-            "times played = " + timesPlayed + "       " +
-            "times app opened = " + timesAppOpened + "     "
-
-            );
+        MigrateLegacyPrefs();
+        RefreshCachedValues();
 
         // check for first time opening
         if (timesAppOpened == 0)
@@ -62,90 +44,79 @@ public class PlayerData: TheYeti
             SetSfx(true);
         }
 
-        // increment app opened counter
-        timesAppOpened++;
-        PlayerPrefs.SetInt(TimesAppOpenedKey, timesAppOpened);
-        PlayerPrefs.Save();
+        IncrementTimesAppOpened();
+        LogCachedValues();
+    }
+
+    // get all for debug
+    public void GetAllPrefs()
+    {
+        RefreshCachedValues();
+        LogCachedValues();
     }
 
     // gets
     public int GetHighScore()
     {
-        return PlayerPrefs.GetInt(HighScoreKey);
+        return GetInt(HighScoreKey);
     }
 
     public int GetKills()
     {
-        if (!PlayerPrefs.HasKey(KillsKey) && PlayerPrefs.HasKey(LegacyTotalKillsKey))
-        {
-            return PlayerPrefs.GetInt(LegacyTotalKillsKey);
-        }
-
-        return PlayerPrefs.GetInt(KillsKey);
+        return GetInt(KillsKey);
     }
 
     public int GetCostume()
     {
-        if (!PlayerPrefs.HasKey(CostumeKey) && PlayerPrefs.HasKey(LegacyCostumeKey))
-        {
-            return PlayerPrefs.GetInt(LegacyCostumeKey);
-        }
-
-        return PlayerPrefs.GetInt(CostumeKey);
+        return GetInt(CostumeKey);
     }
 
     public bool GetMusic()
     {
-        return PlayerPrefs.GetInt(MusicKey) == 1;
+        return GetBool(MusicKey);
     }
 
     public bool GetSfx()
     {
-        return PlayerPrefs.GetInt(SfxKey) == 1;
+        return GetBool(SfxKey);
     }
 
     // sets
     public void SetHighScore(int value)
     {
         highScore = value;
-        PlayerPrefs.SetInt(HighScoreKey, value);
-        PlayerPrefs.Save();
+        SetInt(HighScoreKey, value);
     }
 
     public void SetKills(int value)
     {
         totalKills = value;
-        PlayerPrefs.SetInt(KillsKey, value);
+        SetInt(KillsKey, value);
         Debug.Log("set kills to " + value);
-        PlayerPrefs.Save();
     }
 
     public void SetMusic(bool value)
     {
         musicOn = value ? 1 : 0;
-        PlayerPrefs.SetInt(MusicKey, musicOn);
-        PlayerPrefs.Save();
+        SetBool(MusicKey, value);
     }
 
     public void SetSfx(bool value)
     {
         sfxOn = value ? 1 : 0;
-        PlayerPrefs.SetInt(SfxKey, sfxOn);
-        PlayerPrefs.Save();
+        SetBool(SfxKey, value);
     }
 
     public void SetCostume(int value)
     {
         currentCostume = value;
-        PlayerPrefs.SetInt(CostumeKey, value);
-        PlayerPrefs.Save();
+        SetInt(CostumeKey, value);
     }
 
     public void PlayedCountAdd()
     {
         timesPlayed++;
-        PlayerPrefs.SetInt(PlayedCountKey, timesPlayed);
-        PlayerPrefs.Save();
+        SetInt(PlayedCountKey, timesPlayed);
     }
 
     public bool IsGlobalUnlocked()
@@ -156,18 +127,83 @@ public class PlayerData: TheYeti
     public void SetGlobalUnlockCheat(bool val) {
         if (val)
         {
-            PlayerPrefs.SetInt(GlobalUnlockKey, 1);
+            SetInt(GlobalUnlockKey, 1);
             globalUnlock = 1;
             print("unlocked all costumes cheat activated");
             
         }
         else 
         {
-            PlayerPrefs.SetInt(GlobalUnlockKey, 0);
+            SetInt(GlobalUnlockKey, 0);
             globalUnlock = 0;
         }
+    }
 
+    private void MigrateLegacyPrefs()
+    {
+        MigrateInt(LegacyTotalKillsKey, KillsKey);
+        MigrateInt(LegacyCostumeKey, CostumeKey);
+    }
+
+    private void MigrateInt(string legacyKey, string currentKey)
+    {
+        if (PlayerPrefs.HasKey(currentKey) || !PlayerPrefs.HasKey(legacyKey))
+            return;
+
+        PlayerPrefs.SetInt(currentKey, PlayerPrefs.GetInt(legacyKey));
         PlayerPrefs.Save();
+    }
+
+    private void RefreshCachedValues()
+    {
+        highScore = GetHighScore();
+        totalKills = GetKills();
+        musicOn = GetInt(MusicKey);
+        sfxOn = GetInt(SfxKey);
+        currentCostume = GetCostume();
+        timesPlayed = GetInt(PlayedCountKey);
+        timesAppOpened = GetInt(TimesAppOpenedKey);
+        globalUnlock = GetInt(GlobalUnlockKey);
+    }
+
+    private void IncrementTimesAppOpened()
+    {
+        timesAppOpened++;
+        SetInt(TimesAppOpenedKey, timesAppOpened);
+    }
+
+    private void LogCachedValues()
+    {
+        Debug.Log(
+            "highScore - " + highScore + "      " +
+            "totalKills - " + totalKills + "      " +
+            "music - " + musicOn + "      " +
+            "sfx - " + sfxOn + "      " +
+            "currentCostume - " + currentCostume + "      " +
+            "times played = " + timesPlayed + "       " +
+            "times app opened = " + timesAppOpened + "     "
+        );
+    }
+
+    private int GetInt(string key)
+    {
+        return PlayerPrefs.GetInt(key);
+    }
+
+    private bool GetBool(string key)
+    {
+        return GetInt(key) == 1;
+    }
+
+    private void SetInt(string key, int value)
+    {
+        PlayerPrefs.SetInt(key, value);
+        PlayerPrefs.Save();
+    }
+
+    private void SetBool(string key, bool value)
+    {
+        SetInt(key, value ? 1 : 0);
     }
 
     // for debug //
