@@ -39,24 +39,8 @@ public class Hikers : TheYeti {
     {
         GameObject newHiker = Instantiate(hiker, spawnPoint.transform.position, Quaternion.identity);
         Hiker hikerComponent = newHiker.GetComponent<Hiker>();
-        SpriteRenderer spriteRenderer = newHiker.GetComponent<SpriteRenderer>();
-        Animator animator = newHiker.GetComponent<Animator>();
-
-        // random position
-        if (Random.Range(0, 2) > 0)
-        {
-            // left
-            hikerComponent.left = true;
-            spriteRenderer.flipX = true;
-            animator.SetBool("Left", false);
-            newHiker.transform.position = new Vector2(newHiker.transform.position.x + hikerOffsetX, newHiker.transform.position.y);
-        }
-        else
-        {
-            // right
-            hikerComponent.left = false;
-            newHiker.transform.position = new Vector2(newHiker.transform.position.x - hikerOffsetX, newHiker.transform.position.y);
-        }
+        HikerSide side = Random.Range(0, 2) > 0 ? HikerSide.Left : HikerSide.Right;
+        hikerComponent.SetSide(side, hikerOffsetX);
 
         // if first hiker then set to active
         if (hikers.Count < 1)
@@ -68,8 +52,7 @@ public class Hikers : TheYeti {
         int frenzyRoll = Random.Range(1, GM.gameManager.gameplayVariables.frenzyHikerChance);
         if (frenzyRoll == 1 && !GM.gameManager.goldMode.goldMode && !GM.gameManager.frenzyMode.frenzyMode && GM.gameManager.allowFrenzyMode)
         {
-            hikerComponent.frenzyTagged = true;
-            spriteRenderer.color = Color.red;
+            hikerComponent.SetFrenzyTagged(true);
         }
 
         // add hiker to list of hikers
@@ -98,12 +81,8 @@ public class Hikers : TheYeti {
     {
         GameObject target = hikers[0];
         Hiker targetHiker = target.GetComponent<Hiker>();
-        SpriteRenderer targetRenderer = target.GetComponent<SpriteRenderer>();
-        Animator targetAnimator = target.GetComponent<Animator>();
 
-        targetRenderer.sortingOrder = 10;
-        targetHiker.StartCoroutine(targetHiker.Die());
-        targetAnimator.SetBool("Dead", true);
+        targetHiker.PlayDeath();
         hikers.RemoveAt(0);
         
         activeHiker = hikers[0];
