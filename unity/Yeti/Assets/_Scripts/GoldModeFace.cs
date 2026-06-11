@@ -24,7 +24,7 @@ public class GoldModeFace : TheYeti
             Destroy(gameObject);
         }
 
-        if (GM.gameManager.gameOver.gameOver || GM.gameManager.frenzyMode.frenzyMode)
+        if (GM.gameManager.IsGameOver || GM.gameManager.IsFrenzyModeActive)
             Destroy(gameObject);
 
     }

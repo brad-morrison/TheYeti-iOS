@@ -38,7 +38,7 @@ public class GameControls : TheYeti
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (!GM.gameManager.goldMode.goldMode)
+            if (!GM.gameManager.IsGoldModeActive)
             {
                 GM.gameManager.ActivateGoldMode();
             }

@@ -79,6 +79,11 @@ public class GameManager : TheYeti {
     private TextMeshPro scoreText;
     private GameSession session;
 
+    public bool IsGoldModeActive { get { return goldMode.goldMode; } }
+    public bool IsFrenzyModeActive { get { return frenzyMode.frenzyMode; } }
+    public bool IsGameOver { get { return isGameOver || (gameOver != null && gameOver.gameOver); } }
+    public bool CanTagFrenzyHiker { get { return !IsGoldModeActive && !IsFrenzyModeActive && allowFrenzyMode; } }
+    public bool CanSpawnGoldModeFace { get { return !IsGameOver && !IsFrenzyModeActive && allowGoldMode; } }
 
 
     private void Awake() {
@@ -140,7 +145,7 @@ public class GameManager : TheYeti {
 
     public void PlayGoldModeHitFeedback()
     {
-        if (!goldMode.goldMode)
+        if (!IsGoldModeActive)
             return;
 
         GM.audio.PlaySound(GM.audio.coin);
@@ -152,7 +157,7 @@ public class GameManager : TheYeti {
     public void Hit(PunchSide side)
     {
 
-        if (!goldMode.goldMode)
+        if (!IsGoldModeActive)
             scoreBounceSmall.Invoke();
 
         ApplyYetiHitPose(side);
@@ -170,7 +175,7 @@ public class GameManager : TheYeti {
 
     public void ApplyYetiHitPose(PunchSide side)
     {
-        if (frenzyMode.frenzyMode)
+        if (IsFrenzyModeActive)
         {
             yeti.SetSprite(YetiPose.Idle1);
             return;
@@ -181,7 +186,7 @@ public class GameManager : TheYeti {
 
     public bool IsPlayerCorrect(PunchSide side)
     {
-        if (frenzyMode.frenzyMode)
+        if (IsFrenzyModeActive)
             return true;
 
         bool hikerIsLeft = hikers.activeHiker.GetComponent<Hiker>().left;
@@ -198,7 +203,7 @@ public class GameManager : TheYeti {
         SetScoreUI();
         lifebar.PunchScale();
 
-        if (!frenzyMode.frenzyMode)
+        if (!IsFrenzyModeActive)
             frenzyMode.FrenzyCheck();
 
         hikers.KillHiker();
@@ -229,7 +234,7 @@ public class GameManager : TheYeti {
 
     public int ScoreIncrement()
     {
-        if (goldMode.goldMode)
+        if (IsGoldModeActive)
             return goldMode.goldModeMultiplier;
 
         return 1;
@@ -318,7 +323,7 @@ public class GameManager : TheYeti {
 
     public void SmashEffect(PunchSide side)
     {
-        if (frenzyMode.frenzyMode)
+        if (IsFrenzyModeActive)
         {
             Instantiate(smashLeft);
             Instantiate(smashRight);
@@ -392,7 +397,7 @@ public class GameManager : TheYeti {
         Debug.Log("Gold face spawning in " + from + " seconds");
         yield return new WaitForSeconds(from);
         // spawn gold face
-        if (!isGameOver && !frenzyMode.frenzyMode && allowGoldMode)
+        if (CanSpawnGoldModeFace)
             Instantiate(goldMode.goldModeFace);
     }
 
