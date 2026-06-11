@@ -314,10 +314,7 @@ public class GameManager : TheYeti {
 
         foreach (BoneSpawner spawner in spawners)
         {
-            if (isOn)
-                spawner.spawn = true;
-            else
-                spawner.spawn = false;
+            spawner.spawn = isOn;
         }
 
     }
