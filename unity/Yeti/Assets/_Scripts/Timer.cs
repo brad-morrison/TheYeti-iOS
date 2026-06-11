@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -13,6 +11,16 @@ public class Timer : TheYeti
     public GameObject top, outline;
     public UnityEvent tick;
     public int _time;
+    private TextMeshPro topText;
+    private TextMeshPro outlineText;
+    private DOTweenAnimation tweenAnimation;
+
+    private void Awake()
+    {
+        topText = top.GetComponent<TextMeshPro>();
+        outlineText = outline.GetComponent<TextMeshPro>();
+        tweenAnimation = GetComponent<DOTweenAnimation>();
+    }
 
     public void StartCountdown(int time)
     {
@@ -31,11 +39,10 @@ public class Timer : TheYeti
         for (int i = time; i > 0; i--)
         {
             // set text
-            top.GetComponent<TextMeshPro>().text = i.ToString();
-            outline.GetComponent<TextMeshPro>().text = i.ToString();
+            SetText(i.ToString());
             // play animation
-            GetComponent<DOTweenAnimation>().DOPlayById("tick");
-            GetComponent<DOTweenAnimation>().DORestartById("tick");
+            tweenAnimation.DOPlayById("tick");
+            tweenAnimation.DORestartById("tick");
             // play audio
             GM.audio.PlaySound(GM.audio.timerTick);
             // wait
@@ -44,9 +51,13 @@ public class Timer : TheYeti
         }
 
         // at 0
-        top.GetComponent<TextMeshPro>().text = "o";
-        outline.GetComponent<TextMeshPro>().text = "o";
-        GetComponent<DOTweenAnimation>().DOPlayById("end");
+        SetText("o");
+        tweenAnimation.DOPlayById("end");
     }
 
+    private void SetText(string text)
+    {
+        topText.text = text;
+        outlineText.text = text;
+    }
 }
