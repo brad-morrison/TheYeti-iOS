@@ -126,22 +126,29 @@ public class GameManager : TheYeti {
         difficulty = gameplayVariables.baseDifficulty;
     }
 
-    public void HandleInput(PunchSide side) {
+    public void HandleInput(PunchSide side)
+    {
+        PlayInputFeedback();
+        PlayGoldModeHitFeedback();
+        Hit(side);
+    }
 
-        //cameraShake.Invoke();
+    public void PlayInputFeedback()
+    {
         platformShake.Invoke();
         yetiShake.Invoke();
+    }
 
-        if (goldMode.goldMode) { 
-            GM.audio.PlaySound(GM.audio.coin);
-            goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
+    public void PlayGoldModeHitFeedback()
+    {
+        if (!goldMode.goldMode)
+            return;
 
-            scoreBounceBig.Invoke();
-            
-            Instantiate(goldMode.multiplierPop);
-        }
+        GM.audio.PlaySound(GM.audio.coin);
+        goldMode.multiplierPop.GetComponent<TextMeshPro>().text = "x" + goldMode.goldModeMultiplier.ToString();
 
-        Hit(side);
+        scoreBounceBig.Invoke();
+        Instantiate(goldMode.multiplierPop);
     }
 
     public void Hit(PunchSide side)
@@ -150,16 +157,7 @@ public class GameManager : TheYeti {
         if (!goldMode.goldMode)
             scoreBounceSmall.Invoke();
 
-        if (frenzyMode.frenzyMode)
-            yeti.SetSprite(YetiPose.Idle1);
-        else
-            yeti.SetSprite(side);
-
-        /*
-        if (frenzyMode.frenzyMode)
-            cameraShake.Invoke();
-        */
-
+        ApplyYetiHitPose(side);
         SmashEffect(side);
 
         if (IsPlayerCorrect(side))
@@ -170,6 +168,17 @@ public class GameManager : TheYeti {
         {
             HandleMissedHit();
         }
+    }
+
+    public void ApplyYetiHitPose(PunchSide side)
+    {
+        if (frenzyMode.frenzyMode)
+        {
+            yeti.SetSprite(YetiPose.Idle1);
+            return;
+        }
+
+        yeti.SetSprite(side);
     }
 
     public bool IsPlayerCorrect(PunchSide side)
