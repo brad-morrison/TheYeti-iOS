@@ -22,6 +22,10 @@ public class GameplayVariables : TheYeti
     public int frenzyHikerChance = 20; // the chance that a hiker spawns tagged with frenzy mode [larger numer = less chance]
     public float frenzyTimeDuration; // the amount of time that frenzy mode lasts
 
+    // shield hikers
+    [Header("Shield Hiker Controls")]
+    public int shieldHikerChance = 10; // the chance that a hiker spawns with a shield [larger number = less chance, 0 = disabled]
+
     // visual
 
     private void Reset()
@@ -34,5 +38,6 @@ public class GameplayVariables : TheYeti
         goldModeDurationSpeed = 2f;
         frenzyHikerChance = 20;
         frenzyTimeDuration = 0f;
+        shieldHikerChance = 10;
     }
 }

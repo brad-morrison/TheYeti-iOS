@@ -10,6 +10,7 @@ public class Audio : TheYeti {
     public AudioClip gameOver, goldModeFace, goldModeStart, goldModeEnd, crown, high_score;
     // others
     public AudioClip hit, pop, coin;
+    public AudioClip metal_hit_small, metal_hit_large;
     public AudioClip buttonDown, buttonUp, buttonUp_grey;
     public AudioClip hikerDeath1, hikerDeath2, hikerDeath3;
     public AudioClip frenzyCounter, frenzyStart1, frenzyStart2, frenzyStart3, frenzyEnd;
@@ -32,7 +33,7 @@ public class Audio : TheYeti {
 
     // play sound once
     public void PlaySound(AudioClip sound) {
-        if (sfxOn)
+        if (sfxOn && sound != null)
             source_sfx.PlayOneShot(sound);
     }
 
@@ -56,7 +57,7 @@ public class Audio : TheYeti {
 
     IEnumerator _PlaySoundAfter(AudioClip sound, float delay) {
         yield return new WaitForSeconds(delay);
-        if (sfxOn)
+        if (sfxOn && sound != null)
             source_sfx.PlayOneShot(sound);
     }
 }

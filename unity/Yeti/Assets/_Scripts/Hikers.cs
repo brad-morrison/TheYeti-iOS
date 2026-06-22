@@ -46,6 +46,9 @@ public class Hikers : TheYeti {
 
     private Hiker ActiveHiker()
     {
+        if (activeHiker == null)
+            return null;
+
         return activeHiker.GetComponent<Hiker>();
     }
 
@@ -63,6 +66,11 @@ public class Hikers : TheYeti {
             hikerComponent.SetFrenzyTagged(true);
         }
 
+        if (ShouldSpawnShieldHiker())
+        {
+            hikerComponent.SetShielded(true);
+        }
+
         // add as child of hikers object
         newHiker.transform.parent = transform;
         EnqueueHiker(newHiker);
@@ -72,6 +80,16 @@ public class Hikers : TheYeti {
     {
         hikers.Add(newHiker);
         UpdateActiveHiker();
+    }
+
+    private bool ShouldSpawnShieldHiker()
+    {
+        int shieldHikerChance = GM.gameManager.gameplayVariables.shieldHikerChance;
+
+        if (shieldHikerChance <= 0)
+            return false;
+
+        return Random.Range(1, shieldHikerChance + 1) == 1;
     }
 
     public void MoveHikersUp()
@@ -98,6 +116,12 @@ public class Hikers : TheYeti {
         MoveHikersUp();
         SpawnHiker();
         
+    }
+
+    public ShieldHitResult HandleActiveHikerShieldHit()
+    {
+        Hiker active = ActiveHiker();
+        return active != null ? active.HandleShieldHit() : ShieldHitResult.None;
     }
 
     private GameObject DequeueActiveHiker()

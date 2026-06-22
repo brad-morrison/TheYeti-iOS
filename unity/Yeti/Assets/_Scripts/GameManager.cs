@@ -195,10 +195,29 @@ public class GameManager : TheYeti {
 
     public void HandleCorrectHit()
     {
+        ShieldHitResult shieldHit = hikers.HandleActiveHikerShieldHit();
+
+        if (shieldHit == ShieldHitResult.Cracked)
+        {
+            GM.audio.PlaySound(GM.audio.punchSmall);
+            GM.audio.PlaySound(GM.audio.metal_hit_small);
+            lifebar.PunchScale();
+            return;
+        }
+
+        if (shieldHit == ShieldHitResult.Broken)
+        {
+            GM.audio.PlaySound(GM.audio.punchSmall);
+            GM.audio.PlaySound(GM.audio.metal_hit_large);
+        }
+
         session.RegisterKill();
         SyncSessionState();
         print("total kills in this game - " + totalKills_counter);
-        GM.audio.PlaySound(GM.audio.punchSmall);
+
+        if (shieldHit == ShieldHitResult.None)
+            GM.audio.PlaySound(GM.audio.punchSmall);
+
         AddToScore();
         SetScoreUI();
         lifebar.PunchScale();
